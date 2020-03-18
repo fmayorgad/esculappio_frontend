@@ -1,0 +1,9 @@
+::ng-deep [aria-posinset='2']{
+    background-color: rgb(11, 133, 76) !important;
+    color: white;
+}
+
+::ng-deep [aria-posinset='1']{
+    background-color: rgb(255, 174, 0) !important;
+    color: white;
+}

@@ -1,0 +1,35 @@
+<div class="matero-user-panel p-y-16 b-b-1" fxLayout="column" fxLayoutAlign="center center">
+  <img class="matero-user-panel-avatar m-b-8 r-full" src="assets/images/male-avatar.png" alt="avatar" width="64" />
+  <div mat-icon-button class="gridi" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger"
+    (mouseover)="menuTrigger.openMenu()" style="position: sticky;margin-top: -31px;margin-left: 21px;background: white;width: 27px;height: 27px;color: #28862c;border-radius: 50%;">
+    <mat-icon class="icon-18 mauto">security</mat-icon>
+  </div>
+  <mat-menu #menu="matMenu" [overlapTrigger]="false">
+    <span (mouseleave)="menuTrigger.closeMenu()">
+      <button mat-menu-item>
+        <mat-icon>computer</mat-icon>
+        <span>IP: {{ip}}</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>date_range</mat-icon>
+        <span>Ingreso: {{last}}</span>
+      </button>
+
+    </span>
+  </mat-menu>
+  <h4 class="matero-user-panel-name m-t-0 m-b-8 f-w-400 truncatedText" style="text-transform: capitalize; width: 80%;text-align: center;">{{username}}</h4>
+  <h5 class="matero-user-panel-email m-t-0 m-b-8 f-w-400">{{email}}</h5>
+  <h5 class="matero-user-panel-email m-t-0 m-b-8 f-w-400" matTooltip="Tu rol es {{role}}">({{role}})</h5>
+  <div class="matero-user-panel-icons text-nowrap">
+    <a routerLink="/configuracion/profile" mat-icon-button matTooltip="Ir al perfil">
+      <mat-icon class="icon-18">account_circle</mat-icon>
+    </a>
+    <a routerLink="/configuracion/platform" *ngIf="role==='SUPER_ADMIN'" mat-icon-button
+      matTooltip="Configuración de entorno">
+      <mat-icon class="icon-18">settings</mat-icon>
+    </a>
+    <a routerLink="/auth/login" mat-icon-button matTooltip="Salir de SIGGASAC">
+      <mat-icon (click)="logout()" class="icon-18">exit_to_app</mat-icon>
+    </a>
+  </div>
+</div>

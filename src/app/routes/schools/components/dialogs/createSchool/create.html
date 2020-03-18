@@ -1,0 +1,174 @@
+<bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+<mat-dialog-content class="mat-typography mediumModal">
+	<form [formGroup]= 'createFormGroup'>
+		<div class="row">
+			<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+				<input matInput placeholder="Nombre de la institución" formControlName='name'  >
+				<mat-error *ngIf="createFormGroup.controls.name.hasError('required')">
+					El nombre es <strong>obligatorio</strong>.
+				</mat-error>
+				<mat-error *ngIf="createFormGroup.controls.name.hasError('maxlength')">
+					El nombre debe tener máximo <strong>75 caracteres</strong>.
+				</mat-error>
+				<mat-error *ngIf="createFormGroup.controls.name.hasError('minlength')">
+					El nombre debe tener mínimo <strong>10 caracteres</strong>.
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+				<input type="" matInput placeholder="NIT" formControlName='nit'  >
+				<mat-error *ngIf="createFormGroup.controls.nit.hasError('required')">
+					El NIT es <strong>obligatorio</strong>.
+				</mat-error>
+				<mat-error *ngIf="createFormGroup.controls.nit.hasError('maxlength')">
+					El NIT debe tener máximo <strong>12 caracteres</strong>.
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+				<input matInput placeholder="Dirección"  formControlName='address'  >
+				<mat-error *ngIf="createFormGroup.controls.address	.hasError('required')">
+					El campo dirección es <strong>obligatorio</strong>.
+				</mat-error>
+				<mat-error *ngIf="createFormGroup.controls.address.hasError('maxlength')">
+					El campo dirección debe tener máximo <strong>75 caracteres</strong>.
+				</mat-error>
+				<mat-error *ngIf="createFormGroup.controls.address.hasError('minlength')">
+					El campo dirección debe tener mínimo <strong>10 caracteres</strong>.
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+				<input matInput placeholder="Barrio"  formControlName='neighborhood'  >
+				<mat-error *ngIf="createFormGroup.controls.neighborhood.hasError('maxlength')">
+					El campo barrio debe tener máximo <strong>75 caracteres</strong> (si es ingresado).
+				</mat-error>
+				<mat-error *ngIf="createFormGroup.controls.neighborhood.hasError('minlength')">
+					El campo dirección debe tener mínimo <strong>10 caracteres</strong> (si es ingresado).
+				</mat-error>
+			</mat-form-field>
+
+			<div class="row">
+				<mat-form-field class="col-lg-6 col-md-6 col-sm-12">
+					<input matInput placeholder="Teléfonos"  formControlName='phones'  >
+					<mat-error *ngIf="createFormGroup.controls.phones.hasError('maxlength')">
+						El campo teléfono debe tener máximo <strong>75 caracteres</strong> (si es ingresado).
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.phones.hasError('minlength')">
+						El campo teléfono debe tener mínimo <strong>10 caracteres</strong> (si es ingresado).
+					</mat-error>
+				</mat-form-field>
+				
+
+				<mat-form-field class="col-lg-6 col-md-6 col-sm-12">
+					<input matInput placeholder="FAX"  formControlName='fax'  >
+					<mat-error *ngIf="createFormGroup.controls.fax.hasError('maxlength')">
+						El campo fax debe tener máximo <strong>75 caracteres</strong> (si es ingresado).
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.fax.hasError('minlength')">
+						El campo fax debe tener mínimo <strong>10 caracteres</strong> (si es ingresado).
+					</mat-error>
+				</mat-form-field>
+			</div>
+
+			<div class="row">
+				<mat-form-field class="col-lg-4 col-md-4 col-sm-12">
+					<mat-label>País</mat-label>
+					<mat-select  formControlName='countryId' (selectionChange)="getDepartments()">
+						<mat-option *ngFor="let item of countries" [value]="item.code">
+							{{item.name}}
+						</mat-option>
+					</mat-select>
+					<mat-error *ngIf="createFormGroup.controls.countryId.hasError('required')">
+						El campo país es <strong>Obligatorio</strong>.
+					</mat-error>
+				</mat-form-field>
+				<mat-form-field class="col-lg-4 col-md-4 col-sm-12">
+					<mat-label>Departamento</mat-label>
+					<mat-select  formControlName='departmentId' [disabled]="createFormGroup.value.countryId == ''" (selectionChange)="getCities()">
+						<mat-option *ngFor="let item of departments" [value]="item.code">
+							{{item.name}}
+						</mat-option>
+					</mat-select>
+					<mat-error *ngIf="createFormGroup.controls.departmentId.hasError('required')">
+						El campo departamento es <strong>Obligatorio</strong>.
+					</mat-error>
+				</mat-form-field>
+
+				<mat-form-field class="col-lg-4 col-md-4 col-sm-12">
+					<mat-label>Ciudad</mat-label>
+					<mat-select  formControlName='townId' [disabled]="createFormGroup.value.departmentId == '' ">
+						<mat-option *ngFor="let item of cities" [value]="item.code">
+							{{item.name}}
+						</mat-option>
+					</mat-select>
+					<mat-error *ngIf="createFormGroup.controls.townId.hasError('required')">
+						El campo ciudad es <strong>Obligatorio</strong>.
+					</mat-error>
+				</mat-form-field>
+			</div>
+
+			<mat-card>
+					<div class="row">
+				<h4 class="fullwidth" style="padding: 20px 15px 0px 15px">Datos del usuario Superadministrador</h4>
+				<h5 class="fullwidth" style="padding: 0px 15px;">Es necesario crear el primer usuario a la institución, que realizará la configuración inicial de la misma.</h5>
+
+				<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+					<input matInput placeholder="Nombre del usuario administrador" formControlName='superadminname'  >
+					<mat-error *ngIf="createFormGroup.controls.superadminname.hasError('required')">
+						El campo  es <strong>obligatorio</strong>.
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.superadminname.hasError('maxlength')">
+						El campo debe tener máximo <strong>75 caracteres</strong>
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.superadminname.hasError('minlength')">
+						El campo debe tener mínimo <strong>7 caracteres</strong>
+					</mat-error>
+				</mat-form-field>
+
+				<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+					<input matInput placeholder="Email"  formControlName='superadminemail'  >
+					<mat-error *ngIf="createFormGroup.controls.superadminemail.hasError('required')">
+						El campo  es <strong>obligatorio</strong>.
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.superadminemail.hasError('pattern')">
+						El campo debe ser un email <strong>Valido</strong>
+					</mat-error>
+
+				</mat-form-field>
+
+				<mat-form-field class="col-lg-6 col-md-6 col-sm-12">
+					<input matInput placeholder="Contraseña" formControlName='password' >
+					<mat-error *ngIf="createFormGroup.controls.password.hasError('required')">
+						El campo  es <strong>obligatorio</strong>.
+					</mat-error>
+					<mat-error class="gridi" *ngIf="createFormGroup.controls.password.hasError('pattern')">
+						El campo debe tener:
+						<span><strong>- Mínimo una letra en Mayuscula y Una en minúscula</strong>.</span>
+						<span><strong>- Al menos un caracter especial y un número </strong>.</span>
+					</mat-error>
+				</mat-form-field>
+
+				<mat-form-field class="col-lg-6 col-md-6 col-sm-12">
+					<input matInput id="pc" placeholder="Comprobar contraseña" formControlName='passwordconfirm' >
+					<mat-error *ngIf="createFormGroup.controls.passwordconfirm.hasError('noMatch')">
+						Los campos <strong> contraseña deben ser iguales</strong>.
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.passwordconfirm.hasError('required')">
+						El campo  es <strong>obligatorio</strong>.
+					</mat-error>
+				</mat-form-field>
+				
+			</div>
+			</mat-card>
+			
+		
+			
+		</div>
+
+	</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-button mat-dialog-close color="warn">Cerrar</button>
+	<button mat-button class="successbutton" (click)="create()" [disabled]="!createFormGroup.valid">Crear</button>
+</mat-dialog-actions>

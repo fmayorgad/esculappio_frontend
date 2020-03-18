@@ -1,0 +1,37 @@
+<div class="linearModal">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]='requestForm'>
+      <mat-card>
+        <h4><strong>Institución:</strong> {{incomingdata.month.school.name}} </h4>
+        <h4><strong>Periodo:</strong> {{incomingdata.month.startDate}} a {{incomingdata.month.finishDate}} </h4>
+        <h4><strong>Descripción solicitud:</strong> {{incomingdata.description}} </h4>
+        <div class="row">
+
+          <mat-form-field class="fullwidth">
+            <textarea rows = '4' matInput formControlName='description' placeholder="Indicaciones a realizar a la institución..."></textarea>
+            <mat-error *ngIf="requestForm.controls.description.hasError('required')">
+              El campo es <strong>Obligatorio</strong>.
+            </mat-error>
+
+            <mat-error *ngIf="requestForm.controls.description.hasError('minLength')">
+              Mínimo <strong>10</strong> caracteres.
+            </mat-error>
+
+            <mat-error *ngIf="requestForm.controls.description.hasError('maxLength')">
+              Máximo <strong>200</strong> caracteres..
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+
+      </mat-card>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="warn">Cerrar</button>
+    <button mat-button class="successbutton" [disabled]="!requestForm.valid" (click)="reject()">RECHAZAR SOLICITUD</button>
+  </mat-dialog-actions>
+</div>

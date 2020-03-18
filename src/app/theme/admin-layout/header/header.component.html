@@ -1,0 +1,28 @@
+<mat-toolbar class="matero-toolbar">
+  <button mat-button class="matero-hamburger"
+   (click)="toggleSidenav.emit()"
+   matTooltip="Abrir/Cerrar menú"
+    *ngIf="showToggle">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <app-branding *ngIf="showBranding"></app-branding>
+  <span fxFlex></span>
+
+  <button matTooltip="Modo oscuro" (click)="useDarkMode()" mat-icon-button>
+    <mat-icon>brightness_medium</mat-icon>
+  </button>
+
+  <button matTooltip="Pantalla completa" mat-icon-button (click)="toggleFullscreen()" fxHide.lt-sm>
+    <mat-icon>fullscreen</mat-icon>
+  </button>
+
+  <!-- <app-notification fxHide.lt-sm></app-notification> -->
+ <div class="verticalSeparator"></div>
+
+  <app-user></app-user>
+
+  <!-- <button mat-button class="matero-hamburger" (click)="toggleSidenavNotice.emit()" fxHide.lt-sm>
+    <mat-icon>list</mat-icon>
+  </button> -->
+</mat-toolbar>

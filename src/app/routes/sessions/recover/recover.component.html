@@ -1,0 +1,29 @@
+<div class="w-full h-full" fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card class="mat-elevation-z4 m-b-0" style="width: 400px;">
+    <mat-card-title class="m-b-24">
+      <div style="text-align: center;">RECUPERAR CONTRASEÑA</div>
+    </mat-card-title>
+    <mat-card-content>
+      <form class="matero-form-horizontal" [formGroup]="loginForm">
+        
+        <mat-form-field appearance="outline" class="col-lg-12 col-md-12 col-sm-12 noPadding">
+					<mat-label>Email</mat-label>
+					<input matInput placeholder="Ingresa el email asociado a tu cuenta"
+						formControlName="username" required>
+					<mat-error *ngIf="loginForm.controls.username.hasError('required')">
+						El campo es <strong>obligatorio</strong>.
+					</mat-error>
+					<mat-error *ngIf="loginForm.controls.username.hasError('email')">
+						El campo <strong>debe ser un email</strong>.
+					</mat-error>
+        </mat-form-field>
+        
+        <button class="w-full" style="margin-top: 9px; height: 47px;" mat-raised-button color="primary">Enviar email</button>
+
+        <div  class="col-sm-12 col-md-12 col-lg-12" style="padding: 20px;line-height: 27px;margin-top: 20px;text-align:center;">
+          <a href="/#/auth/login">Volver al login</a>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

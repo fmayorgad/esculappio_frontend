@@ -1,0 +1,58 @@
+<div class="linearModal">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]='requestForm'>
+      <mat-card>
+        <h4>Seleccione el rango entre el cual necesita realizar los cambios a los registros existentes</h4>
+        <div class="row">
+
+          <mat-form-field class="col-lg-6 col-md-6 col-sm-12">
+            <input matInput formControlName='init' [min]="minDate" [max]="maxDate" (change)="selectFirstDate()" [matDatepicker]="dp3" readonly placeholder="Fecha de inicio"
+              disabled="true">
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false" (change)="selectFirstDate()"></mat-datepicker>
+
+            <mat-error *ngIf="requestForm.controls.init.hasError('required')">
+              El campo es <strong>Obligatorio</strong>.
+            </mat-error>
+
+          </mat-form-field>
+
+          <mat-form-field class="col-lg-6 col-md-6 col-sm-12">
+            <input matInput formControlName='end' [min]="minDate" [max]="maxDate" [matDatepicker]="dp4" readonly placeholder="Fin de edición  "
+              disabled="true">
+            <mat-datepicker-toggle matSuffix [for]="dp4"></mat-datepicker-toggle>
+            <mat-datepicker #dp4 disabled="false"></mat-datepicker>
+
+            <mat-error *ngIf="requestForm.controls.end.hasError('required')">
+              El campo es <strong>Obligatorio</strong>.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="fullwidth">
+            <textarea rows = '4' matInput formControlName='description' placeholder="Indique el motivo por el cuál requiere realizar los cambios. Intente ser especifico."></textarea>
+            <mat-error *ngIf="requestForm.controls.description.hasError('required')">
+              El campo es <strong>Obligatorio</strong>.
+            </mat-error>
+
+            <mat-error *ngIf="requestForm.controls.description.hasError('minLength')">
+              Mínimo <strong>10</strong> caracteres.
+            </mat-error>
+
+            <mat-error *ngIf="requestForm.controls.description.hasError('maxLength')">
+              Máximo <strong>200</strong> caracteres..
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+
+      </mat-card>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="warn">Cerrar</button>
+    <button mat-button class="successbutton" [disabled]="!requestForm.valid" (click)="makeRequest()">Enviar Solicitud</button>
+  </mat-dialog-actions>
+</div>

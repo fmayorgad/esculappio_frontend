@@ -1,0 +1,216 @@
+<div class="mediumModal">
+	<bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+	<mat-dialog-content class="mat-typography">
+		<form [formGroup]='createFormGroup'>
+			<div class="row">
+
+				<h3 style="padding: 1px 15px;">Datos básicos</h3>
+
+				<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+					<input matInput placeholder="Razón social" formControlName='businessName'
+						>
+					<mat-error *ngIf="createFormGroup.controls.businessName.hasError('required')">
+						La razón social es <strong>obligatorio</strong>.
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.businessName.hasError('maxlength')">
+						El razón social debe tener máximo <strong>75 caracteres</strong>.
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.businessName.hasError('minlength')">
+						El razón social debe tener mínimo <strong>5 caracteres</strong>.
+					</mat-error>
+				</mat-form-field>
+
+				
+				<div class="row">
+
+					<mat-form-field class="col-lg-6 col-md-6 col-sm-12">
+						<mat-label>Tipos de documento</mat-label>
+						<mat-select formControlName="documentType">
+							<mat-option [value]="1">
+								Ciudadanía
+							</mat-option>
+							<mat-option [value]="2">
+								Extranjería
+							</mat-option>
+						</mat-select>
+						<mat-error *ngIf="createFormGroup.controls.documentType.hasError('required')">
+							El tipo documento es <strong>obligatorio</strong>.
+						</mat-error>
+					</mat-form-field>
+
+					<mat-form-field class="col-lg-6 col-md-6 col-sm-12">
+						<input matInput placeholder="Documento" formControlName='documentNumber'
+							>
+						<mat-error *ngIf="createFormGroup.controls.documentNumber.hasError('required')">
+							El documento es <strong>obligatorio</strong>.
+						</mat-error>
+						<mat-error *ngIf="createFormGroup.controls.documentNumber.hasError('maxlength')">
+							El documento debe tener máximo <strong>15 caracteres</strong>.
+						</mat-error>
+						<mat-error *ngIf="createFormGroup.controls.documentNumber.hasError('minlength')">
+							El documento debe tener mínimo <strong>8 caracteres</strong>.
+						</mat-error>
+					</mat-form-field>
+				</div>
+
+
+
+				<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+					<input matInput placeholder="Nombres" formControlName='name' >
+					<mat-error *ngIf="createFormGroup.controls.name.hasError('required')">
+						El nombre es <strong>obligatorio</strong>.
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.name.hasError('maxlength')">
+						El nombre debe tener máximo <strong>75 caracteres</strong>.
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.name.hasError('minlength')">
+						El nombre debe tener mínimo <strong>5 caracteres</strong>.
+					</mat-error>
+				</mat-form-field>
+
+
+				<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+					<input matInput placeholder="Primer apellido" formControlName='firstname'
+						>
+					<mat-error *ngIf="createFormGroup.controls.firstname.hasError('required')">
+						El primer apellido es <strong>obligatorio</strong>.
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.firstname.hasError('maxlength')">
+						El primer apellido apellido debe tener máximo <strong>75 caracteres</strong>.
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.firstname.hasError('minlength')">
+						El primer apellido apellido debe tener mínimo <strong>5 caracteres</strong>.
+					</mat-error>
+				</mat-form-field>
+
+				<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+					<input matInput placeholder="Segundo apellido" formControlName='lastname'
+						>
+					<mat-error *ngIf="createFormGroup.controls.lastname.hasError('required')">
+						El segundo apellido es <strong>obligatorio</strong>.
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.lastname.hasError('maxlength')">
+						El segundo apellido debe tener máximo <strong>75 caracteres</strong>.
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.lastname.hasError('minlength')">
+						El segundo apellido debe tener mínimo <strong>5 caracteres</strong>.
+					</mat-error>
+				</mat-form-field>
+
+
+
+				<div class="row">
+					<mat-form-field class="col-lg-6 col-md-6 col-sm-12">
+						<mat-label>Tipos de persona</mat-label>
+						<mat-select  formControlName='typePerson'>
+							<mat-option [value]="1">
+								Natural
+							</mat-option>
+							<mat-option [value]="2">
+								Jurídica
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+					<mat-form-field class="col-lg-6 col-md-6 col-sm-12">
+						<mat-label>Tipo de tercero</mat-label>
+						<mat-select  formControlName='thirdtype'>
+							<mat-option *ngFor="let type of typesthirds" [value]="type.id">
+								{{type.description}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+
+				<mat-divider style="margin: 25px 15px;"></mat-divider>
+	
+
+
+				<h3 style="padding: 1px 15px;">Contácto / Ubicación</h3>
+
+				<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+					<input matInput placeholder="Telefonos" formControlName='phones' >
+					<mat-error *ngIf="createFormGroup.controls.phones.hasError('maxlength')">
+						El(los) telefono(s) debe tener máximo <strong>50 caracteres</strong>.
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.phones.hasError('minlength')">
+						El(los) telefono(s) debe tener mínimo <strong>7 caracteres</strong>.
+					</mat-error>
+				</mat-form-field>
+
+				<div class="row">
+					<mat-form-field class="col-lg-6 col-md-6 col-sm-12">
+						<input matInput placeholder="FAX" formControlName='fax' >
+						<mat-error *ngIf="createFormGroup.controls.fax.hasError('maxlength')">
+							El FAX debe tener máximo <strong>38 caracteres</strong>.
+						</mat-error>
+						<mat-error *ngIf="createFormGroup.controls.fax.hasError('minlength')">
+							El FAX debe tener mínimo <strong>7 caracteres</strong>.
+						</mat-error>
+					</mat-form-field>
+
+					<mat-form-field class="col-lg-6 col-md-6 col-sm-12">
+						<input matInput placeholder="Celular" formControlName='cellphone' >
+						<mat-error *ngIf="createFormGroup.controls.cellphone.hasError('maxlength')">
+							El FAX debe tener máximo <strong>20 caracteres</strong>.
+						</mat-error>
+						<mat-error *ngIf="createFormGroup.controls.cellphone.hasError('minlength')">
+							El FAX debe tener mínimo <strong>10 caracteres</strong>.
+						</mat-error>
+					</mat-form-field>
+		
+				</div>
+
+				<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+					<input matInput placeholder="Dirección" formControlName='address' >
+					<mat-error *ngIf="createFormGroup.controls.address.hasError('maxlength')">
+						La dirección debe tener máximo <strong>75 caracteres</strong>.
+					</mat-error>
+					<mat-error *ngIf="createFormGroup.controls.address.hasError('minlength')">
+						La dirección debe tener mínimo <strong>3 caracteres</strong>.
+					</mat-error>
+				</mat-form-field>
+
+				<mat-divider style="margin: 25px 15px;"></mat-divider>
+	
+
+				<div class="row">
+					<h3 class="fullwidth" style="padding: 20px 15px 0px 15px">Datos contables</h3>
+					
+					<div class="col-lg-4 col-md-4 col-sm-12">
+						<mat-checkbox formControlName="rent">Declara renta</mat-checkbox>
+					</div>
+	
+					<div class="col-lg-4 col-md-4 col-sm-12">
+						<mat-checkbox formControlName="keeper">Agente retenedor</mat-checkbox>
+					</div>
+	
+					<div class="col-lg-4 col-md-4 col-sm-12">
+						<mat-checkbox formControlName="taxpayer">Gran contribuyente</mat-checkbox>
+					</div>
+	
+					<div class="col-lg-4 col-md-4 col-sm-12">
+						<mat-checkbox formControlName="selfkeep">Autoretenedor</mat-checkbox>
+					</div>
+	
+					<div class="col-lg-4 col-md-4 col-sm-12">
+						<mat-checkbox formControlName="iva">Factura IVA</mat-checkbox>
+					</div>
+	
+					<div class="col-lg-4 col-md-4 col-sm-12">
+						<mat-checkbox formControlName="keep">Efectua retención</mat-checkbox>
+					</div>
+				</div>
+	
+			
+
+
+		
+			</div>
+		</form>
+	</mat-dialog-content>
+	<mat-dialog-actions align="end">
+		<button mat-button mat-dialog-close color="warn">Cerrar</button>
+		<button mat-button class="successbutton" [disabled]="!createFormGroup.valid" (click)="create()">Crear</button>
+	</mat-dialog-actions>
+</div>

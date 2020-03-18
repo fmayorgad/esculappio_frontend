@@ -1,0 +1,25 @@
+<div class="linearModal">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <mat-dialog-content class="mat-typography"> 
+    
+    <h3><strong>Estas a punto de anular este Certificado de Disponibilidad</strong></h3>
+
+    <h3 class="justified">Anular el CDP elimina todos sus registros de las cuentas de todos los periodos que se vean afectados por el mismo.</h3>
+
+    <h3 class="advise"><strong>Este proceso no se puede deshacerse</strong></h3>
+    <form [formGroup]='closeForm'>
+      <div class="row">
+        <mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+          <input matInput placeholder="Escribe ANULAR" formControlName='validate' autocomplete="off">
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="warn">Cancelar</button>
+    <button mat-button class="successbutton" [disabled]="!closeForm.valid || closeForm.controls.validate.value !== 'ANULAR'" (click)="close()">ANULAR CDP</button>
+  </mat-dialog-actions>
+
+</div>

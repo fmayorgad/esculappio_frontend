@@ -1,0 +1,70 @@
+<mat-grid-list cols="6" rowHeight="50px" gutterSize="20">
+  <mat-grid-tile [colspan]="windowwith > 1150 ? 2 : 6" [rowspan]="7" [style.background]="red">
+    <mat-card class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%;">
+      <bodycardtitle [title]=cards.aud.title [subtitle]=cards.aud.subtitle [icon]=cards.aud.icon
+        [color]=cards.aud.color></bodycardtitle>
+      <form [formGroup]='profileFormGroup'>
+        <div class="row">
+
+          <mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+            <input matInput placeholder="Nombre" formControlName='name'>
+            <mat-error *ngIf="profileFormGroup.controls.name.hasError('required')">
+              El nombre es <strong>obligatorio</strong>.
+            </mat-error>
+            <mat-error *ngIf="profileFormGroup.controls.name.hasError('maxlength')">
+              El nombre debe tener máximo <strong>75 caracteres</strong>.
+            </mat-error>
+            <mat-error *ngIf="profileFormGroup.controls.name.hasError('minlength')">
+              El nombre debe tener mínimo <strong>5 caracteres</strong>.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+            <input matInput placeholder="Apellido" formControlName='surname'>
+            <mat-error *ngIf="profileFormGroup.controls.surname.hasError('required')">
+              El apellido es <strong>obligatorio</strong>.
+            </mat-error>
+            <mat-error *ngIf="profileFormGroup.controls.surname.hasError('maxlength')">
+              El apellido debe tener máximo <strong>40 caracteres</strong>.
+            </mat-error>
+            <mat-error *ngIf="profileFormGroup.controls.surname.hasError('minlength')">
+              El apellido debe tener mínimo <strong>6 caracteres</strong>.
+            </mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+            <input matInput placeholder="Número de teléfono" formControlName='phone'>
+            <mat-error *ngIf="profileFormGroup.controls.phone.hasError('required')">
+              El # de documento es <strong>obligatorio</strong>.
+            </mat-error>
+            <mat-error *ngIf="profileFormGroup.controls.phone.hasError('maxlength')">
+              El # de documento debe tener máximo <strong>15 caracteres</strong>.
+            </mat-error>
+            <mat-error *ngIf="profileFormGroup.controls.phone.hasError('minlength')">
+              El # de documento debe tener mínimo <strong>7 caracteres</strong>.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+            <input matInput placeholder="Número de celular" formControlName='cellphone'>
+            <mat-error *ngIf="profileFormGroup.controls.cellphone.hasError('required')">
+              El # de documento es <strong>obligatorio</strong>.
+            </mat-error>
+            <mat-error *ngIf="profileFormGroup.controls.cellphone.hasError('maxlength')">
+              El # de documento debe tener máximo <strong>30 caracteres</strong>.
+            </mat-error>
+            <mat-error *ngIf="profileFormGroup.controls.cellphone.hasError('minlength')">
+              El # de documento debe tener mínimo <strong>10 caracteres</strong>.
+            </mat-error>
+          </mat-form-field>
+          <div class="col-lg-12 col-md-12 col-sm-12 centered">
+            <button mat-raised-button [disabled]="!profileFormGroup.valid" (click)="editProfile()" color="primary">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+  </mat-grid-tile>
+
+
+</mat-grid-list>

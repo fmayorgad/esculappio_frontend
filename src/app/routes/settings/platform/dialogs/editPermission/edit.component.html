@@ -1,0 +1,35 @@
+<div class="mediumModal" style="min-width: 80vw;">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+  <mat-dialog-content class="mat-typography">
+
+    <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+      <mat-progress-spinner color="primary" mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
+
+    <div *ngIf="!isLoading">
+     
+      <h3>Los cambios se veran reflejados para cada uno de los clientes en su siguiente inicio de sesión. Para poder entrar al menú debe tener el permisso VER.</h3>
+      
+      <table>
+        <tr>
+          <th>Menu / Permisos</th>
+          <th *ngFor="let item of permissions" style="text-align: center;">{{item.name}}</th>
+        </tr>
+        <tr *ngFor="let item2 of iterabledraw | keyvalue">
+          <td style="text-transform: capitalize;">{{item2.value.name}} <strong *ngIf="item2.value.father" matTooltip="Submenu de {{item2.value.fatherName}}">({{item2.value.fatherName}})</strong></td>
+          <td *ngFor="let item3 of item2.value.permissions | keyvalue" style="text-align: center;">
+            <mat-checkbox class="example-margin" [(ngModel)]="iterabledraw[item2.key].permissions[item3.key]">
+            </mat-checkbox>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="warn">Cerrar</button>
+    <button mat-button class="successbutton" [disabled]="isLoading" (click)="editprofile()">Editar</button>
+  </mat-dialog-actions>
+</div>

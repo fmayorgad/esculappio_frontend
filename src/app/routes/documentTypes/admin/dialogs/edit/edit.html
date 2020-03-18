@@ -1,0 +1,50 @@
+<bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+<mat-dialog-content class="mat-typography linearModal">
+	<form [formGroup]= 'formGroup'>
+		<div class="row">
+			<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+				<input matInput placeholder="Código" formControlName='code' autocomplete="false"  >
+				<mat-error *ngIf="formGroup.controls.code.hasError('required')">
+					El campo es <strong>obligatorio</strong>.
+				</mat-error>
+				<mat-error *ngIf="formGroup.controls.code.hasError('maxlength')">
+					El campo debe tener máximo <strong>3 caracteres</strong>.
+				</mat-error>
+				<mat-error *ngIf="formGroup.controls.code.hasError('minlength')">
+					El campo debe tener mínimo <strong>3 caracteres</strong>.
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+				<input type="" matInput placeholder="Descripción" formControlName='description' autocomplete="false"  >
+				<mat-error *ngIf="formGroup.controls.description.hasError('required')">
+					El campo es <strong>obligatorio</strong>.
+				</mat-error>
+				<mat-error *ngIf="formGroup.controls.description.hasError('minlength')">
+					El campo debe tener mínimo <strong>4 caracteres</strong>.
+				</mat-error>
+				<mat-error *ngIf="formGroup.controls.description.hasError('maxlength')">
+					El campo debe tener máximo <strong>30 caracteres</strong>.
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+				<mat-label>Tipo</mat-label>
+				<mat-select  formControlName='natureDocumentId'>
+					<mat-option *ngFor="let item of natures" [value]="item.id">
+						{{item.name}}
+					</mat-option>
+				</mat-select>
+				<mat-error *ngIf="formGroup.controls.natureDocumentId.hasError('required')">
+					El campo es <strong>Obligatorio</strong>.
+				</mat-error>
+			</mat-form-field>
+
+		</div>
+
+	</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-button mat-dialog-close color="warn">Cerrar</button>
+	<button mat-button class="successbutton" (click)="edit()" [disabled]="!formGroup.valid">Editar</button>
+</mat-dialog-actions>

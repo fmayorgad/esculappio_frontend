@@ -1,0 +1,12 @@
+<div class="innerBodyTitle">
+    <div class="flexi border" [style.border-bottom-color]="line">
+        <div class="iconContainer" [style.color]="color" *ngIf="visibleIcon">
+            <mat-icon class="menu-icon" class="iconTitle">{{icon}}</mat-icon>
+        </div>
+        <div class="descriptionContainer">
+            <div class="title" [style.color]="color">{{title}}</div>
+        </div>
+    </div>
+
+    <div class="line"></div>
+</div>

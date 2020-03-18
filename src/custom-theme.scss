@@ -1,0 +1,26 @@
+@import '~@angular/material/theming';
+@import 'styles/custom_palette';
+@include mat-core();
+@import 'styles/theming';
+
+
+$custom-theme-primary: mat-palette($mat-blue);
+$custom-theme-accent:  mat-palette($mat-blue, 600, A100, A400);
+$custom-theme-warn:  mat-palette($mat-red, 600, A100, A400);
+$custom-theme-success:  mat-palette($mat-green, 600, A100, A400);
+
+$custom-theme: mat-light-theme( $custom-theme-primary,  $custom-theme-accent,$custom-theme-warn,);
+
+@include angular-material-theme($custom-theme);
+@include matero-admin-theme($custom-theme);
+
+.theme-dark {
+    $primary: mat-palette($mat-blue);
+    $accent: mat-palette($mat-amber, A200, A100, A400);
+  
+    $theme: mat-dark-theme($primary, $accent);
+  
+    @include angular-material-theme($theme);
+    @include matero-admin-theme($theme);
+  }
+  

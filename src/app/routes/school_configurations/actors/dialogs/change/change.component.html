@@ -1,0 +1,23 @@
+<div class="linearModal">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <mat-dialog-content class="mat-typography"> 
+    
+    <h3>Habilitar usuario como <strong>{{role}}</strong></h3>
+
+    <h3>Al habilitar este usuario inhabilita al usuario actual. Solo puede existir un usuario activo para este rol.</h3>
+    <form [formGroup]='closeForm'>
+      <div class="row">
+        <mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+          <input matInput placeholder="Escribe ACTIVAR" formControlName='validate' autocomplete="off">
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="warn">Cancelar</button>
+    <button mat-button class="successbutton" [disabled]="!closeForm.valid || closeForm.controls.validate.value !== 'ACTIVAR'" (click)="change()">Activar usuario</button>
+  </mat-dialog-actions>
+
+</div>

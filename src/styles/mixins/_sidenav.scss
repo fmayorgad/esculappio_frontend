@@ -1,0 +1,199 @@
+@import '~@angular/material/theming';
+@import '../../styles/custom_palette';
+
+// Basic badge style
+@mixin mat-drawer($custom-theme) {
+    $background: mat-color($md-customtheme, 551);
+    $imagePath: '/assets/images/nwtworkbackground.png';
+    //@debug   $md-customtheme;
+    @debug mat-color($md-customtheme, 500);
+
+    app-sidebar{
+        z-index: 10;
+        position: absolute;
+        height: 100%;
+    }
+
+    .backgroundSidenav{
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        background-image: url(assets/images/industria2.jpg);
+        background-size: cover;
+        filter: brightness(0.9);
+    }
+
+    .matero-sidebar-inner{
+        color: white ;
+    }
+
+    .theme-dark .matero-sidebar-inner{
+        color: white !important;
+    }
+
+
+    app-sidebar{
+        background: $background;
+    }
+
+    .theme-dark app-sidebar{
+        background: #424242 !important;
+    }
+
+    .theme-dark  .matero-sidenav .matero-sidemenu a {
+        color: white;
+        font-weight: 300;
+        font-weight: 300;
+        font-size: 15px;
+    }
+
+    .matero-sidenav .matero-sidemenu a {
+        color: white;
+        font-weight: 300;
+        font-weight: 300;
+        font-size: 15px;
+    }
+
+    .matero-sidenav .matero-sidemenu .matero-sidemenu-item.active > a {
+        font-weight: 300;
+        font-weight: 300;
+        font-size: 15px;
+    }
+
+    .theme-dark .matero-sidenav .matero-sidemenu .matero-sidemenu-item.active > a {
+        color:  #ffd740 !important;
+        font-weight: 300;
+        font-weight: 300;
+        font-size: 15px;
+    }
+
+    .matero-sidenav .matero-sidemenu .matero-sidemenu-item.open {
+        background: rgba(255, 255, 255, 0.31);
+    }
+
+    .theme-dark .matero-sidenav .matero-sidemenu .matero-sidemenu-item.open {
+        background: rgba(255, 255, 255, 0) !important;
+    }
+
+    .active .menuSectionContent{
+        flex-direction: row;
+        box-sizing: border-box;
+        display: flex;
+        border-radius: 3px;
+        color: #2f2e41 !important;
+        padding: 10px 16px;
+    }
+
+    .menuSectionContent{
+        flex-direction: row;
+        box-sizing: border-box;
+        display: flex;
+        border-radius: 3px;
+        padding: 10px 16px;
+        width: 240px;
+    }
+
+    .active .active.open mat-icon{
+        color: #2f2e41;
+    }
+
+     .active.open .submenu .menuSectionContent  mat-icon{
+        color: white;
+    }
+
+    .active.open .submenu .active mat-icon{
+        color: #2f2e41;
+    }
+
+
+
+    .active .matero-sidemenu-toggle{
+        padding: 0px 32px !important;
+        color: white!important;
+        background: rgba(255, 255, 255, 0.09019607843137255);
+    }
+
+    .matero-sidemenu-toggle{
+        padding: 0px 32px !important;
+        color: white!important;
+        margin: 10px 0px;
+    }
+
+    .submenu .matero-sidemenu-link .menu-name{
+        color: white !important; 
+    }
+
+   li.matero-sidemenu-item.active .menu-name {
+    
+   }
+
+   .matero-sidenav .matero-sidemenu .matero-sidemenu-item.open {
+        background: rgba(255, 255, 255, 0);
+    }
+
+    .submenu .active .matero-sidemenu-link .menu-name{
+        color:  #2f2e41 !important;
+    }
+
+    .matero-sidemenu-item .menu-name{
+        color:  white !important;
+    }
+
+    .active .firstlevel .menu-name{
+        color:  #2f2e41 !important;
+    }
+
+    .active .matero-sidemenu-link{
+        background: white;
+        border-radius: 3px;
+    }
+    
+    .matero-sidemenu-link{
+        width: 100%;
+    }
+    .matero-sidenav .matero-sidemenu a {
+        align-items: center;
+        height: 41px;
+        padding: 0 16px;
+        text-decoration: none;
+    }
+
+    .matero-sidenav .matero-sidemenu .matero-sidemenu-item.open {
+        background: rgba(255, 255, 255, 0);
+    }
+
+    
+
+    .submenu .matero-sidemenu-item {
+        background: rgba(255, 255, 255, 0) !important;
+    }
+    
+    .active .submenu .matero-sidemenu-link{
+        background: rgba(255, 255, 255, 0);
+        border-radius: 3px;
+    }
+
+    .submenu .active .matero-sidemenu-link{
+        background: white !important;
+        border-radius: 3px;
+    }
+
+    .matero-sidemenu-item .matero-sidemenu-link{
+        color: white !important;
+    }
+
+    .active .matero-sidemenu-toggle mat-icon{
+        color: white !important;
+    }
+
+    .active .matero-sidemenu-toggle .name{
+        color: white !important;
+    }
+
+    .active .firstlevel  mat-icon{
+        color: #2f2e41 !important;
+    }
+
+    
+  }
+  

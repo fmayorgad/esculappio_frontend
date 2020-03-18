@@ -1,0 +1,270 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*INIT Margin for cardtitled */
+
+.truncatedText{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.verticalSeparator{
+    border-left: 1px solid #dad6d6;
+    height: 60%;
+    margin: 5px;
+}
+
+.mat-card-cardtitled {
+    margin-top: 47px;
+}
+
+/*END  Margin for cardtitled */
+
+.mauto {
+    margin: auto !important;
+}
+
+.flexi {
+    display: flex !important;
+}
+
+.gridi {
+    display: grid !important;
+}
+
+.centered {
+    text-align: center !important;
+}
+
+.actionsColumn {
+    display: table-cell !important;
+    text-align: center !important;
+}
+
+.actionsContainer {
+    display: inline-flex !important;
+}
+
+/* INIT search table container */
+
+.searchTableContainer {
+    padding-top: 10px;
+}
+
+.searchTableContainer .icon {
+    height: 65.5px;
+    width: 65.5px;
+    font-size: 52px;
+}
+
+.searchTableContainer mat-icon {
+    font-size: 36px;
+}
+
+.searchTableContainer mat-form-field {
+    width: 100%;
+    padding-right: 25px;
+}
+
+/* END search table container */
+
+.mat-drawer-container {
+    background-color: #f5f5f5;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.floatAddButton {
+    position: fixed !important;
+    right: 15px;
+    bottom: 15px;
+}
+
+.matero-sidenav-collapsed .menuSectionContent {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.matero-sidenav-collapsed .matero-sidemenu-toggle {
+    padding: 0px 16px !important;
+}
+
+.matero-sidenav-collapsed .active .matero-sidemenu-toggle {
+    padding: 0px 16px !important;
+}
+
+/** scroll styles */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/** scroll styles and */
+
+.noVisible {
+    display: none !important;
+}
+
+.noPadding {
+    padding: 0px !important;
+}
+
+.pad10 {
+    padding: 10px !important;
+}
+
+.mat-mini-fab {
+    margin: 0px 7px !important;
+}
+
+.minifabcontainer {
+    height: 40px;
+    width: 40px;
+}
+
+.floatAddButton {
+    z-index: 1;
+}
+
+.staticCardBody{
+    height: calc(100% - 43px);
+    overflow-y: auto;
+}
+
+mat-dialog-container{
+    padding: 45px 0px 24px 0px !important;
+}
+
+mat-dialog-content{
+    margin: 0px !important;
+}
+
+/**modal configuration */
+
+.mat-dialog-container .bodycardtitleContainer {
+    display: inline-flex !important;
+    width: inherit !important;
+    max-width: calc(100% - 146px) !important;
+}
+
+.mat-dialog-container .iconContainer {
+    display: inherit !important;
+}
+
+.mat-dialog-content.mediumModal {
+    width: 800px !important;
+}
+
+.linearModal {
+    width: 450px !important;
+}
+
+.mediumModal {
+    width: 800px !important;
+}
+
+.largeModal {
+    width: 100% !important;
+}
+
+
+.row{
+    margin: 0px !important;
+    width: 100%;
+}
+
+.fullwidth{
+    width: 100% !important;
+}
+
+
+
+/**end modal configuration */
+
+mat-form-field{
+    margin: 5px 0px;
+}
+
+@media only screen and (max-width: 900px) and (orientation:landscape) {
+    .cdk-overlay-pane {
+        height: 81vh;
+    }
+    .mat-dialog-content.mediumModal {
+        width: 100% !important;
+    }
+
+    .linearModal {
+        width: 100% !important;
+    }
+
+    .mediumModal {
+        width: 100% !important;
+    }
+
+    .largeModal {
+        width: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 900px) and (orientation:portrait) {
+  
+    .mat-dialog-content.mediumModal {
+        width: 100% !important;
+    }
+
+    .linearModal {
+        width: 100% !important;
+    }
+
+    .mediumModal {
+        width: 100% !important;
+    }
+
+    .largeModal {
+        width: 100% !important;
+    }
+}
+
+
+.mat-form-field {
+    display: block !important;
+}
+
+mat-divider{
+    width: 100%;
+    margin: 20px 0px;
+}
+
+mat-dialog-actions{
+    padding: 13px 15px !important;
+}
+
+.overflowTable{
+    overflow-y: hidden;
+}
+
+.mat-progress-spinner, .mat-spinner  circle {
+      stroke: white;
+}
+
+
+.mat-dialog-container {
+    /*display: inline-table !important;*/
+    padding-top: 45px !important;
+}
+
+.justified{
+    text-align: justify;
+}
+
+.submenu.level-1{
+    background-color: #ffffff14;
+}

@@ -1,0 +1,142 @@
+<breadcrumb></breadcrumb>
+
+<mat-card class="mat-card-cardtitled">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+  <div class="">
+
+    <innerBodyTitle title='Revisores' icon='playlist_add_check' color='#2979ff' line='#d0d0d0'></innerBodyTitle>
+
+    <div class="searchTableContainer flexi">
+      <div class="icon gridi">
+        <mat-icon class="menu-icon mauto">search</mat-icon>
+      </div>
+
+      <mat-form-field>
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter('dataSource' ,$event.target.value)"
+          placeholder="Escribe la palabra o valor a buscar en esta tabla...">
+      </mat-form-field>
+    </div>
+
+    <div class="overflowTable">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="name" sticky>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let user">{{user.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="charge">
+          <th mat-header-cell *matHeaderCellDef>Cargo</th>
+          <td mat-cell *matCellDef="let user">{{user.charge }}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let user">{{user.state === 1 ? 'Activo': 'Inactivo'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef class="centered">Acciones</th>
+          <td mat-cell *matCellDef="let user" class="pad10 actionsColumn">
+
+            <div class="actionsContainer" *ngIf="user.state === 0">
+              <button mat-mini-fab class="successbutton" (click)="change(user)"
+                matTooltip="Activar este usuario como Revisor">
+                <mat-icon>check</mat-icon>
+              </button>
+            </div>
+
+            <div class="actionsContainer" *ngIf="user.state === 1">
+              -
+            </div>
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <nodata *ngIf="noData" [nodataheight]=nodataheight [nodatamessage]=nodatamessage></nodata>
+      <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+      </div>
+
+    </div>
+    <mat-paginator [pageSizeOptions]=mainTablePaginationOptions showFirstLastButtons></mat-paginator>
+
+
+    <innerBodyTitle title='Aprobadores' icon='done_all' color='#3eb743' line='#d0d0d0'></innerBodyTitle>
+
+    <div class="searchTableContainer flexi">
+      <div class="icon gridi">
+        <mat-icon class="menu-icon mauto">search</mat-icon>
+      </div>
+
+      <mat-form-field>
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter('dataSource2' ,$event.target.value)"
+          placeholder="Escribe la palabra o valor a buscar en esta tabla...">
+      </mat-form-field>
+    </div>
+
+    <div class="overflowTable">
+      <table mat-table [dataSource]="dataSource2" matSort>
+
+        <ng-container matColumnDef="name" sticky>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let user">{{user.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="charge">
+          <th mat-header-cell *matHeaderCellDef>Cargo</th>
+          <td mat-cell *matCellDef="let user">{{user.charge }}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let user">{{user.state === 1 ? 'Activo': 'Inactivo'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef class="centered">Acciones</th>
+          <td mat-cell *matCellDef="let user" class="pad10 actionsColumn">
+
+            <div class="actionsContainer" *ngIf="user.state === 0">
+              <button mat-mini-fab class="successbutton" (click)="change(user)"
+                matTooltip="Activar este usuario como Revisor">
+                <mat-icon>check</mat-icon>
+              </button>
+
+            </div>
+            <div class="actionsContainer" *ngIf="user.state === 1">
+              -
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <nodata *ngIf="noData" [nodataheight]=nodataheight [nodatamessage]=nodatamessage></nodata>
+      <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+      </div>
+
+    </div>
+    <mat-paginator [pageSizeOptions]=mainTablePaginationOptions showFirstLastButtons></mat-paginator>
+
+  </div>
+
+  <button class="successbutton floatAddButton" mat-fab aria-label="Create primary entity of this page"
+    matTooltip="Crear revisor / aprobador" (click)="create()">
+    <mat-icon>add</mat-icon>
+  </button>
+
+</mat-card>

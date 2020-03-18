@@ -1,0 +1,74 @@
+<breadcrumb></breadcrumb>
+
+<mat-card class="mat-card-cardtitled">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <div class="mat-elevation-z3">
+    <div class="searchTableContainer flexi">
+      <div class="icon gridi">
+        <mat-icon class="menu-icon mauto">search</mat-icon>
+      </div>
+      <mat-form-field>
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event.target.value)"
+          placeholder="Escribe la palabra o valor a buscar en esta tabla...">
+      </mat-form-field>
+    </div>
+
+    <div class="overflowTable">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="treasuryCode" sticky>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Código tesoreria</th>
+          <td mat-cell *matCellDef="let element">{{element.treasuryCode}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="typeAdministratorDocumentIdName">
+          <th mat-header-cell *matHeaderCellDef>Tipo de Documento</th>
+          <td mat-cell *matCellDef="let element"> {{ element.typeAdministratorDocument.code }} - {{ element.typeAdministratorDocument.description }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="utilityCenter">
+          <th mat-header-cell *matHeaderCellDef>Código Centro de Utilidad</th>
+          <td mat-cell *matCellDef="let element"> {{ element.campus.code }} - {{ element.campus.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="voucherName">
+          <th mat-header-cell *matHeaderCellDef>Comprobante</th>
+          <td mat-cell *matCellDef="let element">{{ element.voucher.code }} - {{ element.voucher.description }}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef class="centered">Acciones</th>
+          <td mat-cell *matCellDef="let element" class="pad10 actionsColumn">
+            <div class="actionsContainer">
+              <div class="minifabcontainer actionsContainer gridi">
+                <mat-slide-toggle class="mauto" matTooltip="Activar/Inactivar"></mat-slide-toggle>
+              </div>
+              <button mat-mini-fab class="infobutton" (click)="edit(element)" matTooltip="Editar datos">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <nodata *ngIf="noData" [nodataheight]=nodataheight [nodatamessage]=nodatamessage></nodata>
+      <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+      </div>
+
+    </div>
+    <mat-paginator [pageSizeOptions]=mainTablePaginationOptions showFirstLastButtons></mat-paginator>
+  </div>
+
+  <button class="successbutton floatAddButton" mat-fab aria-label="Create primary entity of this page"
+    matTooltip="Crear Tipo de Documento" (click)="create()">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-card>

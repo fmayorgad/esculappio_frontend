@@ -1,0 +1,74 @@
+<breadcrumb></breadcrumb>
+
+<mat-card class="mat-card-cardtitled">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <div class="mat-elevation-z3">
+    <div class="searchTableContainer flexi">
+      <div class="icon gridi">
+        <mat-icon class="menu-icon mauto">search</mat-icon>
+      </div>
+      <mat-form-field>
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event.target.value)"
+               placeholder="Escribe la palabra o valor a buscar en esta tabla...">
+      </mat-form-field>
+    </div>
+
+    <div class="overflowTable">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="name" sticky>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let bank">{{bank.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef>Código</th>
+          <td mat-cell *matCellDef="let bank">{{bank.code}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let bank">{{states[bank.state]}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef class="centered">Acciones</th>
+          <td mat-cell *matCellDef="let bank" class="pad10 actionsColumn">
+            <div class="minifabcontainer actionsContainer gridi">
+              <mat-slide-toggle class="mauto" matTooltip="Activar/Inactivar"></mat-slide-toggle>
+            </div>
+            <div class="actionsContainer">
+              <button mat-mini-fab class="infobutton"  (click)="edit(bank)"  matTooltip="Editar datos">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <nodata *ngIf="noData" [nodataheight]=nodataheight [nodatamessage]=nodatamessage></nodata>
+      <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+        <mat-progress-spinner 
+          color="primary" 
+          mode="indeterminate">
+        </mat-progress-spinner>
+      </div>
+
+    </div>
+    <mat-paginator [pageSizeOptions]=mainTablePaginationOptions showFirstLastButtons></mat-paginator>
+  </div>
+
+  <button
+    class="successbutton floatAddButton"
+    mat-fab aria-label="Create primary entity of this page"
+    matTooltip="Crear Banco"
+    (click)="createBank()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-card>

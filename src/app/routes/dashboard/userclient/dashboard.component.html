@@ -1,0 +1,12 @@
+<breadcrumb></breadcrumb>
+
+<mat-grid-list cols="6" rowHeight="100px" gutterSize="20">
+    <mat-grid-tile [colspan]="windowwith > 1150 ? 2 : 6" [rowspan]="3" [style.background]="red">
+      <mat-card class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%;">
+        <bodycardtitle [title]=cards.aud.title [subtitle]=cards.aud.subtitle [icon]=cards.aud.icon
+          [color]=cards.aud.color></bodycardtitle>
+  
+      </mat-card>
+    </mat-grid-tile>
+  
+  </mat-grid-list>
