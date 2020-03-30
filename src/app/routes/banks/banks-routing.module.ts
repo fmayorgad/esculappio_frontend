@@ -4,7 +4,6 @@ import { BanksMainComponent } from './main/main.component';
 
 
 const routes: Routes = [
-  { path: 'bancos',},
   { path: '', component: BanksMainComponent },
 ];
 

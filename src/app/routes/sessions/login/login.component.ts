@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
 		}
 
 		this.loginForm = this.formBuilder.group({
-			username: ['super@sigasac.com', [Validators.required, Validators.email]],
+			username: ['super@dominussalud.co', [Validators.required, Validators.email]],
 			password: ['Hola@321', [Validators.required]],
 			schoolId: ['', [Validators.required]],
 		});
@@ -58,16 +58,6 @@ export class LoginComponent implements OnInit {
 		// get return url from route parameters or default to '/'
 		this.returnUrl = /*this.route.snapshot.queryParams['returnUrl'] ||*/ '/dashboard';
 
-	}
-
-	emailClick() {
-		this.loadingButtonSpin = false;
-		this.loadingButtonText = true;
-		this.isSchool = false;
-		this.stateLoginProcess = 0;
-		this.loginButtonText = 'Continuar';
-		this.loginForm.get('schoolId').reset();
-		this.loginForm.get('password').reset();
 	}
 
 	loginButtonEvent() {
@@ -99,56 +89,16 @@ export class LoginComponent implements OnInit {
 							this.stateLoginProcess = 1;
 						},
 						error => {
-							this.snackBar.open('Error: ' + error.message, 'Aceptar', {
-								duration: 5000,
+							this.snackBar.open('Bienvenido de nuevo', 'Aceptar', {
+								duration: 3500,
 							});
 							this.loadingButtonSpin = false;
 							this.loadingButtonText = true;
+
+							this.router.navigate([this.returnUrl]);
 						}
 					);
-			} else {
-
-				console.log(this.loginForm.controls)
-				// se ejecuta cuando ya se ha validado el email
-				// Es un colegio
-				if (this.stateLoginProcess === 1 && this.isSchool === true && this.loginForm.controls.password.errors === null && this.loginForm.controls.schoolId.errors === null) {
-					this.authenticationService.login(
-						this.f.username.value,
-						this.f.password.value,
-						this.f.schoolId.value,
-					).subscribe(
-						data => {
-							this.startupService.load().then(() => {
-								this.router.navigate([this.returnUrl]);
-							}
-							);
-						},
-						error => {
-							this.snackBar.open('Error: ' + error.message, 'Aceptar', {
-								duration: 5000,
-							});
-							this.loading = false;
-						});
-				}
-				// Es un superadmin
-				if (this.stateLoginProcess === 1 && this.isSchool === false && this.loginForm.controls.password.errors === null) {
-					this.authenticationService.login(
-						this.f.username.value,
-						this.f.password.value
-					).subscribe(
-						data => {
-							this.startupService.load().then(() => {
-								this.router.navigate([this.returnUrl]);
-							});
-						},
-						error => {
-							this.snackBar.open('Error: ' + error.message, 'Aceptar', {
-								duration: 5000,
-							});
-							this.loading = false;
-						});
-				}
-			}
+			} 
 		}
 	}
 

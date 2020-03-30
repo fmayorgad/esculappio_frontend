@@ -5,13 +5,9 @@ import {DashboardSchoolAdminComponent} from './userclient/dashboard.component';
 import { getProfile } from '../../../assets/data/globals';
 
 const profile = getProfile();
-const profileVal = {
-  SUPER_ADMIN : DashboardSuperAdminComponent,
-  CONTADOR : DashboardSchoolAdminComponent
-};
 
 const routes: Routes = [
-  { path: '', component: profileVal[profile] },
+  { path: '', component: DashboardSuperAdminComponent },
 ];
 
 @NgModule({

@@ -4,189 +4,71 @@
       "state": "dashboard",
       "name": "Dashboard",
       "type": "link",
-      "icon": "dashboard",
+      "icon": "dashboard"
+    },
+    {
+      "state": "consultas",
+      "name": "Consultas",
+      "type": "link",
+      "icon": "question_answer",
       "badge": {
         "color": "red-500",
-        "value": "5"
+        "value": "12"
       }
     },
 
     {
-      "state": "solicitudes_modificacion",
-      "name": "Solicitudes de Modificación",
+      "state": "registropacientes",
+      "name": "Registro de Pacientes",
       "type": "link",
-      "icon": "playlist_add_check" 
+      "icon": "supervised_user_circle"
     },
 
     {
-      "state": "colegios",
-      "name": "Colegios",
+      "state": "registrousuariosadministrativos",
+      "name": "Registro de Usuarios",
       "type": "link",
-      "icon": "business"
+      "icon": "how_to_reg"
     },
     {
-      "state": "cuentas",
-      "name": "Cuentas",
-      "type": "sub",
-      "icon": "list",
-      "children": [
-        {
-          "state": "puc",
-          "name": "Cuentas Contables",
-          "type": "link",
-          "icon": "date_range"
-        },
-        {
-          "state": "cuentas-presupuestales",
-          "name": "Cuentas Presupuestales",
-          "type": "link",
-          "icon": "date_range"
-        }
-      ]
-    },
-    {
-      "state": "terceros",
-      "name": "Terceros",
-      "type": "sub",
-      "icon": "group",
-      "children": [
-        {
-          "state": "terceros_tipos",
-          "name": "Tipos de terceros",
-          "type": "link",
-          "icon": "date_range"
-        },
-        {
-          "state": "terceros_listado",
-          "name": "Terceros",
-          "type": "link",
-          "icon": "date_range"
-        }
-      ]
-    },
-    {
-      "state": "bancos",
-      "name": "Bancos",
-      "type": "link",
-      "icon": "apartment"
-    },
-    {
-      "state": "comprobantes",
-      "name": "Comprobantes",
-      "type": "link",
-      "icon": "receipt"
-    },
-    {
-      "state": "fuentes",
-      "name": "Fuentes de financiación",
-      "type": "link",
-      "icon": "assessment"
-    },
-    {
-      "state": "proyectos",
-      "name": "Proyectos y Sedes",
-      "type": "sub",
-      "icon": "emoji_symbols",
-      "children": [
-        {
-          "state": "proyectos_proyectos",
-          "name": "Proyectos",
-          "type": "link",
-          "icon": "date_range"
-        },
-        {
-          "state": "proyectos_sedes",
-          "name": "Sedes",
-          "type": "link",
-          "icon": "date_range"
-        }
-      ]
-    },
-    {
-      "state": "tipos_documento",
-      "name": "Tipos de Documento",
-      "type": "sub",
-      "icon": "folder",
-      "children": [
-        {
-          "state": "tipos_documento_disponibles",
-          "name": "Disponibles",
-          "type": "link",
-          "icon": "date_range"
-        },
-        {
-          "state": "tipos_documento_listado",
-          "name": "Listado",
-          "type": "link",
-          "icon": "date_range"
-        }
-      ]
-    },
-
-    {
-      "state": "documentos",
-      "name": "Gestión de Documentos",
-      "type": "sub",
-      "icon": "all_inbox",
-      "children": [
-        {
-          "state": "documentos_notas_presupuestales",
-          "name": "Notas presupuestales",
-          "type": "link",
-          "icon": "attach_money"
-        },
-        {
-          "state": "certificados_disponibilidad",
-          "name": "Certificados de Disponibilidad",
-          "type": "link",
-          "icon": "playlist_add_check"
-        },
-        {
-          "state": "documento_ordenes_compra",
-          "name": "Ordenes de Compra",
-          "type": "link",
-          "icon": "payment"
-        },
-        {
-          "state": "documento_certificado_recibido",
-          "name": "Certificados de Recibido",
-          "type": "link",
-          "icon": "receipt"
-        },
-        {
-          "state": "documento_ordenes_pago",
-          "name": "Ordenes de Pago",
-          "type": "link",
-          "icon": "post_add"
-        }
-      ]
-    },
-    {
-      "state": "configuracion_institucion",
+      "state": "Usuarios",
       "name": "Configuración Institución",
       "type": "sub",
       "icon": "apartment",
       "children": [
         {
-          "state": "periodos_contables",
-          "name": "Periodos Contables",
+          "state": "pendientes_documento",
+          "name": "Pendientes de documento",
           "type": "link",
-          "icon": "date_range"
+          "icon": "folder_shared"
         },
         {
-          "state": "actores",
-          "name": "Actores del sistema",
+          "state": "pendientes_control",
+          "name": "Pendientes de Diagnostico Dominus",
           "type": "link",
-          "icon": "supervised_user_circle"
+          "icon": "assignment_ind"
+        },
+        {
+          "state": "pacientes_control",
+          "name": "Pacientes en control",
+          "type": "link",
+          "icon": "supervisor_account"
         }
       ]
     },
-
     {
-      "state": "cuentas_bancarias",
-      "name": "Cuentas Bancarias",
-      "type": "link",
-      "icon": "ballot" 
+      "state": "configuracion",
+      "name": "Configuración del sistema",
+      "type": "sub",
+      "icon": "account_tree",
+      "children": [
+        {
+          "state": "preguntas",
+          "name": "Periodos Contables",
+          "type": "link",
+          "icon": "date_range"
+        }
+      ]
     }
   ]
 }

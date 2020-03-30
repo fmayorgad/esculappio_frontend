@@ -34,10 +34,10 @@ export class MenuService {
   constructor(
     private globals: GlobalsUser,
   ) {
-    console.log("comprobando que existe local")
-    if (localStorage.getItem('currentUser')) {
-    this.getAll();
-    }
+    // console.log("comprobando que existe local")
+    // if (localStorage.getItem('currentUser')) {
+    // this.getAll();
+    // }
 
   }
 
@@ -46,7 +46,8 @@ export class MenuService {
   private menu: Menu[] = [];
 
   getAll(): Menu[] {
-    console.log("creando menu desde login")
+    return this.menu;
+    /* console.log("creando menu desde login")
     let localvariable: any = JSON.parse(localStorage.getItem('currentUser'));
 
     if (localStorage.getItem('currentUser')) {
@@ -161,7 +162,7 @@ export class MenuService {
     }
     else{
       return [];
-    }
+    } */
   }
 
   set(menu: Menu[]): Menu[] {

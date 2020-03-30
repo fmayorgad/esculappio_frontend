@@ -14,8 +14,8 @@ export class UserPanelComponent implements OnInit {
   email;
   decodedToken;
   role;
-  ip = 1;
-  last = 2;
+  ip = '';
+  last = '';
 
   logout() {
     this.authenticationService.logout();
@@ -23,13 +23,13 @@ export class UserPanelComponent implements OnInit {
 
   ngOnInit() {
     const helper = new JwtHelperService();
-    this.local = localStorage.getItem('currentUser');
-    this.local = JSON.parse(this.local);
-    this.decodedToken = helper.decodeToken(this.local.token);
-    this.username = this.decodedToken.name;
-    this.email = this.decodedToken.email;
-    this.role = this.decodedToken.rolename ? this.decodedToken.rolename : this.decodedToken.role;
-    this.last = this.local.user.lastLogin;
-    this.ip = this.local.user.from;
+    // this.local = localStorage.getItem('currentUser');
+    // this.local = JSON.parse(this.local);
+    // this.decodedToken = helper.decodeToken(this.local.token);
+    this.username = 'Superadministrador'; //this.decodedToken.name;
+    this.email = 'super@dominussalud.co'; //this.decodedToken.email;
+    this.role = 'Superadministrador'; //this.decodedToken.rolename ? this.decodedToken.rolename : this.decodedToken.role;
+    this.last = 'Marzo 18 de 2019, 10:00 a.m.';
+    this.ip = '192.168.25.69';
   }
 }

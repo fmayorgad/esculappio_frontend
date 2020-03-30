@@ -1,13 +1,15 @@
 <div class="w-full h-full" fxLayout="row wrap" fxLayoutAlign="center center">
 	<mat-card class="loginContainer mat-elevation-z4 m-b-0" style="max-width: 380px; border-radius: 2px;">
-		<mat-card-title class="text-center m-b-24">INICIO DE SESIÓN</mat-card-title>
+		<div class="fullwidth gridi">
+			<img class="mauto" style="height: 170px;" src="../../../../assets/images/mainlogo.png" alt="">
+		</div>
+		
 		<mat-card-content>
 			<form class="matero-form-horizontal" [formGroup]="loginForm" #myForm="ngForm">
 
 				<mat-form-field appearance="outline" class="col-lg-12 col-md-12 col-sm-12 noPadding">
 					<mat-label>Email</mat-label>
-					<input matInput placeholder="Ingresa el email asociado a tu cuenta" (click)="emailClick()"
-						formControlName="username" required (keydown.enter)="getSchoolsByUserEmail()">
+					<input matInput placeholder="Ingresa el email asociado a tu cuenta" formControlName="username" required >
 					<mat-error *ngIf="loginForm.controls.username.hasError('required')">
 						El campo es <strong>obligatorio</strong>.
 					</mat-error>
@@ -16,15 +18,12 @@
 					</mat-error>
 				</mat-form-field>
 
-				<mat-form-field appearance="outline" *ngIf="isSchool">
-					<mat-label>Institución</mat-label>
-					<mat-select formControlName="schoolId">
-						<mat-option *ngFor="let school of schools" [value]="school.id">
-							{{school.name}}
-						</mat-option>
-					</mat-select>
-					<mat-error *ngIf="loginForm.controls.schoolId.hasError('required')">
-						Debes seleccionar <strong>institución</strong>.
+				<mat-form-field appearance="outline">
+					<mat-label>Password</mat-label>
+					<input matInput placeholder="Ingrese contraseña" type="password" formControlName="password"
+						required>
+					<mat-error *ngIf="loginForm.controls.password.hasError('required')">
+						El password es <strong>obligatorio</strong>.
 					</mat-error>
 				</mat-form-field>
 
@@ -42,8 +41,8 @@
 					<div class="mauto" *ngIf="loadingButtonSpin">
 						<mat-spinner class="mauto" [diameter]="36" style="width:40px; height: 40px"></mat-spinner>
 					</div>
-					<div class="mauto" *ngIf="loadingButtonText">
-						{{loginButtonText}}
+					<div class="mauto">
+						Continuar
 					</div>
 
 				</button>

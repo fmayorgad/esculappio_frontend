@@ -20,10 +20,10 @@ export class DashboardSuperAdminComponent implements OnInit {
       subtitle: 'Asignar permisos a los perfiles existentes',
     },
     aud: {
-      title: 'Auditoría',
-      icon: 'playlist_add_check',
+      title: 'Consultas pendientes',
+      icon: 'question_answer',
       color: '#f7555c',
-      subtitle: 'Activar/desactivar auditoria de módulos',
+      subtitle: 'Pendientes por responder',
     },
   };
   subtitle = '';

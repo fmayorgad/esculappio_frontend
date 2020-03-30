@@ -28,15 +28,9 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
-    canActivate: [AuthGuard],
     component: AdminLayoutComponent,
   },
-  {
-    path: 'cuentas',
-    loadChildren: () => import('./billingaccounts/billingaccounts.module').then(m => m.BillingaccountsModule),
-    canActivate: [AuthGuard],
-    component: AdminLayoutComponent,
-  },
+
   {
     path: 'configuracion',
     loadChildren: () => import('./settings/settingsplatform.module').then(m => m.SettingsModule),
@@ -56,10 +50,9 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'bancos',
-    loadChildren: () => import('./banks/banks.module').then(m => m.BanksModule),
+    path: 'registrousuariosadministrativos',
+    loadChildren: () => import('./bank_accounts/bankAccounts.module').then(m => m.BankAccountsModule),
     component: AdminLayoutComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'solicitudes_modificacion',
