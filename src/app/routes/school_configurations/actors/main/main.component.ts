@@ -50,14 +50,14 @@ export class ActorsMainComponent implements OnInit {
   displayedColumns2 = ['name', 'charge', 'state', 'actions'];
 
   dataSource = new MatTableDataSource<any>([]);
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatTable) table: MatTable<any>;
 
   dataSource2 = new MatTableDataSource<any>([]);
-  @ViewChild(MatPaginator, { static: false }) paginator2: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort2: MatSort;
-  @ViewChild(MatTable, { static: false }) table2: MatTable<any>;
+  @ViewChild(MatPaginator) paginator2: MatPaginator;
+  @ViewChild(MatSort) sort2: MatSort;
+  @ViewChild(MatTable) table2: MatTable<any>;
 
   applyFilter(targetTable, filterValue: string) {
     this[targetTable].filter = filterValue.trim().toLowerCase();

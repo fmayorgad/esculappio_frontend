@@ -76,7 +76,7 @@ export class EditPurchaseOrderDialogComponent implements OnInit {
   displayedColumns: string[] = ['cdp', 'accountid', 'revenueid', 'amount', 'actions'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatTable, { static: false }) tables: MatTable<any>;
+  @ViewChild(MatTable) tables: MatTable<any>;
 
   getAmount() {
     this.totalAmount = this.accounts.reduce((a, b) => +a + +b.amount, 0);

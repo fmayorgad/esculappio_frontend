@@ -6,7 +6,7 @@ import { Component, OnInit, Input, ContentChild, TemplateRef } from '@angular/co
   styleUrls: ['./text3d.component.scss'],
 })
 export class Text3dComponent implements OnInit {
-  @ContentChild(TemplateRef, { static: false }) template: TemplateRef<any>;
+  @ContentChild(TemplateRef) template: TemplateRef<any>;
 
   @Input() text = '';
   @Input() num = 20;

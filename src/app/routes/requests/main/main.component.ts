@@ -49,14 +49,14 @@ export class RequestsMainComponent implements OnInit {
   displayedColumns = ['name', 'code', 'state', 'actions'];
 
   dataSourcePending = new MatTableDataSource<any>([]);
-  @ViewChild(MatPaginator, { static: false }) paginatorPending: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sortPending: MatSort;
-  @ViewChild(MatTable, { static: false }) tablePending: MatTable<any>;
+  @ViewChild(MatPaginator) paginatorPending: MatPaginator;
+  @ViewChild(MatSort) sortPending: MatSort;
+  @ViewChild(MatTable) tablePending: MatTable<any>;
 
   dataSourceSolved = new MatTableDataSource<any>([]);
-  @ViewChild(MatPaginator, { static: false }) paginatorSolved: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sortSolved: MatSort;
-  @ViewChild(MatTable, { static: false }) tableSolved: MatTable<any>;
+  @ViewChild(MatPaginator) paginatorSolved: MatPaginator;
+  @ViewChild(MatSort) sortSolved: MatSort;
+  @ViewChild(MatTable) tableSolved: MatTable<any>;
 
 
 

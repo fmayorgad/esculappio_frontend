@@ -1,4 +1,4 @@
-import { NgModule, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
+import { NgModule, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Injectable } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatFormFieldModule, MatSelectModule } from '@angular/material';
@@ -24,6 +24,7 @@ import { MatPaginatorIntl } from '@angular/material';
 
 import {GlobalsUser} from '../assets/data/globals';
 
+@Injectable()
 export class CustomMatPaginatorIntl extends MatPaginatorIntl {
   itemsPerPageLabel = 'Items por página';
   nextPageLabel = 'Siguiente página';

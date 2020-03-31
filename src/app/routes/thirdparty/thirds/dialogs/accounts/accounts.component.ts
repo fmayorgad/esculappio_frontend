@@ -56,7 +56,7 @@ export class AcountThirdDialogComponent implements OnInit {
 	displayedColumns: string[] = ['bankId', 'accountTypeId', 'accountNumber', 'acciones'];
 	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: true }) sort: MatSort;
-	@ViewChild(MatTable, { static: false }) tables: MatTable<any>;
+	@ViewChild(MatTable) tables: MatTable<any>;
 	noData = false;
 	isLoading = true;
 	nodataheight = '100px';

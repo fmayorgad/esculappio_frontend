@@ -59,9 +59,9 @@ export class PlatformMainComponent implements OnInit {
 
   // tabla permisos
   dataSource = new MatTableDataSource<any>([]);
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatTable) table: MatTable<any>;
   mainTablePaginationOptions: number[];
   displayedColumns: string[];
   noData = false;
@@ -69,9 +69,9 @@ export class PlatformMainComponent implements OnInit {
 
   // tabla auditoría
   dataSourceAuditoria = new MatTableDataSource<any>([]);
-  @ViewChild(MatPaginator, { static: false }) paginatorAuditoria: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sortAuditoria: MatSort;
-  @ViewChild(MatTable, { static: false }) tableAuditoria: MatTable<any>;
+  @ViewChild(MatPaginator) paginatorAuditoria: MatPaginator;
+  @ViewChild(MatSort) sortAuditoria: MatSort;
+  @ViewChild(MatTable) tableAuditoria: MatTable<any>;
   mainTablePaginationOptionsAuditoria: number[];
   displayedColumnsAuditoria: string[];
   noDataAuditoria = false;

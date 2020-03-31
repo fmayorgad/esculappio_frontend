@@ -45,9 +45,9 @@ export class AccountingPeriodsMainComponent implements OnInit {
   displayedColumns = ['init', 'end', 'closedBy', 'state', 'actions'];
 
   dataSource = new MatTableDataSource<any>([]);
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatTable) table: MatTable<any>;
 
   applyFilter(targetTable, filterValue: string) {
     this[targetTable].filter = filterValue.trim().toLowerCase();
