@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material';
+import { MatTable } from '@angular/material/table';
 
 import { BankService, GlobalService } from '../../../../services';
 import { BanksDialogsCreateComponent } from '../dialogs/create/create.component';

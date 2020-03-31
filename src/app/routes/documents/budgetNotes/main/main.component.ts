@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material';
+import { MatTable } from '@angular/material/table';
 import { CreateBudgedNoteDialogComponent } from '../dialogs/create/create.component';
 import { EditBudgedNoteDialogComponent } from '../dialogs/edit/edit.component';
 import { CloseDialogsComponent } from '../dialogs/close/close.component';

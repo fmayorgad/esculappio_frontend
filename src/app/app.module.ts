@@ -1,7 +1,8 @@
 import { NgModule, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Injectable } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatFormFieldModule, MatSelectModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
@@ -20,7 +21,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtInterceptor, ErrorInterceptor } from './helpers';
-import { MatPaginatorIntl } from '@angular/material';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import {GlobalsUser} from '../assets/data/globals';
 

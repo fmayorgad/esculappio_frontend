@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material';
+import { MatTable } from '@angular/material/table';
 import { CreateAdminDocumentTypeDialogComponent } from '../dialogs/create/create.component';
 import { EditAdminDocumentTypeDialogComponent } from '../dialogs/edit/edit.component';
 import { AdminDocumentTypesService } from '../../../../services';
