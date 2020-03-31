@@ -22,7 +22,7 @@
           <mat-form-field class="col-lg-6 col-md-6 col-sm-12">
             <input matInput formControlName='end' [min]="minDate" [max]="maxDate" [matDatepicker]="dp4" readonly placeholder="Fin de edición  "
               disabled="true">
-            <mat-datepicker-toggle matSuffix [for]="dp4"></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix ></mat-datepicker-toggle>
             <mat-datepicker #dp4 disabled="false"></mat-datepicker>
 
             <mat-error *ngIf="requestForm.controls.end.hasError('required')">

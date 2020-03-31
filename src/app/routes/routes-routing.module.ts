@@ -43,68 +43,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: AdminLayoutComponent,
   },
-  {
-    path: 'colegios',
-    loadChildren: () => import('./schools/schools.module').then(m => m.SchoolsModule),
-    component: AdminLayoutComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'registrousuariosadministrativos',
-    loadChildren: () => import('./bank_accounts/bankAccounts.module').then(m => m.BankAccountsModule),
-    component: AdminLayoutComponent,
-  },
-  {
-    path: 'solicitudes_modificacion',
-    loadChildren: () => import('./requests/requests.module').then(m => m.RequestsModule),
-    component: AdminLayoutComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'tipos_documento',
-    component: AdminLayoutComponent,
-    loadChildren: () => import('./documentTypes/documentTypes.module').then(m => m.DocumentTypesModule),
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard]
-  },
-  {
-    path: 'terceros',
-    component: AdminLayoutComponent,
-    loadChildren: () => import('./thirdparty/thirdparty.module').then(m => m.ThirdPartyModule),
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard]
-  },
-  {
-    path: 'comprobantes',
-    loadChildren: () => import('./vouchers/vouchers.module').then(m => m.VouchersModule),
-    component: AdminLayoutComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'fuentes',
-    loadChildren: () => import('./revenue/revenue.module').then(m => m.RevenueModule),
-    component: AdminLayoutComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'cuentas_bancarias',
-    loadChildren: () => import('./bank_accounts/bankAccounts.module').then(m => m.BankAccountsModule),
-    component: AdminLayoutComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'documentos',
-    loadChildren: () => import('./documents/documents.module').then(m => m.DocumentsModule),
-    component: AdminLayoutComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'proyectos',
-    component: AdminLayoutComponent,
-    loadChildren: () => import('./proyects_subsidiaries/proyects.module').then(m => m.ProyectsSubsidiariesModule),
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard]
-  },
+
   { path: '**', redirectTo: 'dashboard' },
 ];
 

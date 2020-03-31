@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '@shared';
+import { SharedModule } from '../../shared/shared.module';
 import { SchoolConfigurationsRoutingModule } from './schoolconfigurations-routing.module';
 import { AccountingPeriodsMainComponent } from './accounting_periods/main/main.component';
 import {ChangeDialogsComponent} from './actors/dialogs/change/change.component';

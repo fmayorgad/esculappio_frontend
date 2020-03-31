@@ -23,7 +23,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [         
+            "styles": [
               "src/styles.scss",
               "src/styles.css",
               "src/grid.css"
@@ -143,5 +143,8 @@
       }
     }
   },
-  "defaultProject": "admin"
+  "defaultProject": "admin",
+  "cli": {
+    "analytics": false
+  }
 }

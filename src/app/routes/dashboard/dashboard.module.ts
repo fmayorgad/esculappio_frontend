@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
-import {DashboardSuperAdminComponent} from './superadmin/dashboard.component';
-import {DashboardSchoolAdminComponent } from './userclient/dashboard.component';
-import {DashboardRoutingModule} from './dashboard-routing.module';
+import { DashboardSuperAdminComponent } from './superadmin/dashboard.component';
+import { DashboardSchoolAdminComponent } from './userclient/dashboard.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
-
-const COMPONENTS = [DashboardSuperAdminComponent, DashboardSchoolAdminComponent];
+const COMPONENTS =
+  [
+    DashboardSuperAdminComponent,
+    DashboardSchoolAdminComponent,
+  ];
 const COMPONENTS_DYNAMIC = [];
 
 @NgModule({
