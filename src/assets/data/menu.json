@@ -7,7 +7,7 @@
       "icon": "dashboard"
     },
     {
-      "state": "consultas",
+      "state": "banco",
       "name": "Consultas",
       "type": "link",
       "icon": "question_answer",

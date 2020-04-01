@@ -32,6 +32,12 @@ const routes: Routes = [
   },
 
   {
+    path: 'banco',
+    loadChildren: () => import('./banks/banks.module').then(m => m.BanksModule),
+    component: AdminLayoutComponent,
+  },
+
+  {
     path: 'configuracion',
     loadChildren: () => import('./settings/settingsplatform.module').then(m => m.SettingsModule),
     canActivate: [AuthGuard],
