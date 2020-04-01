@@ -37,12 +37,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: AdminLayoutComponent,
   },
-  {
-    path: 'configuracion_institucion',
-    loadChildren: () => import('./school_configurations/schoolconfigurations.module').then(m => m.SchoolConfigurationsModule),
-    canActivate: [AuthGuard],
-    component: AdminLayoutComponent,
-  },
 
   { path: '**', redirectTo: 'dashboard' },
 ];
