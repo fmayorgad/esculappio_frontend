@@ -1,8 +1,8 @@
 {
   "menu": [
     {
-      "state": "dashboard",
-      "name": "Dashboard",
+      "state": "indicadores",
+      "name": "Indicadores",
       "type": "link",
       "icon": "dashboard"
     },
