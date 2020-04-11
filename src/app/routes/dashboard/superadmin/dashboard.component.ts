@@ -13,7 +13,6 @@ export class DashboardSuperAdminComponent implements OnInit {
 
   }
 
-
   cards = {
     profiles: {
       title: 'Asignación de Permisos',

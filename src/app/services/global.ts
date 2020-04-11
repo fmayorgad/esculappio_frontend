@@ -29,24 +29,6 @@ export class GlobalService {
       .pipe(map(data => data['natureDocuments']));
   }
 
-  getBudgets() {
-    return this.http
-      .get(`${environment.apiUrl}/${environment.apiBaseMain.documents}/${environment.versions.v1}/budgets`)
-      .pipe(map(data => data['budgets']));
-  }
-
-  getConcepts(id) {
-    return this.http
-      .get(`${environment.apiUrl}/${environment.apiBaseMain.documents}/${environment.versions.v1}/budgets/${id}/concepts`)
-      .pipe(map(data => data['concepts']));
-  }
-
-  getSubconcepts(id) {
-    return this.http
-      .get(`${environment.apiUrl}/${environment.apiBaseMain.documents}/${environment.versions.v1}/budgets/concepts/${id}/subconcepts`)
-      .pipe(map(data => data['subconcepts']));
-  }
-
   getProfiles() {
     return this.http
       .get(`${environment.apiUrl}/${environment.apiBaseMain.configuration}/${environment.versions.v1}/profiles`)

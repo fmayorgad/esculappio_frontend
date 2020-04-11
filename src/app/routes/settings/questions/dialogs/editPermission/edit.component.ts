@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MatDialogRef } from '@angular/material/dialog';
-import { GlobalService, ConfigurationsService } from '../../../../../services';
+import { GlobalService } from '../../../../../services';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
@@ -17,7 +17,6 @@ export class EditPermissionsDialogsEditComponent implements OnInit {
     private globalService: GlobalService,
     private _snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<EditPermissionsDialogsEditComponent>,
-    public configService: ConfigurationsService,
     @Inject(MAT_DIALOG_DATA) public incomingdata: any
   ) {
   }
@@ -135,19 +134,19 @@ export class EditPermissionsDialogsEditComponent implements OnInit {
       }
     }
 
-    this.configService.savePermissions(sendobj, this.incomingdata.id).subscribe(
-      response => {
-        this.dialogRef.close({
-          state: 1,
-          message: 'Permisos editados satisfactoriamente. Tendrá efecto cuando el usuario vuelva a iniciar sesión.'
-        });
-      },
-      error => {
-        this._snackBar.open('Error al ejecutar la acción. Intentalo de nuevo más tarde.', 'Aceptar', {
-          duration: 3000,
-        });
-      },
-    );
+    // this.configService.savePermissions(sendobj, this.incomingdata.id).subscribe(
+    //   response => {
+    //     this.dialogRef.close({
+    //       state: 1,
+    //       message: 'Permisos editados satisfactoriamente. Tendrá efecto cuando el usuario vuelva a iniciar sesión.'
+    //     });
+    //   },
+    //   error => {
+    //     this._snackBar.open('Error al ejecutar la acción. Intentalo de nuevo más tarde.', 'Aceptar', {
+    //       duration: 3000,
+    //     });
+    //   },
+    // );
 
   }
 

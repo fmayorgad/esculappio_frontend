@@ -1,13 +1,13 @@
 {
   "menu": [
     {
-      "state": "indicadores",
-      "name": "Indicadores",
+      "state": "dashboard",
+      "name": "Dashboard",
       "type": "link",
       "icon": "dashboard"
     },
     {
-      "state": "banco",
+      "state": "consultas",
       "name": "Consultas",
       "type": "link",
       "icon": "question_answer",
@@ -18,55 +18,28 @@
     },
 
     {
-      "state": "registropacientes",
-      "name": "Registro de Pacientes",
+      "state": "pacientes",
+      "name": "Pacientes",
       "type": "link",
       "icon": "supervised_user_circle"
-    },
-
-    {
-      "state": "registrousuariosadministrativos",
-      "name": "Registro de Usuarios",
-      "type": "link",
-      "icon": "how_to_reg"
-    },
-    {
-      "state": "Usuarios",
-      "name": "Configuración Institución",
-      "type": "sub",
-      "icon": "apartment",
-      "children": [
-        {
-          "state": "pendientes_documento",
-          "name": "Pendientes de documento",
-          "type": "link",
-          "icon": "folder_shared"
-        },
-        {
-          "state": "pendientes_control",
-          "name": "Pendientes de Diagnostico Dominus",
-          "type": "link",
-          "icon": "assignment_ind"
-        },
-        {
-          "state": "pacientes_control",
-          "name": "Pacientes en control",
-          "type": "link",
-          "icon": "supervisor_account"
-        }
-      ]
     },
     {
       "state": "configuracion",
       "name": "Configuración del sistema",
       "type": "sub",
-      "icon": "account_tree",
+      "icon": "settings",
       "children": [
         {
-          "state": "preguntas",
-          "name": "Periodos Contables",
+          "state": "usuarios_administrativos",
+          "name": "Usuarios del sistema",
           "type": "link",
-          "icon": "date_range"
+          "icon": "how_to_reg"
+        },
+        {
+          "state": "organos",
+          "name": "Organos y Preguntas",
+          "type": "link",
+          "icon": "account_tree"
         }
       ]
     }

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
 import { SettingsPlatformRoutingModule } from './settingsplatform-routing.module';
-import { PlatformMainComponent } from './platform/main/main.component';
-import { ProfileMainComponent } from './profile/main/main.component';
-import { BanksDialogsCreateComponent } from './platform/dialogs/create/create.component';
-import { EditPermissionsDialogsEditComponent } from './platform/dialogs/editPermission/edit.component';
+import { QuestionsMainComponent } from './questions/main/main.component';
+import {QuestionCreateComponent} from '../settings/questions/dialogs/create/create.component';
+import {EditPermissionsDialogsEditComponent} from '../settings/questions/dialogs/editPermission/edit.component';
 
-const COMPONENTS = [PlatformMainComponent ];
-const COMPONENTS_DYNAMIC = [BanksDialogsCreateComponent, EditPermissionsDialogsEditComponent, ProfileMainComponent];
+
+const COMPONENTS = [QuestionsMainComponent ];
+const COMPONENTS_DYNAMIC = [ QuestionCreateComponent, EditPermissionsDialogsEditComponent];
 
 @NgModule({
   imports: [

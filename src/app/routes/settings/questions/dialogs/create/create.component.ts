@@ -3,14 +3,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MatDialogRef } from '@angular/material/dialog';
-import { BankService } from '../../../../services';
 
 @Component({
   selector: 'app-banks-dialogs-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css'],
 })
-export class BanksDialogsCreateComponent {
+export class QuestionCreateComponent {
   title = 'Crear';
   icon = 'add';
   color = '#4caf50';
@@ -36,9 +35,8 @@ export class BanksDialogsCreateComponent {
   });
 
   constructor(
-    private bankService: BankService,
     private _snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<BanksDialogsCreateComponent>,
+    public dialogRef: MatDialogRef<QuestionCreateComponent>,
   ) {
   }
 
@@ -47,19 +45,19 @@ export class BanksDialogsCreateComponent {
   }
 
   create() {
-    this.bankService
-      .createBank(`${this.form.name.value}`, `${this.form.code.value}`)
-      .subscribe(
-        response => {
-          this._snackBar.open('Banco creado satisfactoriamente.', 'Aceptar', {
-            duration: 3000,
-          });
+    // this.bankService
+    //   .createBank(`${this.form.name.value}`, `${this.form.code.value}`)
+    //   .subscribe(
+    //     response => {
+    //       this._snackBar.open('Banco creado satisfactoriamente.', 'Aceptar', {
+    //         duration: 3000,
+    //       });
 
-          this.dialogRef.close('Todo creado satisfactoriamente!');
-        },
-        error => {
-          console.error(error);
-        },
-      );
+    //       this.dialogRef.close('Creado satisfactoriamente!');
+    //     },
+    //     error => {
+    //       console.error(error);
+    //     },
+    //   );
   }
 }

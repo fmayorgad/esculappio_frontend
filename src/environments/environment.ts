@@ -4,13 +4,12 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'http://167.172.127.180',
+  apiUrl: 'http://esculappio.local:3000',
   apiBaseMain: {
-    main: 'sigasac',
+    main: 'main',
     configuration: 'configurations',
     users: 'users',
     data: 'data',
-    documents : 'documents'
   },
   versions: {
     v1: 'v1',

@@ -31,16 +31,16 @@ const routes: Routes = [
     component: AdminLayoutComponent,
   },
 
-  {
-    path: 'banco',
-    loadChildren: () => import('./banks/banks.module').then(m => m.BanksModule),
-    component: AdminLayoutComponent,
-  },
+  // {
+  //   path: 'banco',
+  //   loadChildren: () => import('./banks/banks.module').then(m => m.BanksModule),
+  //   component: AdminLayoutComponent,
+  // },
 
   {
     path: 'configuracion',
     loadChildren: () => import('./settings/settingsplatform.module').then(m => m.SettingsModule),
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     component: AdminLayoutComponent,
   },
 

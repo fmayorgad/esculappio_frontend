@@ -13,7 +13,7 @@ import {
 	HttpErrorResponse
 } from '@angular/common/http';
 
-import { AuthenticationService, SchoolService } from '../../../services';
+import { AuthenticationService } from '../../../services';
 
 @Component({
 	selector: 'app-login',
@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private authenticationService: AuthenticationService,
-		private schoolService: SchoolService,
 		private snackBar: MatSnackBar,
 		private startupService: StartupService
 	) {
@@ -69,35 +68,7 @@ export class LoginComponent implements OnInit {
 				this.loadingButtonSpin = true;
 				this.loadingButtonText = false;
 				const email = this.loginForm.controls.username.value;
-				this.schoolService
-					.getSchoolsByUserEmail(`${this.f.username.value}`)
-					.subscribe(
-						data => {
-							console.log(this.loginForm);
-							this.loginForm.markAsUntouched();
-							this.loginForm.markAsPristine();
-							if (data.length > 0) {
-								this.schools = data;
-								this.isSchool = true;
-							} else {
-								this.isSchool = false;
-							}
-							this.myform.resetForm({ username: emailstate, schoolId: '', password: 'Hola@321' });
-							this.loadingButtonSpin = false;
-							this.loadingButtonText = true;
-							this.loginButtonText = 'Iniciar sesión';
-							this.stateLoginProcess = 1;
-						},
-						error => {
-							this.snackBar.open('Bienvenido de nuevo', 'Aceptar', {
-								duration: 3500,
-							});
-							this.loadingButtonSpin = false;
-							this.loadingButtonText = true;
-
-							this.router.navigate([this.returnUrl]);
-						}
-					);
+				
 			} 
 		}
 	}
@@ -108,40 +79,5 @@ export class LoginComponent implements OnInit {
 
 	get f() {
 		return this.loginForm.controls;
-	}
-
-	login() {
-		this.submitted = true;
-
-		// stop here if form is invalid
-		if (this.loginForm.invalid) {
-			return;
-		}
-
-		this.loading = true;
-
-		this.authenticationService.login(
-			this.f.username.value,
-			this.f.password.value,
-			this.f.schoolId.value,
-		)
-
-			.subscribe(
-				data => {
-					this.router.navigate([this.returnUrl]);
-				},
-				error => {
-					// this.alertService.error(error);
-					this.loading = false;
-				});
-	}
-
-	getSchoolsByUserEmail() {
-		this.schoolService
-			.getSchoolsByUserEmail(`${this.f.username.value}`)
-			.subscribe(data => {
-				this.schools = data;
-				this.isSchool = true;
-			});
 	}
 }

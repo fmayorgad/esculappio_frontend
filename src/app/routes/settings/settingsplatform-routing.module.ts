@@ -1,21 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PlatformMainComponent } from './platform/main/main.component';
-import { ProfileMainComponent } from './profile/main/main.component';
+import { QuestionsMainComponent } from './questions/main/main.component';
 import { AuthGuard } from '../../helpers';
 
 const routes: Routes = [
+  // {
+  //   path: 'usuarios_administrativos',
+  //   component: ProfileMainComponent,
+  //  // canActivate: [AuthGuard],
+  //  // canActivateChild: [AuthGuard],
+  //   children: []
+  // },
   {
-    path: 'platform',
-    component: PlatformMainComponent,
-    canActivate: [AuthGuard],
+    path: 'organos',
+    component: QuestionsMainComponent,
     canActivateChild: [AuthGuard],
     children: []
   },
-  
   {
-    path: 'profile',
-    component: ProfileMainComponent,
+    path: 'organos/preguntas/:id',
+    component: QuestionsMainComponent,
     canActivateChild: [AuthGuard],
     children: []
   },

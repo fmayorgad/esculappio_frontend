@@ -4,12 +4,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 
-import { BankService, GlobalService } from '../../../../services';
-import { BanksDialogsCreateComponent } from '../dialogs/create/create.component';
+import { QuestionCreateComponent } from '../dialogs/create/create.component';
 import { EditPermissionsDialogsEditComponent } from '../dialogs/editPermission/edit.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ConfigurationsService } from './../../../../services/configurations.service';
+import { QuestionsService } from '../../../../services/configuration/questions/questionsService';
 
 
 @Component({
@@ -17,34 +16,23 @@ import { ConfigurationsService } from './../../../../services/configurations.ser
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
 })
-export class PlatformMainComponent implements OnInit {
+export class QuestionsMainComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private bankService: BankService,
     private _snackBar: MatSnackBar,
-    private globalService: GlobalService,
-    private configService: ConfigurationsService
+    private questionsService: QuestionsService
   ) {
   }
 
   windowwith = window.innerWidth;
   colsnumber = 6;
 
-  cards = {
-    profiles: {
-      title: 'Asignación de Permisos',
-      icon: 'person_add',
-      color: '#ee4e1c',
-      subtitle: 'Asignar permisos a los perfiles existentes',
-    },
-    aud: {
-      title: 'Auditoría',
-      icon: 'playlist_add_check',
-      color: '#f7555c',
-      subtitle: 'Activar/desactivar auditoria de módulos',
-    },
-  };
+  title = 'Organos';
+  icon = 'accessibility';
+  color = '#f7555c';
+  subtitle = 'Listado de Organos disponibles en la app movil.';
+
 
   profiles;
 
@@ -81,26 +69,9 @@ export class PlatformMainComponent implements OnInit {
     this.windowwith = event.target.innerWidth;
   }
 
-  getAllProfiles() {
-    this.globalService.getProfiles().subscribe(
-      data => {
-        console.log(data);
-        this.dataSource = new MatTableDataSource<any>(data);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.isLoadingAuditoria = false;
-        if (data.length === 0) {
-          this.noDataAuditoria = true;
-        } else {
-          this.noDataAuditoria = false;
-        }
-      },
-      error => {
-      });
-  }
 
-  getEntities() {
-    this.configService.getEntities().subscribe(
+  getAll() {
+    this.questionsService.getAll().subscribe(
       data => {
         console.log(data);
         this.dataSourceAuditoria = new MatTableDataSource<any>(data);
@@ -117,25 +88,25 @@ export class PlatformMainComponent implements OnInit {
       });
   }
 
-  changeEntityState(index, state, entityId){
+  changeEntityState(index, state, entityId) {
     console.log(index)
     console.log(state)
     console.log(entityId)
     console.log(this.dataSourceAuditoria)
-    
-    this.configService.setEntityState((state) ? 1 : 0, entityId).subscribe(
-      data => {
-        this._snackBar.open('Estado editado satisfactoriamente.', 'Aceptar', {
-          duration: 3000,
-        });
-      },
-      error => {
 
-        this.dataSourceAuditoria.filteredData[index].state = !state;
-        this._snackBar.open('No se pudo realizar la acción. Intentalo de nuevo más tarde.', 'Aceptar', {
-          duration: 3000,
-        });
-      });
+    // this.configService.setEntityState((state) ? 1 : 0, entityId).subscribe(
+    //   data => {
+    //     this._snackBar.open('Estado editado satisfactoriamente.', 'Aceptar', {
+    //       duration: 3000,
+    //     });
+    //   },
+    //   error => {
+
+    //     this.dataSourceAuditoria.filteredData[index].state = !state;
+    //     this._snackBar.open('No se pudo realizar la acción. Intentalo de nuevo más tarde.', 'Aceptar', {
+    //       duration: 3000,
+    //     });
+    //   });
   }
 
   applyFilter(filterValue: string) {
@@ -144,6 +115,24 @@ export class PlatformMainComponent implements OnInit {
 
   editPermissions(element) {
 
+    console.log(element)
+    const dialogRef = this.dialog.open(QuestionCreateComponent, { disableClose: true, data: element });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.state === 1) {
+        this._snackBar.open(result.message, 'Aceptar', {
+          duration: 3000,
+        });
+      }
+      if (result.state === 0) {
+        this._snackBar.open(result.message, 'Aceptar', {
+          duration: 3000,
+        });
+      }
+    });
+  }
+
+  create(element) {
     console.log(element)
     const dialogRef = this.dialog.open(EditPermissionsDialogsEditComponent, { disableClose: true, data: element });
 
@@ -162,17 +151,12 @@ export class PlatformMainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllProfiles();
-    this.getEntities();
+    //this.getAllProfiles();
+    this.getAll();
     this.displayedColumns = ['name', 'actions'];
     this.mainTablePaginationOptions = [4, 15, 50];
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
-    this.displayedColumnsAuditoria = ['name', 'actions'];
-    this.mainTablePaginationOptionsAuditoria = [4, 15, 50];
-    this.dataSourceAuditoria.paginator = this.paginatorAuditoria;
-    this.dataSourceAuditoria.sort = this.sortAuditoria;
 
   }
 

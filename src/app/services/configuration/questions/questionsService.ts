@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class AdminDocumentTypesService {
+export class QuestionsService {
 
   constructor(private http: HttpClient) {
   }
@@ -26,7 +26,7 @@ export class AdminDocumentTypesService {
 
   getAll() {
     return this.http
-      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/types-administrator-documents`)
-      .pipe(map(data => data['typesAdministratorDocuments']));
+      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/organs`)
+      .pipe(map(data => data['organs']));
   }
 }

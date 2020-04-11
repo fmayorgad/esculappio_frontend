@@ -6,6 +6,8 @@ import { environment } from '@env/environment';
 
 import { User } from '../models';
 
+const subdomain =  'eep'; // window.location.hostname.split('.')[0];
+
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
@@ -20,11 +22,23 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(email: string, password: string, schoolId?: number) {
+  loginInformation() {
+    return this.http
+    .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v2}/configurations/login/${subdomain}`)
+    .pipe();
+  }
+
+  campaingActive() {
+    return this.http
+    .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v2}/campaing/campaingAct`)
+    .pipe();
+  }
+
+  login(email: string, password: string) {
     return this.http
       .post<any>(
-        `${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/login/login`,
-        { email, password, schoolId },
+        `${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v2}/login`,
+        { email, password, subdomain},
       )
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
