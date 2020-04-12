@@ -1,27 +1,27 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { QuestionsMainComponent } from './questions/main/main.component';
+import { NgModule, Injectable } from '@angular/core';
+import { Routes, RouterModule, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { OrgansMainComponent } from './questions/main/main.component';
+import { QuestionsMainComponent } from './questions/questions/main.component';
 import { AuthGuard } from '../../helpers';
+import { APIResolver } from '../../services/configuration/questions/questionsService';
+import { QuestionResolverService } from './questions/questions/question-resolver.service';
 
 const routes: Routes = [
-  // {
-  //   path: 'usuarios_administrativos',
-  //   component: ProfileMainComponent,
-  //  // canActivate: [AuthGuard],
-  //  // canActivateChild: [AuthGuard],
-  //   children: []
-  // },
   {
     path: 'organos',
-    component: QuestionsMainComponent,
+    canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    children: []
-  },
-  {
-    path: 'organos/preguntas/:id',
-    component: QuestionsMainComponent,
-    canActivateChild: [AuthGuard],
-    children: []
+    children: [
+      {
+        path: '',
+        component: OrgansMainComponent
+      },
+      {
+        path: ':id/preguntas',
+        resolve: {item: QuestionResolverService},
+        component: QuestionsMainComponent,
+      },
+    ]
   },
 ];
 
@@ -30,3 +30,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class SettingsPlatformRoutingModule { }
+

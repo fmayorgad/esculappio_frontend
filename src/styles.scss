@@ -2,6 +2,23 @@
 @import "custom-theme";
 @import  "./styles/variables";
 
+.snackbarSuccess{
+    color: white !important;
+    background:  $success !important;
+}
+
+.snackbarSuccess .mat-button{
+    color: white !important;
+}
+.snackbarError{
+    color: white !important;
+    background:  $danger !important;
+}
+
+.snackbarError .mat-button{
+    color: white !important;
+}
+
 [disabled][disabled].mat-button{
     background: rgba(255, 255, 255, 0) !important;
     color:  #d8d8d8 !important;
@@ -18,19 +35,41 @@
     color: white !important;
 }
 
+.successbutton[disabled]{
+    background: rgba(0, 0, 0, 0.12) !important;
+    color: rgba(0, 0, 0, 0.26) !important;
+}
+
+
 .errorbutton {
     background: $danger !important;
     color: white !important;
 }
+
+.errorbutton[disabled]{
+    background: rgba(0, 0, 0, 0.12) !important;
+    color: rgba(0, 0, 0, 0.26) !important;
+}
+
 
 .infobutton{
     background: $info !important;
     color: white !important;
 }
 
+.infobutton[disabled]{
+    background: rgba(0, 0, 0, 0.12) !important;
+    color: rgba(0, 0, 0, 0.26) !important;
+}
+
 .alterbutton{
     background: $orange !important;
     color: white !important;
+}
+
+.alterbutton[disabled]{
+    background: rgba(0, 0, 0, 0.12) !important;
+    color: rgba(0, 0, 0, 0.26) !important;
 }
 
 .selectorInputFilter{

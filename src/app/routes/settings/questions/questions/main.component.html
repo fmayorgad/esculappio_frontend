@@ -1,0 +1,136 @@
+<mat-card class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%;">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <div class="staticCardBody">
+
+    <div *ngIf="(p1.length === 0)" class="gridi row">
+
+      <div class="mauto col-xs-12 col-sm-6 col-md-6 col-lg-6" style="padding: 50px ;">
+        <img class="fullwidth" src="../../../../../assets/svgs/todolist.svg" alt="">
+        <h3 class="centered">Este organo aún no tiene preguntas.</h3>
+        <div class="gridi fullwidth">
+          <button class="mauto" mat-raised-button color="primary" (click)="create()">Crear la primer pregunta</button>
+        </div>
+        
+      </div>
+
+    </div>
+
+    <div *ngIf="!(p1.length === 0)">
+      <div class="searchTableContainer flexi">
+        <div class="icon gridi">
+          <mat-icon class="menu-icon mauto">search</mat-icon>
+        </div>
+        <mat-form-field>
+          <mat-label>Buscar</mat-label>
+          <input matInput (keyup)="applyFilter($event.target.value)"
+            placeholder="Escribe la palabra o valor a buscar en esta tabla...">
+        </mat-form-field>
+      </div>
+
+      <div style="height: 100%; overflow-y: auto;">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="title" sticky>
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+          </ng-container>
+          <ng-container matColumnDef="actions" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef class="centered"> Acciones </th>
+            <td mat-cell *matCellDef="let element; let i = index" class="pad10 actionsColumn">
+              <div class="minifabcontainer actionsContainer gridi">
+                <button mat-mini-fab class="successbutton" (click)="redirect()"
+                  matTooltip="Listado de preguntas: {{element.title}}">
+                  <mat-icon>list</mat-icon>
+                </button>
+                <mat-slide-toggle class="mauto" 
+                  [(ngModel)]="element.state" matTooltip="Activar/Inactivar Pregunta"></mat-slide-toggle>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+        </table>
+
+        <nodata *ngIf="noData" [nodataheight]=nodataheight [nodatamessage]=nodatamessage></nodata>
+        <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+          <mat-progress-spinner color="primary" mode="indeterminate">
+          </mat-progress-spinner>
+        </div>
+      </div>
+      <mat-paginator [pageSizeOptions]=mainTablePaginationOptions showFirstLastButtons></mat-paginator>
+    </div>
+
+
+  </div>
+
+</mat-card>
+
+
+
+<mat-card *ngIf="dataSource.data.length > 0" class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%;">
+  <bodycardtitle [title]=titleq2 [subtitle]=subtitleq2 [icon]=icon [color]=colorq2></bodycardtitle>
+
+  <div class="staticCardBody">
+
+    <div >
+      <div class="searchTableContainer flexi">
+        <div class="icon gridi">
+          <mat-icon class="menu-icon mauto">search</mat-icon>
+        </div>
+        <mat-form-field>
+          <mat-label>Buscar</mat-label>
+          <input matInput (keyup)="applyFilter($event.target.value)"
+            placeholder="Escribe la palabra o valor a buscar en esta tabla...">
+        </mat-form-field>
+      </div>
+
+      <div style="height: 100%; overflow-y: auto;">
+        <table mat-table [dataSource]="dataSourceq2" matSort>
+
+          <ng-container matColumnDef="title" sticky>
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+          </ng-container>
+          <ng-container matColumnDef="actions" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef class="centered"> Acciones </th>
+            <td mat-cell *matCellDef="let element; let i = index" class="pad10 actionsColumn">
+              <div class="minifabcontainer actionsContainer gridi">
+                <button mat-mini-fab class="successbutton" (click)="redirect()"
+                  matTooltip="Listado de preguntas: {{element.title}}">
+                  <mat-icon>list</mat-icon>
+                </button>
+                <mat-slide-toggle class="mauto"
+                  [(ngModel)]="element.state" matTooltip="Activar/Inactivar Pregunta"></mat-slide-toggle>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsq2; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsq2; let i = index"></tr>
+        </table>
+
+        <nodata *ngIf="noDataq2" [nodataheight]=nodataheight [nodatamessage]=nodatamessage></nodata>
+        <div *ngIf="isLoadingq2" style="display: flex; justify-content: center; align-items: center">
+          <mat-progress-spinner color="primary" mode="indeterminate">
+          </mat-progress-spinner>
+        </div>
+      </div>
+      <mat-paginator [pageSizeOptions]=mainTablePaginationOptionsq2 showFirstLastButtons></mat-paginator>
+    </div> 
+
+
+  </div>
+
+</mat-card>
+
+
+<button
+    class="successbutton floatAddButton"
+    mat-fab aria-label="Create primary entity of this page"
+    matTooltip="Crear Pregunta"
+    (click)="create()"
+  >
+  <mat-icon>add</mat-icon>
+</button>

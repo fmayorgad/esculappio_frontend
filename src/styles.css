@@ -1,7 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
 /*INIT Margin for cardtitled */
+input:focus, textarea:focus, select:focus, a{
+    outline: none;
+}
+*{
+    outline: none !important;
+}
 
+a:link
+{
+text-decoration:none !important;
+}
 .truncatedText{
     overflow: hidden;
     white-space: nowrap;
@@ -131,7 +141,7 @@
 }
 
 .floatAddButton {
-    z-index: 1;
+    z-index: 1000;
 }
 
 .staticCardBody{

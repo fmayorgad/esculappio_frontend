@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
 import { SettingsPlatformRoutingModule } from './settingsplatform-routing.module';
-import { QuestionsMainComponent } from './questions/main/main.component';
-import {QuestionCreateComponent} from '../settings/questions/dialogs/create/create.component';
-import {EditPermissionsDialogsEditComponent} from '../settings/questions/dialogs/editPermission/edit.component';
+import { OrgansMainComponent } from './questions/main/main.component';
+import {QuestionsMainComponent} from './questions/questions/main.component';
+import { HttpClientModule } from '@angular/common/http';
 
+//Dialogs
+import {QuestionCreateComponent} from './questions/questions/dialogs/create/create.component';
 
-const COMPONENTS = [QuestionsMainComponent ];
-const COMPONENTS_DYNAMIC = [ QuestionCreateComponent, EditPermissionsDialogsEditComponent];
+const COMPONENTS = [OrgansMainComponent, QuestionsMainComponent];
+const COMPONENTS_DYNAMIC = [ QuestionCreateComponent];
 
 @NgModule({
   imports: [
     SharedModule,
-    SettingsPlatformRoutingModule
+    SettingsPlatformRoutingModule,
+    HttpClientModule
   ],
   declarations: [
     ...COMPONENTS,
