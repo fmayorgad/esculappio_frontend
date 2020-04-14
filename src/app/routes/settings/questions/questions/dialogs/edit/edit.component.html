@@ -1,0 +1,44 @@
+<div class="linearModal">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <img class="fullwidth" style="padding: 50px;" src="../../../../../../../assets/svgs/faq.svg" alt="">
+
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]='mainForm'>
+      <div class="row">
+        <mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+          <input matInput placeholder="Descripción de la pregunta" (change)="test()" formControlName='title' autocomplete="off">
+          <mat-error *ngIf="mainForm.controls.title.hasError('required')">
+            El campo es <strong>obligatorio</strong>.
+          </mat-error>
+          <mat-error *ngIf="mainForm.controls.title.hasError('maxlength')">
+            El campo debe tener máximo <strong>75 caracteres</strong>.
+          </mat-error>
+          <mat-error *ngIf="mainForm.controls.title.hasError('minlength')">
+            El campo debe tener mínimo <strong>5 caracteres</strong>.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-12 col-md-12 col-sm-12">
+          <mat-label>Paso al cual asociar la pregunta</mat-label>
+          <mat-select formControlName='step_type_id'>
+            <mat-option  [value]="1">
+              Paso 1
+            </mat-option>
+            <mat-option  [value]="2">
+              Paso 2
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="mainForm.controls.step_type_id.hasError('required')">
+            El campo es <strong>obligatorio</strong>.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="warn">Cerrar</button>
+    <button mat-raised-button class="infobutton" [disabled]="!mainForm.valid" (click)="edit()">Editar</button>
+  </mat-dialog-actions>
+</div>

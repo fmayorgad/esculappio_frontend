@@ -1,101 +1,66 @@
+<breadcrumb></breadcrumb>
+
 <mat-card class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%;">
   <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
 
   <div class="staticCardBody">
 
-    <div *ngIf="(p1.length === 0)" class="gridi row">
-
+    <div [hidden]="!showp1" class="gridi row">
       <div class="mauto col-xs-12 col-sm-6 col-md-6 col-lg-6" style="padding: 50px ;">
         <img class="fullwidth" src="../../../../../assets/svgs/todolist.svg" alt="">
         <h3 class="centered">Este organo aún no tiene preguntas.</h3>
         <div class="gridi fullwidth">
           <button class="mauto" mat-raised-button color="primary" (click)="create()">Crear la primer pregunta</button>
         </div>
-        
       </div>
-
     </div>
 
-    <div *ngIf="!(p1.length === 0)">
+    <div [hidden]="showp1">
+
       <div class="searchTableContainer flexi">
         <div class="icon gridi">
           <mat-icon class="menu-icon mauto">search</mat-icon>
         </div>
         <mat-form-field>
           <mat-label>Buscar</mat-label>
-          <input matInput (keyup)="applyFilter($event.target.value)"
+          <input matInput (keyup)="applyFilter($event.target.value, 1)" autocomplete="off"
             placeholder="Escribe la palabra o valor a buscar en esta tabla...">
         </mat-form-field>
       </div>
 
-      <div style="height: 100%; overflow-y: auto;">
-        <table mat-table [dataSource]="dataSource" matSort>
- 
-          <ng-container matColumnDef="title" sticky>
-            <th mat-header-cell *matHeaderCellDef>Nombre</th>
-            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+      <div class="overflowTable">
+        <table mat-table matSort [dataSource]="dataSource" #matTable1="matTable" #matSort1="matSort">
+
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let element">{{element.title}}</td>
           </ng-container>
+
           <ng-container matColumnDef="actions" stickyEnd>
-            <th mat-header-cell *matHeaderCellDef class="centered"> Acciones </th>
-            <td mat-cell *matCellDef="let element; let i = index" class="pad10 actionsColumn">
+            <th mat-header-cell *matHeaderCellDef class="centered" width="200">Acciones</th>
+            <td mat-cell *matCellDef="let element" class="pad10 actionsColumn">
               <div class="minifabcontainer actionsContainer gridi">
-                <button mat-mini-fab class="successbutton" (click)="redirect()"
-                  matTooltip="Listado de preguntas: {{element.title}}">
-                  <mat-icon>list</mat-icon>
+                <mat-slide-toggle class="mauto" (click)="editState(element.id, element.state)" [(ngModel)]="element.state" matTooltip="Activar/Inactivar"></mat-slide-toggle>
+              </div>
+              <div class="actionsContainer">
+                <button mat-mini-fab class="infobutton" (click)="editModal(element)" matTooltip="Editar datos">
+                  <mat-icon>edit</mat-icon>
                 </button>
-                <mat-slide-toggle class="mauto" 
-                  [(ngModel)]="element.state" matTooltip="Activar/Inactivar Pregunta"></mat-slide-toggle>
               </div>
             </td>
           </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-
         <nodata *ngIf="noData" [nodataheight]=nodataheight [nodatamessage]=nodatamessage></nodata>
         <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
           <mat-progress-spinner color="primary" mode="indeterminate">
           </mat-progress-spinner>
         </div>
       </div>
-      <mat-paginator [pageSizeOptions]=mainTablePaginationOptions showFirstLastButtons></mat-paginator>
-    </div> 
-
-    <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource1">
-    
-        <!-- Position Column -->
-        <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-        </ng-container>
-    
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-    
-        <!-- Weight Column -->
-        <ng-container matColumnDef="weight">
-          <th mat-header-cell *matHeaderCellDef> Weight </th>
-          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-        </ng-container>
-    
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="symbol">
-          <th mat-header-cell *matHeaderCellDef> Symbol </th>
-          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-        </ng-container>
-    
-        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
-      </table>
-    
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <mat-paginator mat-Paginator #matPaginator1="matPaginator" [pageSizeOptions]=mainTablePaginationOptions
+        showFirstLastButtons></mat-paginator>
     </div>
-
 
   </div>
 
@@ -103,7 +68,7 @@
 
 
 
-<mat-card *ngIf="dataSource.data.length > 0" class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%;">
+<mat-card [hidden]="showp1" class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%;">
   <bodycardtitle [title]=titleq2 [subtitle]=subtitleq2 [icon]=icon [color]=colorq2></bodycardtitle>
 
   <div class="staticCardBody">
@@ -115,56 +80,77 @@
         </div>
         <mat-form-field>
           <mat-label>Buscar</mat-label>
-          <input matInput (keyup)="applyFilter($event.target.value)"
+          <input matInput (keyup)="applyFilter($event.target.value, 2)" autocomplete="off"
             placeholder="Escribe la palabra o valor a buscar en esta tabla...">
         </mat-form-field>
       </div>
 
-      <div style="height: 100%; overflow-y: auto;">
-        <table mat-table [dataSource]="dataSourceq2" matSort>
-          <ng-container matColumnDef="title" sticky>
-            <th mat-header-cell *matHeaderCellDef>Nombre</th>
-            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+      <div class="overflowTable">
+        <table mat-table [dataSource]="dataSource2" matSort #matSort2="matSort" #matTable2="matTable">
+
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let element">{{element.title}}</td>
           </ng-container>
+
           <ng-container matColumnDef="actions" stickyEnd>
-            <th mat-header-cell *matHeaderCellDef class="centered"> Acciones </th>
-            <td mat-cell *matCellDef="let element; let i = index" class="pad10 actionsColumn">
+            <th mat-header-cell *matHeaderCellDef class="centered" width="200">Acciones</th>
+            <td mat-cell *matCellDef="let element" class="pad10 actionsColumn">
               <div class="minifabcontainer actionsContainer gridi">
-                <button mat-mini-fab class="successbutton" (click)="redirect()"
-                  matTooltip="Listado de preguntas: {{element.title}}">
-                  <mat-icon>list</mat-icon>
+                <mat-slide-toggle [(ngModel)]="element.state" (click)="editState(element.id, element.state)" class="mauto" matTooltip="Activar/Inactivar"></mat-slide-toggle>
+              </div>
+              <div class="actionsContainer">
+                <button mat-mini-fab class="infobutton" (click)="editModal(element)" matTooltip="Editar datos">
+                  <mat-icon>edit</mat-icon>
                 </button>
-                <mat-slide-toggle class="mauto"
-                  [(ngModel)]="element.state" matTooltip="Activar/Inactivar Pregunta"></mat-slide-toggle>
               </div>
             </td>
           </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsq2; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumnsq2; let i = index"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-
-        <nodata *ngIf="noDataq2" [nodataheight]=nodataheight [nodatamessage]=nodatamessage></nodata>
-        <div *ngIf="isLoadingq2" style="display: flex; justify-content: center; align-items: center">
+        <nodata *ngIf="noData2" [nodataheight]=nodataheight [nodatamessage]=nodatamessage></nodata>
+        <div *ngIf="isLoading2" style="display: flex; justify-content: center; align-items: center">
           <mat-progress-spinner color="primary" mode="indeterminate">
           </mat-progress-spinner>
         </div>
       </div>
-
-      <mat-paginator [pageSizeOptions]=mainTablePaginationOptions showFirstLastButtons></mat-paginator>
-    </div> 
-
+      <mat-paginator #matPaginator2="matPaginator" [pageSizeOptions]=mainTablePaginationOptions showFirstLastButtons>
+      </mat-paginator>
+    </div>
 
   </div>
 
 </mat-card>
 
+<mat-card [hidden]="showp1" class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%;">
+  <bodycardtitle [title]=titleq3 [subtitle]=subtitleq3 [icon]=icon2 [color]=colorq3></bodycardtitle>
 
-<button
-    class="successbutton floatAddButton"
-    mat-fab aria-label="Create primary entity of this page"
-    matTooltip="Crear Pregunta"
-    (click)="create()"
-  >
+  <div class="staticCardBody">
+    <div class="flex row">
+      <div class="mauto col-xs-12 col-sm-4 col-md-4 col-lg-4" style="padding: 50px ;">
+        <img class="fullwidth" src="../../../../../assets/svgs/money.svg" alt="">
+
+      </div>
+      <div class="mauto col-xs-12 col-sm-8 col-md-8 col-lg-8">
+        <div class="gridi fullwidth">
+
+          <h3>Mensaje actual: "{{organMessage}}"</h3>
+          <mat-form-field>
+            <mat-label>Mensaje</mat-label>
+            <input matInput [(ngModel)]="organMessage" autocomplete="off"
+              placeholder="Escribe el mensaje publicitario a presentar. Los cambios son inmediatos.">
+          </mat-form-field>
+          <button class="mauto" mat-raised-button color="primary" (click)="editMessage()">Guardar mensaje</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</mat-card>
+
+
+<button class="successbutton floatAddButton" mat-fab aria-label="Create primary entity of this page"
+  matTooltip="Crear Pregunta" (click)="create()">
   <mat-icon>add</mat-icon>
 </button>

@@ -23,7 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtInterceptor, ErrorInterceptor } from './helpers';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 
-import {GlobalsUser} from '../assets/data/globals';
+import { GlobalsUser } from '../assets/data/globals';
 
 @Injectable()
 export class CustomMatPaginatorIntl extends MatPaginatorIntl {
@@ -33,8 +33,8 @@ export class CustomMatPaginatorIntl extends MatPaginatorIntl {
   lastPageLabel = 'Última página';
   firstPageLabel = 'Primer página';
 
-  //configuracion general de tablas
-  getRangeLabel = function(page, pageSize, length) {
+  // configuracion general de tablas
+  getRangeLabel = function (page, pageSize, length) {
     if (length === 0 || pageSize === 0) {
       return '0 de ' + length;
     }

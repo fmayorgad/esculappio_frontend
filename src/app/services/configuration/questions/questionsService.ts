@@ -8,11 +8,11 @@ import { Routes, RouterModule, Resolve, ActivatedRouteSnapshot, RouterStateSnaps
 
 @Injectable()
 export class APIResolver implements Resolve<any> {
-  constructor() {}
+  constructor() { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     console.log(route.params)
-    return {mamasapos: 2323};
+    return { mamasapos: 2323 };
   }
 }
 
@@ -27,14 +27,25 @@ export class QuestionsService {
 
   create(id, obj) {
     return this.http
-    .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/organs/${id}`, obj)
+      .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/organs/${id}`, obj)
       .pipe(map(response => response));
   }
 
-  edit(data: object ,id: number) {
+  editMessage(data: object, id: number) {
     return this.http
-      .put(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/types-administrator-documents/${id}`,
-      data)
+      .patch(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/organs/${id}`, data)
+      .pipe(map(response => response));
+  }
+
+  editState(state, id) {
+    return this.http
+      .patch(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/organs/questions/${id}`, state)
+      .pipe(map(response => response));
+  }
+
+  editQuestion(id, tmp) {
+    return this.http
+      .patch(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/organs/questions/${id}`, tmp)
       .pipe(map(response => response));
   }
 

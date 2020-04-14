@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { QuestionsService } from '../../../../services/configuration/questions/questionsService';
 import { QuestionCreateComponent } from './dialogs/create/create.component';
+import { QuestionEditComponent } from './dialogs/edit/edit.component';
 
 @Component({
   selector: 'app-questions-main',
@@ -25,6 +26,8 @@ export class QuestionsMainComponent implements OnInit {
   ) {
     activatedRoute.data.subscribe(
       response => {
+
+        this.organMessage = response.item.organs.advertising;
         this.firstdata = response.item.organs.questions;
         this.organ = response.item.organs;
         this.p1 = this.firstdata.filter(step => {
@@ -53,59 +56,87 @@ export class QuestionsMainComponent implements OnInit {
   colorq2 = 'tomato';
   subtitleq2 = 'Listado de preguntas para este organo.';
 
+  icon2 = 'local_atm';
+  colorq3 = '#5745e8';
+  subtitleq3 = 'Publicidad a presentar al final de las preguntas.';
+  titleq3 = 'Publicidad';
+
   profiles;
 
   nodataheight = '100px';
   nodatamessage = 'No hay datos para mostrar';
 
+  organMessage;
   states = {
     0: 'Inactivo',
     1: 'Activo'
   };
 
-  
+  showp1 = true;
+  showp2 = true;
 
-
-  // tabla paso 1
-  dataSource = new MatTableDataSource<any>([]);
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
-  mainTablePaginationOptions: number[];
-  displayedColumns: string[];
-  noData = false;
   isLoading = true;
+  noData = false;
+  isLoading2 = true;
+  noData2 = false;
+
+  dataSource = new MatTableDataSource<any>([]);
+  @ViewChild('matPaginator1') MatPaginator1: MatPaginator;
+  @ViewChild('matSort1') MatSort1: MatSort;
+  @ViewChild('matTable1') MatTable1: MatTable<any>;
+
+  dataSource2 = new MatTableDataSource<any>([]);
+  @ViewChild('matPaginator2') MatPaginator2: MatPaginator;
+  @ViewChild('matSort2') MatSort2: MatSort;
+  @ViewChild('matTable2') MatTable2: MatTable<any>;
+
+  mainTablePaginationOptions: number[] = [5, 15, 50];
+  displayedColumns: string[] = ['title', 'actions'];
 
 
-  // tabla paso 2
-  dataSourceq2 = new MatTableDataSource<any>([]);
-  @ViewChild(MatPaginator, { static: false }) paginatorq2: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sortq2: MatSort;
-  @ViewChild(MatTable, { static: false }) tableq2: MatTable<any>;
-  mainTablePaginationOptionsq2: number[];
-  displayedColumnsq2: string[];
-  noDataq2 = false;
-  isLoadingq2 = true;
-
-  displayedColumns1: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource1 = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-
-  @ViewChild(MatPaginator, {static: true}) paginator1: MatPaginator;
-
-
-
-
-  @HostListener('window:resize', ['$event']) onResize(event) {
-    this.windowwith = event.target.innerWidth;
+  applyFilter(filterValue: string, table: number) {
+    if (table === 1) {
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+    } else {
+      this.dataSource2.filter = filterValue.trim().toLowerCase();
+    }
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  editState(id, state) {
+    console.log(state)
+    console.log(id)
+    this.questionsService.editState({ state: !state }, id).subscribe(
+      response => {
+        this._snackBar.open('Estado editado satisfactoriamente', 'Aceptar', {
+          duration: 3000,
+          panelClass: 'snackbarSuccess'
+        });
+      },
+      error => {
+        this._snackBar.open('Error al editar el estado. Intentalo de nuevo más tarde', 'Aceptar', {
+          duration: 3000,
+          panelClass: 'snackbarError'
+        });
+      },
+    );
   }
 
-  redirect() {
-    console.log("from questions")
-    this.router.navigate(['configuracion/organos/1/preguntas']);
+  editMessage() {
+    console.log(this.activatedRoute.params["_value"])
+    this.questionsService.editMessage({ advertising: this.organMessage }, this.activatedRoute.params["_value"].id).subscribe(
+      response => {
+        this._snackBar.open('Mensaje editado satisfactoriamente', 'Aceptar', {
+          duration: 3000,
+          panelClass: 'snackbarSuccess'
+        });
+      },
+      error => {
+        this._snackBar.open('Error al editar el mensaje. Intentalo de nuevo más tarde', 'Aceptar', {
+          duration: 3000,
+          panelClass: 'snackbarError'
+        });
+      },
+    );
   }
 
   create() {
@@ -127,31 +158,59 @@ export class QuestionsMainComponent implements OnInit {
     });
   }
 
+  editModal(element) {
+    const dialogRef = this.dialog.open(QuestionEditComponent, { disableClose: true, data: element });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.state === 1) {
+        this.getAll();
+        this._snackBar.open(result.message, 'Aceptar', {
+          duration: 3000,
+          panelClass: 'snackbarSuccess'
+        });
+      }
+      if (result.state === 0) {
+        this._snackBar.open(result.message, 'Aceptar', {
+          duration: 3000,
+        });
+      }
+    });
+  }
+
   getAll() {
     this.questionsService.getById(this.organ.id).subscribe(
       data => {
-        console.log(data);
-        this.dataSource = new MatTableDataSource<any>(data.questions.filter(step => {
-          return step.stepTypeId === 1;
-        }));
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+
+        console.log(data)
+        const questions1 = data.questions.filter(q => q.stepTypeId === 1);
+        const questions2 = data.questions.filter(q => q.stepTypeId === 2);
+
+        this.showp1 = data.questions.length > 0 ? false : true;
+        this.showp2 = data.questions.length > 0 ? false : true;
+
+        console.log(this.showp1)
+
+        this.dataSource = new MatTableDataSource<any>(questions1);
+        this.dataSource.paginator = this.MatPaginator1;
+        this.dataSource.sort = this.MatSort1;
+
+        this.dataSource2 = new MatTableDataSource<any>(questions2);
+        this.dataSource2.paginator = this.MatPaginator2;
+        this.dataSource2.sort = this.MatSort2;
+
         this.isLoading = false;
+        if (questions1.length === 0) {
+          this.noData = true;
+        } else {
+          this.noData = false;
+        }
 
-        this.dataSourceq2 = new MatTableDataSource<any>(data.questions.filter(step => {
-          return step.stepTypeId === 2;
-        }));
-        this.table.renderRows();
-
-
-        this.dataSourceq2.paginator = this.paginatorq2;
-        this.dataSourceq2.sort = this.sortq2;
-
-        this.noData = !(this.dataSource.data.length > 0);
-        this.isLoading = false;
-
-        this.noDataq2 = !(this.dataSourceq2.data.length > 0);
-        this.isLoadingq2 = false;
+        this.isLoading2 = false;
+        if (questions2.length === 0) {
+          this.noData2 = true;
+        } else {
+          this.noData2 = false;
+        }
       },
       error => {
       });
@@ -159,63 +218,25 @@ export class QuestionsMainComponent implements OnInit {
 
   ngOnInit() {
 
-    this.dataSource1.paginator = this.paginator1;
-
-    console.log(this.p1);
     if (this.p1.length > 0) {
-      this.title = this.title + this.organ.name + ', Paso 1:';
-      this.titleq2 = this.titleq2 + this.organ.name + ' Paso 2:';
+      this.title = this.title + this.organ.name + ', Paso 1';
+      this.titleq2 = this.titleq2 + this.organ.name + ' Paso 2';
     } else {
       this.title = this.title + this.organ.name;
     }
+    this.showp1 = this.p1.length > 0 ? false : true;
+    this.showp2 = this.p1.length > 0 ? false : true;
 
-    this.dataSource = new MatTableDataSource<any>([]);
-    this.displayedColumns = ['title', 'actions'];
-    this.mainTablePaginationOptions = [7, 15, 50];
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.noData = false;
-    this.isLoading = false;
+    this.dataSource.paginator = this.MatPaginator1;
+    this.dataSource.sort = this.MatSort1;
 
-    this.dataSourceq2 = new MatTableDataSource<any>([]);
-    this.displayedColumnsq2 = ['title', 'actions'];
-    this.mainTablePaginationOptionsq2 = [7, 15, 50];
-    this.dataSourceq2.paginator = this.paginatorq2;
-    this.dataSourceq2.sort = this.sortq2;
-    this.noDataq2 = false;
-    this.isLoadingq2 = false;
+    this.dataSource2.paginator = this.MatPaginator2;
+    this.dataSource2.sort = this.MatSort2;
 
     this.getAll();
   }
 
 }
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-  {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-  {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-  {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-  {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-  {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-  {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-  {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-  {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
-];
+
