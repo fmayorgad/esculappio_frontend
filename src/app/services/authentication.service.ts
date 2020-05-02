@@ -6,7 +6,7 @@ import { environment } from '@env/environment';
 
 import { User } from '../models';
 
-const subdomain =  'eep'; // window.location.hostname.split('.')[0];
+const subdomain = 'eep'; // window.location.hostname.split('.')[0];
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -22,23 +22,11 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  loginInformation() {
-    return this.http
-    .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v2}/configurations/login/${subdomain}`)
-    .pipe();
-  }
-
-  campaingActive() {
-    return this.http
-    .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v2}/campaing/campaingAct`)
-    .pipe();
-  }
-
-  login(email: string, password: string) {
+  login(obj) {
     return this.http
       .post<any>(
-        `${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v2}/login`,
-        { email, password, subdomain},
+        `${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/login`,
+         obj,
       )
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes

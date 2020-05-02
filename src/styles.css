@@ -51,7 +51,7 @@ text-decoration:none !important;
 }
 
 .actionsColumn {
-    display: table-cell !important;
+   /*  display: grid !important; */
     text-align: center !important;
 }
 
@@ -131,8 +131,26 @@ text-decoration:none !important;
     padding: 0px !important;
 }
 
+
+.noMargin {
+    margin: 0px !important;
+}
+
+
 .pad10 {
     padding: 10px !important;
+}
+
+.pad20 {
+    padding: 20px !important;
+}
+
+.pad30 {
+    padding: 30px !important;
+}
+
+.pad40 {
+    padding: 40px !important;
 }
 
 .mat-mini-fab {
@@ -141,7 +159,8 @@ text-decoration:none !important;
 
 .minifabcontainer {
     height: 40px;
-    width: 40px;
+    width: fit-content;
+    margin: auto;
 }
 
 .floatAddButton {

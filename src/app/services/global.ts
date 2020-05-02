@@ -11,46 +11,10 @@ export class GlobalService {
   constructor(private http: HttpClient) {
   }
 
-  getBankAccountTypes() {
+  getEPS() {
     return this.http
-      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/accounts-types`)
-      .pipe(map(data => data['accountTypes']));
-  }
-
-  getPUCs() {
-    return this.http
-      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/single-account-plan`)
-      .pipe(map(data => data['singleAccountPlan']));
-  }
-
-  getDocumentNature() {
-    return this.http
-      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/nature-documents`)
-      .pipe(map(data => data['natureDocuments']));
-  }
-
-  getProfiles() {
-    return this.http
-      .get(`${environment.apiUrl}/${environment.apiBaseMain.configuration}/${environment.versions.v1}/profiles`)
-      .pipe(map(data => data['profiles']));
-  }
-
-  getMenus() {
-    return this.http
-      .get(`${environment.apiUrl}/${environment.apiBaseMain.configuration}/${environment.versions.v1}/menus`)
-      .pipe(map(data => data['menus']));
-  }
-
-  getPermissionsByProfile(id) {
-    return this.http
-      .get(`${environment.apiUrl}/${environment.apiBaseMain.configuration}/${environment.versions.v1}/permissions/${id}`)
-      .pipe(map(data => data));
-  }
-
-  getPermissions() {
-    return this.http
-      .get(`${environment.apiUrl}/${environment.apiBaseMain.configuration}/${environment.versions.v1}/permissions`)
-      .pipe(map(data => data['permissions']));
+      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/general/eps`)
+      .pipe(map(data => data['eps']));
   }
 
   currency(number){

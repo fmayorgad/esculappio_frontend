@@ -26,7 +26,8 @@
             "styles": [
               "src/styles.scss",
               "src/styles.css",
-              "src/grid.css"
+              "src/grid.css",
+              "src/tables.css"
             ],
             "scripts": []
           },

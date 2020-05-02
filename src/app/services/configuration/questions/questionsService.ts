@@ -31,7 +31,7 @@ export class QuestionsService {
       .pipe(map(response => response));
   }
 
-  editMessage(data: object, id: number) {
+  editOrgan(data: object, id: number) {
     return this.http
       .patch(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/organs/${id}`, data)
       .pipe(map(response => response));

@@ -1,0 +1,170 @@
+<breadcrumb></breadcrumb>
+<mat-card class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%;">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <div class="staticCardBody">
+
+    <p>Listado de usuarios registrados en la plataforma.</p>
+
+    <div class="searchTableContainer flexi">
+      <div class="icon gridi">
+        <mat-icon class="menu-icon mauto">search</mat-icon>
+      </div>
+      <mat-form-field>
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event.target.value)"
+          placeholder="Escribe la palabra o valor a buscar en esta tabla...">
+      </mat-form-field>
+    </div>
+
+    <div style=" overflow-y: auto;">
+      <table mat-table matSort [dataSource]="dataSourcePacients" #sortPacients="matSort" #tablePacients="matTable" >
+        <ng-container matColumnDef="name" sticky>
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="surname" sticky>
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastname" sticky>
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="number" sticky>
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element"> {{element.identificationValue}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cellphone" sticky>
+          <th mat-header-cell *matHeaderCellDef>Celular</th>
+          <td mat-cell *matCellDef="let element"> {{element.cellphone}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef class="centered" width="200"> Acciones </th>
+          <td mat-cell *matCellDef="let element; let i = index" class="pad10 actionsColumn">
+            <div class="minifabcontainer actionsContainer gridi">
+              <mat-slide-toggle class="mauto" (change)="editState(element.id, element.state)"
+                [(ngModel)]="element.state" matTooltip="Activar/Inactivar usuario"></mat-slide-toggle>
+
+              <button mat-mini-fab class="successbutton" (click)="createProcedure(element)"
+                matTooltip="Agregar Procedimiento Médico">
+                <mat-icon>add</mat-icon>
+              </button>
+
+              <button mat-mini-fab class="errorbutton" 
+                matTooltip="Ver tratamientos">
+                <mat-icon>list</mat-icon>
+              </button>
+
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsPacients ; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsPacients; let i = index"></tr>
+      </table>
+
+      <nodata *ngIf="noDataPacients" [nodataheight]=nodataheight [nodatamessage]=nodatamessage></nodata>
+      <div *ngIf="isLoadingPacients" style="display: flex; justify-content: center; align-items: center">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+      </div>
+
+    </div>
+    <mat-paginator  #paginatorPacients="matPaginator" [pageSizeOptions]=mainTablePaginationOptionsPacients showFirstLastButtons></mat-paginator>
+  </div>
+
+  <button [@fadeInOut] class="successbutton floatAddButton" mat-fab aria-label="Create primary entity of this page"
+    matTooltip="Crear Paciente en el sistema" (click)="create()">
+    <mat-icon>add</mat-icon>
+  </button>
+
+</mat-card>
+
+
+<mat-card class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%; margin-top: 90px;">
+  <bodycardtitle [title]=titleProcedures [subtitle]=subtitleProcedures [icon]=iconProcedures [color]=colorProcedures></bodycardtitle>
+
+  
+  <mat-tab-group dynamicHeight mat-align-tabs="center">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">description</mat-icon>
+        Pendientes de documentos
+      </ng-template>
+
+<!--       <div class="searchTableContainer flexi">
+        <div class="icon gridi">
+          <mat-icon class="menu-icon mauto">search</mat-icon>
+        </div>
+        <mat-form-field>
+          <mat-label>Buscar</mat-label>
+          <input matInput (keyup)="applyFilter($event.target.value)"
+            placeholder="Escribe la palabra o valor a buscar en esta tabla...">
+        </mat-form-field>
+      </div>
+ -->
+ 
+      <div style=" overflow-y: auto;">
+        <table mat-table matSort [dataSource]="dataSourceDocuments" #sortDocuments="matSort" #tableDocuments="matTable" >
+          <ng-container matColumnDef="name" sticky>
+            <th mat-header-cell *matHeaderCellDef>Nombre Paciente</th>
+            <td mat-cell *matCellDef="let element"> {{element.patiente.name}} {{element.patiente.surname}} {{element.patiente.lastname}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="number" sticky>
+            <th mat-header-cell *matHeaderCellDef>Identificación paciente</th>
+            <td mat-cell *matCellDef="let element"> {{element.patiente.identificationValue}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="organ" sticky>  
+            <th mat-header-cell *matHeaderCellDef>Organo afectado</th>
+            <td mat-cell *matCellDef="let element"> {{element.organ.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef class="centered" width="200"> Acciones </th>
+            <td mat-cell *matCellDef="let element; let i = index" class="pad10 actionsColumn">
+              <div class="minifabcontainer actionsContainer gridi">
+                <mat-slide-toggle class="mauto" (change)="editState(element.id, element.state)"
+                  [(ngModel)]="element.state" matTooltip="Activar/Inactivar Procedimiento médico"></mat-slide-toggle>
+                <button mat-mini-fab class="infobutton" 
+                  matTooltip="Completar documentos faltantes" (click)="documents(element )" >
+                  <mat-icon>list</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsDocuments ; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsDocuments; let i = index"></tr>
+        </table>
+  
+        <nodata *ngIf="noDataDocuments" [nodataheight]=nodataheight [nodatamessage]=nodatamessage></nodata>
+        <div *ngIf="isLoadingDocuments" style="display: flex; justify-content: center; align-items: center">
+          <mat-progress-spinner color="primary" mode="indeterminate">
+          </mat-progress-spinner>
+        </div>
+      </div>
+      <mat-paginator  #paginatorDocuments="matPaginator" [pageSizeOptions]=mainTablePaginationOptionsDocuments showFirstLastButtons></mat-paginator>
+      
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">assignment</mat-icon>
+        Pendientes de diagnostico
+      </ng-template>
+      Contenido pendiente
+    </mat-tab>
+
+
+  </mat-tab-group>
+
+
+</mat-card>

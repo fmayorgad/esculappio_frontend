@@ -1,0 +1,139 @@
+<div class="mediumModal">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]='mainForm'>
+      <div class="row">
+
+        <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <input matInput placeholder="Nombres" formControlName='name' autocomplete="off">
+          <mat-error *ngIf="mainForm.controls.name.hasError('required')">
+            El campo es <strong>obligatorio</strong>.
+          </mat-error>
+          <mat-error *ngIf="mainForm.controls.name.hasError('maxlength')">
+            El campo debe tener máximo <strong>75 caracteres</strong>.
+          </mat-error>
+          <mat-error *ngIf="mainForm.controls.name.hasError('minlength')">
+            El campo debe tener mínimo <strong>5 caracteres</strong>.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <input matInput placeholder="Primer apellido" formControlName='surname' autocomplete="off">
+          <mat-error *ngIf="mainForm.controls.surname.hasError('required')">
+            El campo es <strong>obligatorio</strong>.
+          </mat-error>
+          <mat-error *ngIf="mainForm.controls.surname.hasError('maxlength')">
+            El campo debe tener máximo <strong>75 caracteres</strong>.
+          </mat-error>
+          <mat-error *ngIf="mainForm.controls.surname.hasError('minlength')">
+            El campo debe tener mínimo <strong>5 caracteres</strong>.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <input matInput placeholder="Segundo apellido" formControlName='lastname' autocomplete="off">
+          <mat-error *ngIf="mainForm.controls.lastname.hasError('required')">
+            El campo es <strong>obligatorio</strong>.
+          </mat-error>
+          <mat-error *ngIf="mainForm.controls.lastname.hasError('maxlength')">
+            El campo debe tener máximo <strong>75 caracteres</strong>.
+          </mat-error>
+          <mat-error *ngIf="mainForm.controls.lastname.hasError('minlength')">
+            El campo debe tener mínimo <strong>5 caracteres</strong>.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <mat-label>Género</mat-label>
+          <mat-select formControlName='gender'>
+            <mat-option [value]="'F'">
+              Femenino
+            </mat-option>
+            <mat-option [value]="'M'">
+              Masculino
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="mainForm.controls.gender.hasError('required')">
+            El campo es <strong>obligatorio</strong>.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <mat-label>Tipo de identificación</mat-label>
+          <mat-select formControlName='identificationType'>
+            <mat-option [value]="1">
+              Cédula de Ciudadanía
+            </mat-option>
+            <mat-option [value]="2">
+              Cédula de Extranjería
+            </mat-option>
+            <mat-option [value]="3">
+              Pasaporte
+            </mat-option>
+            <mat-option [value]="4">
+              Registro Civil
+            </mat-option>
+            <mat-option [value]="5">
+              Tarjeta de Identidad
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="mainForm.controls.identificationType.hasError('required')">
+            El campo es <strong>obligatorio</strong>.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <input matInput placeholder="Número de identificación" formControlName='identificationValue'
+            autocomplete="off">
+          <mat-error *ngIf="mainForm.controls.identificationValue.hasError('required')">
+            El campo es <strong>obligatorio</strong>.
+          </mat-error>
+          <mat-error *ngIf="mainForm.controls.identificationValue.hasError('maxlength')">
+            El campo debe tener máximo <strong>75 caracteres</strong>.
+          </mat-error>
+          <mat-error *ngIf="mainForm.controls.identificationValue.hasError('minlength')">
+            El campo debe tener mínimo <strong>5 caracteres</strong>.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <mat-label>Tipo de usuario</mat-label>
+          <mat-select formControlName='profile'>
+            <mat-option [value]="3">
+              Secretaria
+            </mat-option>
+            <mat-option [value]="2">
+              Especialista
+            </mat-option>
+            <mat-option [value]="5">
+              Médico general
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="mainForm.controls.profile.hasError('required')">
+            El campo es <strong>obligatorio</strong>.
+          </mat-error>
+        </mat-form-field>
+ 
+        <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12" [hidden]="!(mainForm.controls.profile.value === 2 || mainForm.controls.profile.value === 5)">
+          <input matInput placeholder="Número profesional" formControlName='professionalNumber' autocomplete="off">
+          <mat-error *ngIf="mainForm.controls.professionalNumber.hasError('required')">
+            El campo es <strong>obligatorio</strong>.
+          </mat-error>
+          <mat-error *ngIf="mainForm.controls.professionalNumber.hasError('maxlength')">
+            El campo debe tener máximo <strong>12 caracteres</strong>.
+          </mat-error>
+          <mat-error *ngIf="mainForm.controls.professionalNumber.hasError('minlength')">
+            El campo debe tener mínimo <strong>8 caracteres</strong>.
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="warn">Cerrar</button>
+    <button mat-raised-button class="infobutton" [disabled]="!mainForm.valid" (click)="edit()">Guardar cambios</button>
+  </mat-dialog-actions>
+</div>

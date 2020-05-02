@@ -6,19 +6,21 @@ import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { QuestionsService } from '../../../../services/configuration/questions/questionsService';
+import { AdminUsersService } from '@services';
+import { UserAdminCreateComponent } from './dialogs/create/create.component';
+import { UserAdminEditComponent } from './dialogs/edit/edit.component';
 
 @Component({
-  selector: 'app-organs-main',
+  selector: 'app-useradmin-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
 })
-export class OrgansMainComponent implements OnInit {
+export class UsersAdminMainComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
-    private questionsService: QuestionsService,
+    private adminUsersService: AdminUsersService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -27,10 +29,10 @@ export class OrgansMainComponent implements OnInit {
   windowwith = window.innerWidth;
   colsnumber = 6;
 
-  title = 'Organos';
-  icon = 'accessibility';
-  color = '#f7555c';
-  subtitle = 'Listado de Organos disponibles en la app movil.';
+  title = 'Usuarios administrativos';
+  icon = 'how_to_reg';
+  color = '#ffab42';
+  subtitle = 'Listado de usuarios administrativos.';
 
 
   profiles;
@@ -63,31 +65,45 @@ export class OrgansMainComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  create() {
+    const dialogRef = this.dialog.open(UserAdminCreateComponent, { disableClose: true, data: this.activatedRoute.params["_value"] });
 
-  redirect(id){
-    this.router.navigate([`configuracion/organos/${id}/preguntas`]);
-  }
-
-  editState( id, state) {
-    console.log(this.activatedRoute.params["_value"])
-    this.questionsService.editOrgan({ state }, id).subscribe(
-      response => {
-        this._snackBar.open('Estado modificado satisfactoriamente', 'Aceptar', {
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.state === 1) {
+        this.getAll();
+        this._snackBar.open(result.message, 'Aceptar', {
           duration: 3000,
           panelClass: 'snackbarSuccess'
         });
-      },
-      error => {
-        this._snackBar.open('Error al editar el estado. Intentalo de nuevo más tarde', 'Aceptar', {
+      }
+      if (result.state === 0) {
+        this._snackBar.open(result.message, 'Aceptar', {
           duration: 3000,
-          panelClass: 'snackbarError'
         });
-      },
-    );
+      }
+    });
+  }
+
+  edit(element) {
+    const dialogRef = this.dialog.open(UserAdminEditComponent, { disableClose: true, data: element });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.state === 1) {
+        this.getAll();
+        this._snackBar.open(result.message, 'Aceptar', {
+          duration: 3000,
+          panelClass: 'snackbarSuccess'
+        });
+      }
+      if (result.state === 0) {
+        this._snackBar.open(result.message, 'Aceptar', {
+          duration: 3000,
+        });
+      }
+    });
   }
 
   getAll() {
-    this.questionsService.getAll().subscribe(
+    this.adminUsersService.getAll().subscribe(
       data => {
         console.log(data);
         this.dataSource = new MatTableDataSource<any>(data);
@@ -104,33 +120,28 @@ export class OrgansMainComponent implements OnInit {
       });
   }
 
-  changeEntityState(index, state, entityId) {
-    console.log(index)
-    console.log(state)
-    console.log(entityId)
-
-    // this.configService.setEntityState((state) ? 1 : 0, entityId).subscribe(
-    //   data => {
-    //     this._snackBar.open('Estado editado satisfactoriamente.', 'Aceptar', {
-    //       duration: 3000,
-    //     });
-    //   },
-    //   error => {
-
-    //     this.dataSourceAuditoria.filteredData[index].state = !state;
-    //     this._snackBar.open('No se pudo realizar la acción. Intentalo de nuevo más tarde.', 'Aceptar', {
-    //       duration: 3000,
-    //     });
-    //   });
+  editState(id, state) {
+    this.adminUsersService.editState(id, state).subscribe(
+      data => {
+        this._snackBar.open('Estado editado satisfactoriamente.', 'Aceptar', {
+          duration: 3000,
+          panelClass: 'snackbarSuccess'
+        });
+      },
+      error => {
+        this._snackBar.open('No se pudo realizar la acción. Intentalo de nuevo más tarde.', 'Aceptar', {
+          duration: 3000,
+          panelClass: 'snackbarError'
+        });
+      });
   }
-
 
 
 
   ngOnInit() {
     //this.getAllProfiles();
     this.getAll();
-    this.displayedColumns = ['name', 'actions'];
+    this.displayedColumns = ['name', 'email', 'profile', 'actions'];
     this.mainTablePaginationOptions = [7, 15, 50];
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

@@ -32,6 +32,11 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       }
       // segunda posición
       if (route['_lastPathIndex'] === 1) {
+
+        console.log( route['_urlSegment'].segments[route['_lastPathIndex'] - 1].path );
+        console.log(this.globalsUser.nav)
+        console.log(route.routeConfig.path)
+
         if (this.globalsUser.nav[ route['_urlSegment'].segments[route['_lastPathIndex'] - 1].path ].children[route.routeConfig.path]) {
           return true;
         } else {
@@ -40,9 +45,9 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       }
       return true;
     } else {
-      //this.router.navigate(['/auth/login'], { queryParams: { returnUrl: state.url } });
-      //return false;
-      return true;
+      this.router.navigate(['/auth/login'], { queryParams: { returnUrl: state.url } });
+      return false;
+  
     }
 
   }

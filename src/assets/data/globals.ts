@@ -7,9 +7,9 @@ export class GlobalsUser {
 }
 
 export function getProfile() {
-/*   const localvariable: any = JSON.parse(localStorage.getItem('currentUser')).token;
+  const localvariable: any = JSON.parse(localStorage.getItem('currentUser')).token;
   const helper = new JwtHelperService();
   const decodedToken = helper.decodeToken(localvariable);
   console.log(decodedToken)
-  return decodedToken.role; */
+  return decodedToken.role;
 }

@@ -31,11 +31,11 @@ const routes: Routes = [
     component: AdminLayoutComponent,
   },
 
-  // {
-  //   path: 'banco',
-  //   loadChildren: () => import('./banks/banks.module').then(m => m.BanksModule),
-  //   component: AdminLayoutComponent,
-  // },
+  {
+    path: 'pacientes',
+    loadChildren: () => import('./pacients/pacients.module').then(m => m.PacientsdModule),
+    component: AdminLayoutComponent,
+  },
   {
     path: 'configuracion',
     loadChildren: () => import('./settings/settingsplatform.module').then(m => m.SettingsModule),

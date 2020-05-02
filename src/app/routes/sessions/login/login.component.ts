@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { StartupService } from '../../../core/services/startup.service';
+import { AuthenticationService } from '@services';
 
 import {
 	HttpEvent,
@@ -13,7 +14,6 @@ import {
 	HttpErrorResponse
 } from '@angular/common/http';
 
-import { AuthenticationService } from '../../../services';
 
 @Component({
 	selector: 'app-login',
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
 		}
 
 		this.loginForm = this.formBuilder.group({
-			username: ['super@dominussalud.co', [Validators.required, Validators.email]],
+			username: ['esculappio@dominussalud.co', [Validators.required, Validators.email]],
 			password: ['Hola@321', [Validators.required]],
 			schoolId: ['', [Validators.required]],
 		});
@@ -61,15 +61,34 @@ export class LoginComponent implements OnInit {
 
 	loginButtonEvent() {
 		const emailstate = this.loginForm.controls.username.value;
-		// esto reinicia el formulario
-		// cuando solo hay un email y no se ha buscado su tipo
 		if (this.loginForm.controls.username.errors === null) { // solo si el campo email esta bien diligenciado
 			if (this.stateLoginProcess === 0) {
 				this.loadingButtonSpin = true;
 				this.loadingButtonText = false;
 				const email = this.loginForm.controls.username.value;
-				
-			} 
+				const password = this.loginForm.controls.password.value;
+
+
+				this.authenticationService.login({ email, password }).subscribe(
+					response => {
+
+						this.snackBar.open('Bienvenido de nuevo', 'Aceptar', {
+							duration: 3000,
+							panelClass: 'snackbarSuccess'
+						});
+						this.startupService.load().then(() => {
+							this.router.navigate([this.returnUrl]);
+						});
+					},
+					error => {
+						this.snackBar.open(error, 'Aceptar', {
+							duration: 3000,
+							panelClass: 'snackbarError'
+						});
+					},
+				);
+
+			}
 		}
 	}
 

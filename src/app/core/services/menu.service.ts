@@ -34,10 +34,10 @@ export class MenuService {
   constructor(
     private globals: GlobalsUser,
   ) {
-    // console.log("comprobando que existe local")
-    // if (localStorage.getItem('currentUser')) {
-    // this.getAll();
-    // }
+    console.log("comprobando que existe local")
+    if (localStorage.getItem('currentUser')) {
+    this.getAll();
+    }
 
   }
 
@@ -46,8 +46,7 @@ export class MenuService {
   private menu: Menu[] = [];
 
   getAll(): Menu[] {
-    return this.menu;
-    /* console.log("creando menu desde login")
+    console.log("creando menu desde login")
     let localvariable: any = JSON.parse(localStorage.getItem('currentUser'));
 
     if (localStorage.getItem('currentUser')) {
@@ -59,6 +58,8 @@ export class MenuService {
       const menucopy = [];
       const t12 = this.menu;
 
+     
+
       if (!decodedToken) {
         //this.router.navigate(['/']);
       }
@@ -69,11 +70,11 @@ export class MenuService {
       // se recorre el menu y se elimina lo que no se encuentre en el token
       let i1 = 0;
       let incomingmenu = decodedToken.menus;
-
       // Se realiza el proceso con Objetos y no con arrays para reutilizar dichos onbjetos en la validación de permisos como crear, ver eliminar etc,
       // y que no sea necesario filtrar un array (usando una funcion especifica para dicho proceso) y validar si mostrar o no la opción
 
       // converción del menu del token
+      console.log(incomingmenu)
       const tokenmenu = {};
       for (const i of incomingmenu) {
         tokenmenu[i.name] = {};
@@ -94,6 +95,8 @@ export class MenuService {
           }
         }
       }
+
+      console.log(tokenmenu);
 
       // conversion del menu de la app
       const appmenu = {}
@@ -126,6 +129,9 @@ export class MenuService {
       }
       // se recorre el array de la app y se compara con el array del token, para crear el menu a pintar
       // tslint:disable-next-line: forin
+
+      console.log("for1")
+      console.log(appmenu);
 
       const finalmenu = [];
 
@@ -162,7 +168,7 @@ export class MenuService {
     }
     else{
       return [];
-    } */
+    }
   }
 
   set(menu: Menu[]): Menu[] {

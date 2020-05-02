@@ -123,7 +123,7 @@ export class QuestionsMainComponent implements OnInit {
 
   editMessage() {
     console.log(this.activatedRoute.params["_value"])
-    this.questionsService.editMessage({ advertising: this.organMessage }, this.activatedRoute.params["_value"].id).subscribe(
+    this.questionsService.editOrgan({ advertising: this.organMessage }, this.activatedRoute.params["_value"].id).subscribe(
       response => {
         this._snackBar.open('Mensaje editado satisfactoriamente', 'Aceptar', {
           duration: 3000,
@@ -184,6 +184,7 @@ export class QuestionsMainComponent implements OnInit {
         console.log(data)
         const questions1 = data.questions.filter(q => q.stepTypeId === 1);
         const questions2 = data.questions.filter(q => q.stepTypeId === 2);
+        
 
         this.showp1 = data.questions.length > 0 ? false : true;
         this.showp2 = data.questions.length > 0 ? false : true;
@@ -220,7 +221,7 @@ export class QuestionsMainComponent implements OnInit {
 
     if (this.p1.length > 0) {
       this.title = this.title + this.organ.name + ', Paso 1';
-      this.titleq2 = this.titleq2 + this.organ.name + ' Paso 2';
+      this.titleq2 = this.titleq2 + this.organ.name + ', Paso 2';
     } else {
       this.title = this.title + this.organ.name;
     }
