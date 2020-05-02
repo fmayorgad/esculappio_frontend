@@ -19,6 +19,16 @@
     color: white !important;
 }
 
+
+.snackbarInfo{
+    color: white !important;
+    background:  $info !important;
+}
+
+.snackbarInfo .mat-button{
+    color: white !important;
+}
+
 [disabled][disabled].mat-button{
     background: rgba(255, 255, 255, 0) !important;
     color:  #d8d8d8 !important;

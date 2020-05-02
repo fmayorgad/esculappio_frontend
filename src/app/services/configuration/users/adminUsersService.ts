@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Routes, RouterModule, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 //import {} from '';
-
+import {saveAs} from "file-saver";
 
 @Injectable()
 export class APIResolver implements Resolve<any> {
@@ -90,8 +90,6 @@ export class AdminUsersService {
     return this.http
       .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/getFile/${id}`,
       {responseType: "blob", headers: {'Accept': 'application/pdf'}}
-      )/* .subscribe(blob => {
-        //saveAs(blob, 'download.pdf');
-      }); */
+      )
   }
 }

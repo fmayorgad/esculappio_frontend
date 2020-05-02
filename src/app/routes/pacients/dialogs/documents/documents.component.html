@@ -21,7 +21,7 @@
             <h2 class="noMargin">Subir archivo</h2>
           </div>
 
-          <input style="padding: 20px 0px;" class="col-lg-6 col-md-6 col-sm-12 col-xs-12" (change)="uploadFile($event)" type="file" id="avatar"
+          <input style="padding: 20px 0px;" #inputFile class="col-lg-6 col-md-6 col-sm-12 col-xs-12" (change)="uploadFile($event)" type="file" id="avatar"
             name="avatar" accept="image/png, image/jpeg, application/pdf">
 
           <mat-form-field class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -75,12 +75,136 @@
               <td style="text-align: left;">{{b.name}}</td>
               <td style="text-align: center;">
 
-                <button mat-mini-fab class="successbutton" (click)="getFile(b.id)" matTooltip="Descargar el archivo">
+                <button mat-mini-fab class="successbutton" (click)="getFile(b.id, b.name)" matTooltip="Descargar el archivo">
                   <mat-icon>cloud_download
                   </mat-icon>
                 </button>
 
                 <button mat-mini-fab class="errorbutton" (click)="deletefile(b.id)" matTooltip="Eliminar archivo">
+                  <mat-icon>close</mat-icon>
+                </button>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 40px;">
+        <h2>Imágenes Médicas</h2>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="text-align: left;">Nombre del archivo</th>
+              <th style="width:150px">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let f of userfiles.i">
+              <td style="text-align: left;">{{f.name}}</td>
+              <td style="text-align: center;">
+
+                <button mat-mini-fab class="successbutton" (click)="getFile(f.id, f.name)" matTooltip="Descargar el archivo">
+                  <mat-icon>cloud_download
+                  </mat-icon>
+                </button>
+
+                <button mat-mini-fab class="errorbutton" (click)="deletefile(f.id)" matTooltip="Eliminar archivo">
+                  <mat-icon>close</mat-icon>
+                </button>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 40px;">
+        <h2>Radioterapias</h2>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="text-align: left;">Nombre del archivo</th>
+              <th style="width:150px">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let f of userfiles.r">
+              <td style="text-align: left;">{{f.name}}</td>
+              <td style="text-align: center;">
+
+                <button mat-mini-fab class="successbutton" (click)="getFile(f.id, f.name)" matTooltip="Descargar el archivo">
+                  <mat-icon>cloud_download
+                  </mat-icon>
+                </button>
+
+                <button mat-mini-fab class="errorbutton" (click)="deletefile(f.id)" matTooltip="Eliminar archivo">
+                  <mat-icon>close</mat-icon>
+                </button>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 40px;">
+        <h2>Quimioterapias</h2>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="text-align: left;">Nombre del archivo</th>
+              <th style="width:150px">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let f of userfiles.q">
+              <td style="text-align: left;">{{f.name}}</td>
+              <td style="text-align: center;">
+
+                <button mat-mini-fab class="successbutton" (click)="getFile(f.id, f.name)" matTooltip="Descargar el archivo">
+                  <mat-icon>cloud_download
+                  </mat-icon>
+                </button>
+
+                <button mat-mini-fab class="errorbutton" (click)="deletefile(f.id)" matTooltip="Eliminar archivo">
+                  <mat-icon>close</mat-icon>
+                </button>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 40px;">
+        <h2>Historias clínicas</h2>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="text-align: left;">Nombre del archivo</th>
+              <th style="width:150px">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let f of userfiles.h">
+              <td style="text-align: left;">{{f.name}}</td>
+              <td style="text-align: center;">
+
+                <button mat-mini-fab class="successbutton" (click)="getFile(f.id, f.name)" matTooltip="Descargar el archivo">
+                  <mat-icon>cloud_download
+                  </mat-icon>
+                </button>
+
+                <button mat-mini-fab class="errorbutton" (click)="deletefile(f.id)" matTooltip="Eliminar archivo">
                   <mat-icon>close</mat-icon>
                 </button>
 

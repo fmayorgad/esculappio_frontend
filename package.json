@@ -37,6 +37,7 @@
     "@ngx-translate/http-loader": "~4.0.0",
     "@swimlane/ngx-charts": "^13.0.2",
     "chart.js": "^2.9.3",
+    "file-saver": "^2.0.2",
     "moment": "^2.24.0",
     "ng-matero": "^9.1.0",
     "ngx-mat-select-search": "^2.1.2",

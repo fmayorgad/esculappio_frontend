@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit , ViewChild, ElementRef} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminUsersService } from '@services';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { saveAs as importedSaveAs } from "file-saver";
 
 const identype = {
   'Cédula de Ciudadanía': 1,
@@ -37,6 +38,8 @@ export class DocumentCreateComponent implements OnInit {
   fileType = 'Biopsia';
   fileButton = true;
 
+  @ViewChild('inputFile') myInputVariable: ElementRef;
+
 
   constructor(
     private _snackBar: MatSnackBar,
@@ -56,6 +59,9 @@ export class DocumentCreateComponent implements OnInit {
     fd.append('type', this.fileType);
 
     this.adminUsersService.uploadFile(fd).subscribe(data => {
+
+      this.myInputVariable.nativeElement.value = '';
+      this.fileButton = true;
       this._snackBar.open('Archivo ' + this.fileToUpload.name + ' subido correctamente.', 'Aceptar', {
         duration: 3000,
         panelClass: 'snackbarSuccess'
@@ -106,15 +112,26 @@ export class DocumentCreateComponent implements OnInit {
       });
   }
 
-  getFile(id) {
-    this.adminUsersService.getFileById(id).subscribe(
-      data => {
-        console.log(data)
-      },
+  getFile(id, name) {
+    this._snackBar.open('Descargando archivo...', 'Aceptar', {
+      duration: 10000,
+      panelClass: 'snackbarInfo'
+    });
+
+    this.adminUsersService.getFileById(id).subscribe(blob => {
+      importedSaveAs(blob, name);
+      this._snackBar.open('Archivo ' + name + ' descargado correctamente.', 'Aceptar', {
+        duration: 3000,
+        panelClass: 'snackbarSuccess'
+      });
+    },
       error => {
+        this._snackBar.open('Error al descargar el archivo. Intentalo de nuevo más tarde: '+ error, 'Aceptar', {
+          duration: 3000,
+          panelClass: 'snackbarError'
+        });
       });
   }
-
 
   uploadFile(e) {
     this.fileToUpload = e.target.files[0];
@@ -129,7 +146,6 @@ export class DocumentCreateComponent implements OnInit {
 
   fileChangeEvent(fileInput: any) {
     this.filesToUpload = <Array<File>>fileInput.target.files;
-    //this.product.photo = fileInput.target.files[0]['name'];
   }
 
   ngOnInit() {
