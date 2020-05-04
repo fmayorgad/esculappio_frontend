@@ -1,30 +1,24 @@
-import { Component, Inject, OnInit , ViewChild, ElementRef} from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminUsersService } from '@services';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { saveAs as importedSaveAs } from "file-saver";
 
-const identype = {
-  'Cédula de Ciudadanía': 1,
-  'Cédula de Extranjería': 2,
-  'Pasaporte': 3,
-  'Registro Civil': 4,
-  'Tarjeta de Identidad': 5
-}
+
 
 @Component({
-  selector: 'user-adddocument-create',
-  templateUrl: './documents.component.html',
-  styleUrls: ['./documents.component.css'],
+  selector: 'user-pieldiagnostico-create',
+  templateUrl: './piel.component.html',
+  styleUrls: ['./piel.component.css'],
 })
 
-export class DocumentCreateComponent implements OnInit {
+export class PielDiagnosisComponent implements OnInit {
 
-  title = 'Completar Procedimiento';
-  icon = 'note_add';
-  color = '#2196f3';
-  subtitle = 'Completar los documentos faltantes para diagnosticar.';
+  title = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.surname + ' ' + this.incomingdata.patiente.lastname;
+  icon = 'how_to_reg';
+  color = 'green';
+  subtitle = 'Diagnostico para Colon - Rector';
 
   user = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.surname + ' ' + this.incomingdata.patiente.lastname;
   userfiles = {
@@ -38,18 +32,58 @@ export class DocumentCreateComponent implements OnInit {
   fileType = 'Biopsia';
   fileButton = true;
 
+  tnms;
+
   @ViewChild('inputFile') myInputVariable: ElementRef;
 
 
   constructor(
     private _snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<DocumentCreateComponent>,
+    public dialogRef: MatDialogRef<PielDiagnosisComponent>,
     private adminUsersService: AdminUsersService,
     @Inject(MAT_DIALOG_DATA) public incomingdata: any
   ) {
   }
 
   filesToUpload: Array<File> = [];
+
+  tnm = 1;
+  tnm2 = 1;
+
+  mainForm = new FormGroup({
+    biopsia: new FormControl(
+      1,
+      [
+        Validators.required,
+      ],
+    ),
+    localizacion: new FormControl(
+      1,
+      [
+        Validators.required,
+      ],
+    ),
+
+    her: new FormControl(
+      1,
+      [
+        Validators.required,
+      ],
+    ),
+  });
+
+  getTnms() {
+    this.adminUsersService.getTnms().subscribe(data => {
+      this.tnms = data.filter(o => o.organId === 3);
+    },
+      error => {
+        console.log(error)
+        this._snackBar.open(error, 'Aceptar', {
+          duration: 3000,
+          panelClass: 'snackbarError'
+        });
+      });
+  }
 
   upload() {
 
@@ -126,7 +160,7 @@ export class DocumentCreateComponent implements OnInit {
       });
     },
       error => {
-        this._snackBar.open('Error al descargar el archivo. Intentalo de nuevo más tarde: '+ error, 'Aceptar', {
+        this._snackBar.open('Error al descargar el archivo. Intentalo de nuevo más tarde: ' + error, 'Aceptar', {
           duration: 3000,
           panelClass: 'snackbarError'
         });
@@ -149,7 +183,7 @@ export class DocumentCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.userfiles)
+    this.getTnms();
     this.getById();
   }
 }

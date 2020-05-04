@@ -30,7 +30,7 @@
                 Biopsia
               </mat-option>
               <mat-option [value]="'Imagenes médicas'">
-                Imágenes
+                Imágenes médicas
               </mat-option>
 
               <mat-option [value]="'Radioterapias'">
@@ -63,6 +63,7 @@
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 50px;">
         <h2>Biopsia</h2>
 
+        <p style="color: rgb(214, 47, 18)">Estos archivos no pueden borrarse una vez subidos, debido a que son necesarios en el proceso de diagnostico.</p>
         <table class="table">
           <thead>
             <tr>
@@ -80,10 +81,10 @@
                   </mat-icon>
                 </button>
 
-                <button mat-mini-fab class="errorbutton" (click)="deletefile(b.id)" matTooltip="Eliminar archivo">
+                 <button mat-mini-fab class="errorbutton" (click)="deletefile(b.id)" matTooltip="Eliminar archivo">
                   <mat-icon>close</mat-icon>
                 </button>
-
+ 
               </td>
             </tr>
           </tbody>
@@ -93,7 +94,7 @@
 
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 40px;">
         <h2>Imágenes Médicas</h2>
-
+        <p style="color: rgb(214, 47, 18)">Estos archivos no pueden borrarse una vez subidos, debido a que son necesarios en el proceso de diagnostico.</p>
         <table class="table">
           <thead>
             <tr>
@@ -111,10 +112,10 @@
                   </mat-icon>
                 </button>
 
-                <button mat-mini-fab class="errorbutton" (click)="deletefile(f.id)" matTooltip="Eliminar archivo">
+              <!--   <button mat-mini-fab class="errorbutton" (click)="deletefile(f.id)" matTooltip="Eliminar archivo">
                   <mat-icon>close</mat-icon>
                 </button>
-
+ -->
               </td>
             </tr>
           </tbody>

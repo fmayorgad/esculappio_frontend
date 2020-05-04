@@ -92,4 +92,10 @@ export class AdminUsersService {
       {responseType: "blob", headers: {'Accept': 'application/pdf'}}
       )
   }
+
+  getTnms() {
+    return this.http
+      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/tnms`)
+      .pipe(map(data => data['tnm']));
+  }
 }

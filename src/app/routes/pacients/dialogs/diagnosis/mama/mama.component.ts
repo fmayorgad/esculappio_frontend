@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit , ViewChild, ElementRef} from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminUsersService } from '@services';
@@ -14,17 +14,17 @@ const identype = {
 }
 
 @Component({
-  selector: 'user-adddocument-create',
-  templateUrl: './documents.component.html',
-  styleUrls: ['./documents.component.css'],
+  selector: 'user-mamadiagnosis-create',
+  templateUrl: './mama.component.html',
+  styleUrls: ['./mama.component.css'],
 })
 
-export class DocumentCreateComponent implements OnInit {
+export class MamaDiagnosisComponent implements OnInit {
 
-  title = 'Completar Procedimiento';
-  icon = 'note_add';
+  title = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.surname + ' ' + this.incomingdata.patiente.lastname;
+  icon = 'how_to_reg';
   color = '#2196f3';
-  subtitle = 'Completar los documentos faltantes para diagnosticar.';
+  subtitle = 'Diagnostico para Máma';
 
   user = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.surname + ' ' + this.incomingdata.patiente.lastname;
   userfiles = {
@@ -38,18 +38,84 @@ export class DocumentCreateComponent implements OnInit {
   fileType = 'Biopsia';
   fileButton = true;
 
+  tnms;
+
   @ViewChild('inputFile') myInputVariable: ElementRef;
 
 
   constructor(
     private _snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<DocumentCreateComponent>,
+    public dialogRef: MatDialogRef<MamaDiagnosisComponent>,
     private adminUsersService: AdminUsersService,
     @Inject(MAT_DIALOG_DATA) public incomingdata: any
   ) {
   }
 
   filesToUpload: Array<File> = [];
+
+  tnm = 1;
+  tnm2 = 1;
+
+  mainForm = new FormGroup({
+    biopsia: new FormControl(
+      1,
+      [
+        Validators.required,
+      ],
+    ),
+    luminal: new FormControl(
+      1,
+      [
+        Validators.required,
+      ],
+    ),
+    re: new FormControl(
+      1,
+      [
+        Validators.max(100),
+        Validators.required,
+        Validators.min(0)
+      ],
+    ),
+
+    rp: new FormControl(
+      1,
+      [
+        Validators.max(100),
+        Validators.required,
+        Validators.min(0)
+      ],
+    ),
+
+    her: new FormControl(
+      1,
+      [
+        Validators.required,
+      ],
+    ),
+
+    ki: new FormControl(
+      1,
+      [
+        Validators.max(100),
+        Validators.required,
+        Validators.min(0)
+      ],
+    ),
+  });
+
+  getTnms() {
+    this.adminUsersService.getTnms().subscribe(data => {
+      this.tnms = data.filter(o => o.organId === 1);
+    },
+      error => {
+        console.log(error)
+        this._snackBar.open(error, 'Aceptar', {
+          duration: 3000,
+          panelClass: 'snackbarError'
+        });
+      });
+  }
 
   upload() {
 
@@ -126,7 +192,7 @@ export class DocumentCreateComponent implements OnInit {
       });
     },
       error => {
-        this._snackBar.open('Error al descargar el archivo. Intentalo de nuevo más tarde: '+ error, 'Aceptar', {
+        this._snackBar.open('Error al descargar el archivo. Intentalo de nuevo más tarde: ' + error, 'Aceptar', {
           duration: 3000,
           panelClass: 'snackbarError'
         });
@@ -149,7 +215,7 @@ export class DocumentCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.userfiles)
+    this.getTnms();
     this.getById();
   }
 }

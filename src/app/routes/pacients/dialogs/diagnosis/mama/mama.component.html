@@ -1,0 +1,405 @@
+<div class="mediumModal">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <mat-dialog-content class="mat-typography">
+
+    <mat-tab-group dynamicHeight mat-align-tabs="center">
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">how_to_reg</mat-icon>
+          Diagnostico
+        </ng-template>
+
+
+        <div class="row">
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <h3 style="margin-top: 20px;" class="centered"><strong> Seno Izquierdo </strong></h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Estadio</th>
+                  <th style="width:150px">T</th>
+                  <th style="width:150px">N</th>
+                  <th style="width:150px">M</th>
+                  <th style="width:150px">Seleccionar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let t of tnms">
+                  <td style="text-align: left;">
+                    {{t.estadio}}
+                  </td>
+                  <td style="text-align: center;">
+                    {{t.t}}
+                  </td>
+                  <td style="text-align: center;">
+                    {{t.n}}
+                  </td>
+                  <td style="text-align: center;">
+                    {{t.m}}
+                  </td>
+                  <td style="text-align: center;">
+                    <mat-radio-button name="tnm" value="t.id"></mat-radio-button>
+                  </td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h3 style="margin-top: 20px;" class="centered"><strong> Seno Derecho </strong></h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Estadio</th>
+                  <th style="width:150px">T</th>
+                  <th style="width:150px">N</th>
+                  <th style="width:150px">M</th>
+                  <th style="width:150px">Seleccionar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let t of tnms">
+                  <td style="text-align: left;">
+                    {{t.estadio}}
+                  </td>
+                  <td style="text-align: center;">
+                    {{t.t}}
+                  </td>
+                  <td style="text-align: center;">
+                    {{t.n}}
+                  </td>
+                  <td style="text-align: center;">
+                    {{t.m}}
+                  </td>
+                  <td style="text-align: center;">
+                    <mat-radio-button name="tnm2" value="t.id"></mat-radio-button>
+                  </td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <form [formGroup]='mainForm' class="fullwidth">
+            <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <mat-label>Biopsia</mat-label>
+              <mat-select formControlName='biopsia'>
+                <mat-option [value]="1">
+                  CARCINOMA DUCTAL INVASIVO
+                </mat-option>
+
+                <mat-option [value]="2">
+                  CARCINOMA LOBULILLAR INVASIVO
+                </mat-option>
+
+                <mat-option [value]="3">
+                  CARCINOMA DUCTAL IN SITU
+                </mat-option>
+
+                <mat-option [value]="4">
+                  CARCINOMA LOBULILLAR IN SITU
+                </mat-option>
+
+                <mat-option [value]="5">
+                  SARCOMA
+                </mat-option>
+
+                <mat-option [value]="6">
+                  CARCINOMA INFLAMATORIO
+                </mat-option>
+
+                <mat-option [value]="7">
+                  CARCINOMA MUCINOSO
+                </mat-option>
+                <mat-option [value]="8">
+                  CARCINOMA ENDOCRINO
+                </mat-option>
+                <mat-option [value]="9">
+                  TUMOR PHYLLODES
+                </mat-option>
+                <mat-option [value]="10">
+                  OTRO
+                </mat-option>
+
+              </mat-select>
+              <mat-error *ngIf="mainForm.controls.biopsia.hasError('required')">
+                El campo es <strong>obligatorio</strong>.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <mat-label>Luminal</mat-label>
+              <mat-select formControlName='luminal'>
+                <mat-option [value]="1">
+                  A
+                </mat-option>
+
+                <mat-option [value]="2">
+                  B
+                </mat-option>
+
+                <mat-option [value]="3">
+                  B+HER2
+                </mat-option>
+
+                <mat-option [value]="4">
+                  HER 2
+                </mat-option>
+
+                <mat-option [value]="5">
+                  TRIPLE NEGATIVO
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="mainForm.controls.biopsia.hasError('required')">
+                El campo es <strong>obligatorio</strong>.
+              </mat-error>
+            </mat-form-field>
+
+
+            <h2 style="margin-top: 25px; text-align: center;">Inmunohistoquimica</h2>
+            <table class="table col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <thead>
+                <tr>
+                  <th style="width:25%">RE 0-100% </th>
+                  <th style="width:25%">RP 0-100%
+                  </th>
+                  <th style="width:25%">HER2 +
+                  </th>
+                  <th style="width:25%">KI 67 0-100%
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align: left;">
+                    <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <input type="number" matInput  formControlName='re' autocomplete="off">
+                      <mat-error *ngIf="mainForm.controls.re.hasError('required')">
+                        El campo es <strong>obligatorio</strong>.
+                      </mat-error>
+                      <mat-error *ngIf="mainForm.controls.re.hasError('max')">
+                        El campo debe tener máximo <strong>100</strong>.
+                      </mat-error>
+                      <mat-error *ngIf="mainForm.controls.re.hasError('min')">
+                        El campo debe tener mínimo <strong>0</strong>.
+                      </mat-error>
+                    </mat-form-field>
+                  </td>
+                  <td style="text-align: center;">
+                    <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <input type="number" matInput formControlName='rp' autocomplete="off">
+                      <mat-error *ngIf="mainForm.controls.rp.hasError('required')">
+                        El campo es <strong>obligatorio</strong>.
+                      </mat-error>
+                      <mat-error *ngIf="mainForm.controls.rp.hasError('max')">
+                        El campo debe tener máximo <strong>100</strong>.
+                      </mat-error>
+                      <mat-error *ngIf="mainForm.controls.rp.hasError('min')">
+                        El campo debe tener mínimo <strong>0</strong>.
+                      </mat-error>
+                    </mat-form-field>
+                  </td>
+                  <td style="text-align: center;     padding-top: 32px;" >
+                    <mat-select formControlName='her'>
+                      <mat-option [value]="1">
+                        +
+                      </mat-option>
+      
+                      <mat-option [value]="2">
+                        ++
+                      </mat-option>
+      
+                      <mat-option [value]="3">
+                        +++
+                      </mat-option>
+                    </mat-select>
+                  </td>
+                  <td style="text-align: center;">
+                    <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <input type="number" matInput  formControlName='ki' autocomplete="off">
+                      <mat-error *ngIf="mainForm.controls.ki.hasError('required')">
+                        El campo es <strong>obligatorio</strong>.
+                      </mat-error>
+                      <mat-error *ngIf="mainForm.controls.ki.hasError('max')">
+                        El campo debe tener máximo <strong>100</strong>.
+                      </mat-error>
+                      <mat-error *ngIf="mainForm.controls.ki.hasError('min')">
+                        El campo debe tener mínimo <strong>0</strong>.
+                      </mat-error>
+                    </mat-form-field>
+                  </td>
+
+                </tr>
+              </tbody>
+            </table>
+
+
+          </form>
+        </div>
+
+
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">file_copy</mat-icon>
+          Documentos
+        </ng-template>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 50px;">
+          <h2>Biopsia</h2>
+
+          <p style="color: rgb(214, 47, 18)">Estos archivos no pueden borrarse una vez subidos, debido a que son
+            necesarios en el proceso de diagnostico.</p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="text-align: left;">Nombre del archivo</th>
+                <th style="width:150px">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let b of userfiles.b">
+                <td style="text-align: left;">{{b.name}}</td>
+                <td style="text-align: center;">
+
+                  <button mat-mini-fab class="successbutton" (click)="getFile(b.id, b.name)"
+                    matTooltip="Descargar el archivo">
+                    <mat-icon>cloud_download
+                    </mat-icon>
+                  </button>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 40px;">
+          <h2>Imágenes Médicas</h2>
+          <p style="color: rgb(214, 47, 18)">Estos archivos no pueden borrarse una vez subidos, debido a que son
+            necesarios en el proceso de diagnostico.</p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="text-align: left;">Nombre del archivo</th>
+                <th style="width:150px">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let f of userfiles.i">
+                <td style="text-align: left;">{{f.name}}</td>
+                <td style="text-align: center;">
+
+                  <button mat-mini-fab class="successbutton" (click)="getFile(f.id, f.name)"
+                    matTooltip="Descargar el archivo">
+                    <mat-icon>cloud_download
+                    </mat-icon>
+                  </button>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 40px;">
+          <h2>Radioterapias</h2>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="text-align: left;">Nombre del archivo</th>
+                <th style="width:150px">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let f of userfiles.r">
+                <td style="text-align: left;">{{f.name}}</td>
+                <td style="text-align: center;">
+
+                  <button mat-mini-fab class="successbutton" (click)="getFile(f.id, f.name)"
+                    matTooltip="Descargar el archivo">
+                    <mat-icon>cloud_download
+                    </mat-icon>
+                  </button>
+
+
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 40px;">
+          <h2>Quimioterapias</h2>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="text-align: left;">Nombre del archivo</th>
+                <th style="width:150px">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let f of userfiles.q">
+                <td style="text-align: left;">{{f.name}}</td>
+                <td style="text-align: center;">
+
+                  <button mat-mini-fab class="successbutton" (click)="getFile(f.id, f.name)"
+                    matTooltip="Descargar el archivo">
+                    <mat-icon>cloud_download
+                    </mat-icon>
+                  </button>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 40px;">
+          <h2>Historias clínicas</h2>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="text-align: left;">Nombre del archivo</th>
+                <th style="width:150px">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let f of userfiles.h">
+                <td style="text-align: left;">{{f.name}}</td>
+                <td style="text-align: center;">
+
+                  <button mat-mini-fab class="successbutton" (click)="getFile(f.id, f.name)"
+                    matTooltip="Descargar el archivo">
+                    <mat-icon>cloud_download
+                    </mat-icon>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+      </mat-tab>
+    </mat-tab-group>
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="warn">Cerrar</button>
+  </mat-dialog-actions>
+</div>

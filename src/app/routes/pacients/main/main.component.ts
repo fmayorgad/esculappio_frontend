@@ -7,10 +7,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserPacientCreateComponent } from '../dialogs/create/create.component';
-import {ProcedureCreateComponent} from '../dialogs/procedure/procedure.component';
+import { ProcedureCreateComponent } from '../dialogs/procedure/procedure.component';
 import { DocumentCreateComponent } from '../dialogs/documents/documents.component';
 import { AdminUsersService } from '@services';
 import { trigger, style, animate, transition } from '@angular/animations';
+
+// diagnosis 
+import { MamaDiagnosisComponent } from '../dialogs/diagnosis/mama/mama.component';
+import { EstomagoDiagnosisComponent } from '../dialogs/diagnosis/estomago/estomago.component';
+import { ColonDiagnosisComponent } from '../dialogs/diagnosis/colon/colon.component';
+import { PielDiagnosisComponent } from '../dialogs/diagnosis/piel/piel.component';
 
 @Component({
   selector: 'app-pacients-main',
@@ -75,7 +81,6 @@ export class PacientsMainComponent implements OnInit {
 
 
   //tabla de pendientes documento
-  // tabla de pacientes
   dataSourceDocuments = new MatTableDataSource<any>([]);
   @ViewChild('paginatorDocuments') paginatorDocuments: MatPaginator;
   @ViewChild('sortDocuments') sortDocuments: MatSort;
@@ -86,6 +91,16 @@ export class PacientsMainComponent implements OnInit {
   isLoadingDocuments = true;
 
 
+  //tabla de pendientes documento
+  dataSourceDiagnosis = new MatTableDataSource<any>([]);
+  @ViewChild('paginatorDiagnosis') paginatorDiagnosis: MatPaginator;
+  @ViewChild('sortDiagnosis') sortDiagnosis: MatSort;
+  @ViewChild('tableDiagnosis') tableDiagnosis: MatTable<any>;
+  mainTablePaginationOptionsDiagnosis: number[];
+  displayedColumnsDiagnosis: string[];
+  noDataDiagnosis = false;
+  isLoadingDiagnosis = true;
+
   @HostListener('window:resize', ['$event']) onResize(event) {
     this.windowwith = event.target.innerWidth;
   }
@@ -95,42 +110,12 @@ export class PacientsMainComponent implements OnInit {
   }
 
 
-  // editState( id, state) {
-  //   console.log(this.activatedRoute.params["_value"])
-  //   this.questionsService.editOrgan({ state }, id).subscribe(
-  //     response => {
-  //       this._snackBar.open('Estado modificado satisfactoriamente', 'Aceptar', {
-  //         duration: 3000,
-  //         panelClass: 'snackbarSuccess'
-  //       });
-  //     },
-  //     error => {
-  //       this._snackBar.open('Error al editar el estado. Intentalo de nuevo más tarde', 'Aceptar', {
-  //         duration: 3000,
-  //         panelClass: 'snackbarError'
-  //       });
-  //     },
-  //   );
-  // }
 
   changeEntityState(index, state, entityId) {
     console.log(index)
     console.log(state)
     console.log(entityId)
 
-    // this.configService.setEntityState((state) ? 1 : 0, entityId).subscribe(
-    //   data => {
-    //     this._snackBar.open('Estado editado satisfactoriamente.', 'Aceptar', {
-    //       duration: 3000,
-    //     });
-    //   },
-    //   error => {
-
-    //     this.dataSourceAuditoria.filteredData[index].state = !state;
-    //     this._snackBar.open('No se pudo realizar la acción. Intentalo de nuevo más tarde.', 'Aceptar', {
-    //       duration: 3000,
-    //     });
-    //   });
   }
 
   create() {
@@ -175,19 +160,42 @@ export class PacientsMainComponent implements OnInit {
     const dialogRef = this.dialog.open(DocumentCreateComponent, { disableClose: true, data: user });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.state === 1) {
-        this.getAll();
-        this._snackBar.open(result.message, 'Aceptar', {
-          duration: 3000,
-          panelClass: 'snackbarSuccess'
-        });
-      }
-      if (result.state === 0) {
-        this._snackBar.open(result.message, 'Aceptar', {
-          duration: 3000,
-        });
-      }
+      this.getAll();
     });
+  }
+
+
+  diagnosis(procedure) {
+    console.log(procedure)
+
+    if (procedure.organId === 1) {
+      const dialogRef = this.dialog.open(MamaDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+        this.getAll();
+      });
+    }
+
+    if (procedure.organId === 2) {
+      const dialogRef = this.dialog.open(EstomagoDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+        this.getAll();
+      });
+    }
+
+    if (procedure.organId === 3) {
+      const dialogRef = this.dialog.open(ColonDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+        this.getAll();
+      });
+    }
+
+    if (procedure.organId === 4) {
+      const dialogRef = this.dialog.open(PielDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+        this.getAll();
+      });
+    }
+
   }
 
   getAll() {
@@ -211,7 +219,17 @@ export class PacientsMainComponent implements OnInit {
     this.adminUsersService.getPendingMedicalProcedures().subscribe(
       data => {
         console.log(data);
-        this.dataSourceDocuments = new MatTableDataSource<any>(data);
+
+        // se filtran los tipos de archivo biopsia e imagenes: si existe por lo menos uno de cada uno, ya esta listo para diagnostico.
+        let pendingFiles = data.filter(p => {
+          return p.state === 1;
+        })
+
+        let pendingDiagnosis = data.filter(p => {
+          return p.state === 2;
+        })
+
+        this.dataSourceDocuments = new MatTableDataSource<any>(pendingFiles);
         this.dataSourceDocuments.paginator = this.paginatorDocuments;
         this.dataSourceDocuments.sort = this.sortDocuments;
         this.isLoadingDocuments = false;
@@ -220,6 +238,19 @@ export class PacientsMainComponent implements OnInit {
         } else {
           this.noDataDocuments = false;
         }
+
+
+        this.dataSourceDiagnosis = new MatTableDataSource<any>(pendingDiagnosis);
+        this.dataSourceDiagnosis.paginator = this.paginatorDiagnosis;
+        this.dataSourceDiagnosis.sort = this.sortDiagnosis;
+        this.isLoadingDiagnosis = false;
+        if (data.length === 0) {
+          this.noDataDiagnosis = true;
+        } else {
+          this.noDataDiagnosis = false;
+        }
+
+
       },
       error => {
       });
@@ -228,15 +259,21 @@ export class PacientsMainComponent implements OnInit {
   ngOnInit() {
 
     this.getAll();
-    this.displayedColumnsPacients = ['name', 'surname' , 'lastname', 'number' , 'cellphone' ,'actions'];
+    this.displayedColumnsPacients = ['name', 'surname', 'lastname', 'number', 'cellphone', 'actions'];
     this.mainTablePaginationOptionsPacients = [7, 15, 50];
     this.dataSourcePacients.paginator = this.paginatorPacients;
     this.dataSourcePacients.sort = this.sortPacients;
 
-    this.displayedColumnsDocuments = ['name', 'number' , 'organ' , 'actions'];
+    this.displayedColumnsDocuments = ['name', 'number', 'organ', 'actions'];
     this.mainTablePaginationOptionsDocuments = [7, 15, 50];
     this.dataSourceDocuments.paginator = this.paginatorDocuments;
     this.dataSourceDocuments.sort = this.sortDocuments;
+
+    this.displayedColumnsDiagnosis = ['name', 'number', 'organ', 'actions'];
+    this.mainTablePaginationOptionsDiagnosis = [7, 15, 50];
+    this.dataSourceDiagnosis.paginator = this.paginatorDiagnosis;
+    this.dataSourceDiagnosis.sort = this.sortDiagnosis;
+
 
   }
 
