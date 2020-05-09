@@ -10,12 +10,17 @@ import { MamaDiagnosisComponent } from './dialogs/diagnosis/mama/mama.component'
 import { EstomagoDiagnosisComponent } from './dialogs/diagnosis/estomago/estomago.component';
 import { ColonDiagnosisComponent } from './dialogs/diagnosis/colon/colon.component';
 import { PielDiagnosisComponent } from './dialogs/diagnosis/piel/piel.component';
+import { TiroidesDiagnosisComponent } from './dialogs/diagnosis/tiroides/tiroides.component';
+import { SarcomaDiagnosisComponent } from './dialogs/diagnosis/sarcoma/sarcoma.component';
+import { EsofagoDiagnosisComponent } from './dialogs/diagnosis/esofago/esofago.component';
+import { MelanomaDiagnosisComponent } from './dialogs/diagnosis/melanoma/melanoma.component';
+import { IDXCreateComponent } from './dialogs/idx/idx.component';
 
 const COMPONENTS =
   [
     PacientsMainComponent,
   ];
-const COMPONENTS_DYNAMIC = [PielDiagnosisComponent, ColonDiagnosisComponent, UserPacientCreateComponent, ProcedureCreateComponent, DocumentCreateComponent, MamaDiagnosisComponent, EstomagoDiagnosisComponent];
+const COMPONENTS_DYNAMIC = [IDXCreateComponent, MelanomaDiagnosisComponent, EsofagoDiagnosisComponent, SarcomaDiagnosisComponent, PielDiagnosisComponent, ColonDiagnosisComponent, UserPacientCreateComponent, ProcedureCreateComponent, DocumentCreateComponent, MamaDiagnosisComponent, EstomagoDiagnosisComponent, TiroidesDiagnosisComponent];
 
 @NgModule({
   imports: [

@@ -1,0 +1,122 @@
+<breadcrumb></breadcrumb>
+<mat-card class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%;">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <div class="staticCardBody">
+
+    <p>Listado de consultas realizadas por los pacientes del sistema.</p>
+
+
+  </div>
+
+  <mat-tab-group dynamicHeight mat-align-tabs="center">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">description</mat-icon>
+        Consultas pendientes
+      </ng-template>
+
+      <div style=" overflow-y: auto;">
+        <table mat-table matSort [dataSource]="dataSourceDocuments" #sortDocuments="matSort" #tableDocuments="matTable">
+          <ng-container matColumnDef="name" sticky>
+            <th mat-header-cell *matHeaderCellDef>Nombre Paciente</th>
+            <td mat-cell *matCellDef="let element"> {{element.patiente.name}} {{element.patiente.surname}}
+              {{element.patiente.lastname}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="number" sticky>
+            <th mat-header-cell *matHeaderCellDef>Identificación paciente</th>
+            <td mat-cell *matCellDef="let element"> {{element.patiente.identificationValue}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="organ" sticky>
+            <th mat-header-cell *matHeaderCellDef>Organo afectado</th>
+            <td mat-cell *matCellDef="let element"> {{element.organ.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef class="centered" width="200"> Acciones </th>
+            <td mat-cell *matCellDef="let element; let i = index" class="pad10 actionsColumn">
+              <div class="minifabcontainer actionsContainer gridi">
+
+                <button mat-mini-fab class="infobutton" matTooltip="Completar documentos faltantes"
+                  (click)="documents(element )">
+                  <mat-icon>note_add</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsDocuments ; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsDocuments; let i = index"></tr>
+        </table>
+
+        <nodata *ngIf="noDataDocuments" [nodataheight]=nodataheight [nodatamessage]=nodatamessage></nodata>
+        <div *ngIf="isLoadingDocuments" style="display: flex; justify-content: center; align-items: center">
+          <mat-progress-spinner color="primary" mode="indeterminate">
+          </mat-progress-spinner>
+        </div>
+      </div>
+      <mat-paginator #paginatorDocuments="matPaginator" [pageSizeOptions]=mainTablePaginationOptionsDocuments
+        showFirstLastButtons></mat-paginator>
+
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">assignment</mat-icon>
+        Historico de consultas (cerradas)
+      </ng-template>
+
+      <div style=" overflow-y: auto;">
+        <table mat-table matSort [dataSource]="dataSourceDiagnosis" #sortDiagnosis="matSort" #tableDiagnosis="matTable">
+          <ng-container matColumnDef="name" sticky>
+            <th mat-header-cell *matHeaderCellDef>Nombre Paciente</th>
+            <td mat-cell *matCellDef="let element"> {{element.patiente.name}} {{element.patiente.surname}}
+              {{element.patiente.lastname}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="number" sticky>
+            <th mat-header-cell *matHeaderCellDef>Identificación paciente</th>
+            <td mat-cell *matCellDef="let element"> {{element.patiente.identificationValue}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="organ" sticky>
+            <th mat-header-cell *matHeaderCellDef>Organo afectado</th>
+            <td mat-cell *matCellDef="let element"> {{element.organ.name}} </td>
+          </ng-container>
+
+          
+
+          <ng-container matColumnDef="actions" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef class="centered" width="200"> Acciones </th>
+            <td mat-cell *matCellDef="let element; let i = index" class="pad10 actionsColumn">
+              <div class="minifabcontainer actionsContainer gridi">
+
+                <button mat-mini-fab class="successbutton" matTooltip="Diagnosticar Historia Clínica"
+                  (click)="diagnosis(element)">
+                  <mat-icon>how_to_reg</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsDiagnosis ; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsDiagnosis; let i = index"></tr>
+        </table>
+
+        <nodata *ngIf="noDataDiagnosis" [nodataheight]=nodataheight [nodatamessage]=nodatamessage></nodata>
+        <div *ngIf="isLoadingDiagnosis" style="display: flex; justify-content: center; align-items: center">
+          <mat-progress-spinner color="primary" mode="indeterminate">
+          </mat-progress-spinner>
+        </div>
+      </div>
+      <mat-paginator #paginatorDiagnosis="matPaginator" [pageSizeOptions]=mainTablePaginationOptionsDiagnosis
+        showFirstLastButtons></mat-paginator>
+
+    </mat-tab>
+
+  </mat-tab-group>
+
+</mat-card>
+

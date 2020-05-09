@@ -5,20 +5,26 @@ import { AdminUsersService } from '@services';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { saveAs as importedSaveAs } from "file-saver";
 
-
+const identype = {
+  'Cédula de Ciudadanía': 1,
+  'Cédula de Extranjería': 2,
+  'Pasaporte': 3,
+  'Registro Civil': 4,
+  'Tarjeta de Identidad': 5
+}
 
 @Component({
-  selector: 'user-pieldiagnostico-create',
-  templateUrl: './piel.component.html',
-  styleUrls: ['./piel.component.css'],
+  selector: 'user-mamadiagnosis-create',
+  templateUrl: './melanoma.component.html',
+  styleUrls: ['./melanoma.component.css'],
 })
 
-export class PielDiagnosisComponent implements OnInit {
+export class MelanomaDiagnosisComponent implements OnInit {
 
   title = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.surname + ' ' + this.incomingdata.patiente.lastname;
   icon = 'how_to_reg';
-  color = 'green';
-  subtitle = 'Diagnostico para Colon - Rector';
+  color = 'black';
+  subtitle = 'Diagnostico para Melanoma';
 
   user = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.surname + ' ' + this.incomingdata.patiente.lastname;
   userfiles = {
@@ -39,7 +45,7 @@ export class PielDiagnosisComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<PielDiagnosisComponent>,
+    public dialogRef: MatDialogRef<MelanomaDiagnosisComponent>,
     private adminUsersService: AdminUsersService,
     @Inject(MAT_DIALOG_DATA) public incomingdata: any
   ) {
@@ -57,33 +63,39 @@ export class PielDiagnosisComponent implements OnInit {
         Validators.required,
       ],
     ),
-    localizacion: new FormControl(
+    i: new FormControl(
       1,
       [
         Validators.required,
       ],
     ),
-
+    clark: new FormControl(
+      1,
+      [
+        Validators.required,
+      ],
+    ),
     breslow: new FormControl(
       1,
       [
-        Validators.max(10),
-        Validators.min(0),
+        Validators.max(100),
         Validators.required,
+        Validators.min(0)
       ],
     ),
 
-    her: new FormControl(
+    braf: new FormControl(
       1,
       [
         Validators.required,
       ],
     ),
+
   });
 
   getTnms() {
     this.adminUsersService.getTnms().subscribe(data => {
-      this.tnms = data.filter(o => o.organId === 4);
+      this.tnms = data.filter(o => o.organId === 1);
     },
       error => {
         console.log(error)

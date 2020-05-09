@@ -36,6 +36,13 @@ const routes: Routes = [
     loadChildren: () => import('./pacients/pacients.module').then(m => m.PacientsdModule),
     component: AdminLayoutComponent,
   },
+
+  {
+    path: 'consultas',
+    loadChildren: () => import('./consultations/consultations.module').then(m => m.ConsultationsModule),
+    component: AdminLayoutComponent,
+  },
+
   {
     path: 'configuracion',
     loadChildren: () => import('./settings/settingsplatform.module').then(m => m.SettingsModule),

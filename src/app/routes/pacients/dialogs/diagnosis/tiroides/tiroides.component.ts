@@ -8,17 +8,17 @@ import { saveAs as importedSaveAs } from "file-saver";
 
 
 @Component({
-  selector: 'user-pieldiagnostico-create',
-  templateUrl: './piel.component.html',
-  styleUrls: ['./piel.component.css'],
+  selector: 'user-tiroidesdiagnostico-create',
+  templateUrl: './tiroides.component.html',
+  styleUrls: ['./tiroides.component.css'],
 })
 
-export class PielDiagnosisComponent implements OnInit {
+export class TiroidesDiagnosisComponent implements OnInit {
 
   title = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.surname + ' ' + this.incomingdata.patiente.lastname;
   icon = 'how_to_reg';
-  color = 'green';
-  subtitle = 'Diagnostico para Colon - Rector';
+  color = 'orange';
+  subtitle = 'Diagnostico para Tiroides';
 
   user = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.surname + ' ' + this.incomingdata.patiente.lastname;
   userfiles = {
@@ -33,13 +33,14 @@ export class PielDiagnosisComponent implements OnInit {
   fileButton = true;
 
   tnms;
+  tnms2;
 
   @ViewChild('inputFile') myInputVariable: ElementRef;
 
 
   constructor(
     private _snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<PielDiagnosisComponent>,
+    public dialogRef: MatDialogRef<TiroidesDiagnosisComponent>,
     private adminUsersService: AdminUsersService,
     @Inject(MAT_DIALOG_DATA) public incomingdata: any
   ) {
@@ -73,7 +74,7 @@ export class PielDiagnosisComponent implements OnInit {
       ],
     ),
 
-    her: new FormControl(
+    i: new FormControl(
       1,
       [
         Validators.required,
@@ -83,7 +84,8 @@ export class PielDiagnosisComponent implements OnInit {
 
   getTnms() {
     this.adminUsersService.getTnms().subscribe(data => {
-      this.tnms = data.filter(o => o.organId === 4);
+      this.tnms = data.filter(o => o.organId === 5 && o.specification === 1);
+      this.tnms2 = data.filter(o => o.organId === 5 && o.specification === 2);
     },
       error => {
         console.log(error)

@@ -268,7 +268,7 @@ mat-form-field{
 
 
 .mat-form-field {
-    display: block !important;
+  /*  display: block !important; */
 }
 
 mat-divider{

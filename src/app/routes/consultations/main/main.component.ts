@@ -6,22 +6,10 @@ import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserPacientCreateComponent } from '../dialogs/create/create.component';
-import { ProcedureCreateComponent } from '../dialogs/procedure/procedure.component';
-import { DocumentCreateComponent } from '../dialogs/documents/documents.component';
 import { AdminUsersService } from '@services';
 import { trigger, style, animate, transition } from '@angular/animations';
 
-// diagnosis 
-import { MamaDiagnosisComponent } from '../dialogs/diagnosis/mama/mama.component';
-import { EstomagoDiagnosisComponent } from '../dialogs/diagnosis/estomago/estomago.component';
-import { ColonDiagnosisComponent } from '../dialogs/diagnosis/colon/colon.component';
-import { PielDiagnosisComponent } from '../dialogs/diagnosis/piel/piel.component';
-import { TiroidesDiagnosisComponent } from '../dialogs/diagnosis/tiroides/tiroides.component';
-import { SarcomaDiagnosisComponent } from '../dialogs/diagnosis/sarcoma/sarcoma.component';
-import { EsofagoDiagnosisComponent } from '../dialogs/diagnosis/esofago/esofago.component';
-import { MelanomaDiagnosisComponent } from '../dialogs/diagnosis/melanoma/melanoma.component';
-import { IDXCreateComponent } from '../dialogs/idx/idx.component';
+// dialogs
 
 @Component({
   selector: 'app-pacients-main',
@@ -39,7 +27,7 @@ import { IDXCreateComponent } from '../dialogs/idx/idx.component';
     ])
   ]
 })
-export class PacientsMainComponent implements OnInit {
+export class ConsultationsMainComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
@@ -53,15 +41,10 @@ export class PacientsMainComponent implements OnInit {
   windowwith = window.innerWidth;
   colsnumber = 6;
 
-  title = 'Pacientes';
-  icon = 'face';
-  color = '#113b8f';
-  subtitle = 'Listados de pacientes inscritos en la plataforma.';
-
-  titleProcedures = 'Historias clinicas pendientes';
-  iconProcedures = 'supervised_user_circle';
-  colorProcedures = '#ff3637';
-  subtitleProcedures = 'Listados de historias clinicas pendientes de documento y de diagnostico';
+  title = 'Consultas ESCULAPPIO';
+  icon = 'question_answer';
+  color = '#118f5b';
+  subtitle = 'Listados de consultas.';
 
   profiles;
 
@@ -124,7 +107,7 @@ export class PacientsMainComponent implements OnInit {
   }
 
   create() {
-    const dialogRef = this.dialog.open(UserPacientCreateComponent, { disableClose: true, data: this.activatedRoute.params["_value"] });
+    /* const dialogRef = this.dialog.open(UserPacientCreateComponent, { disableClose: true, data: this.activatedRoute.params["_value"] });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result.state === 1) {
@@ -139,107 +122,28 @@ export class PacientsMainComponent implements OnInit {
           duration: 3000,
         });
       }
-    });
+    }); */
   }
 
   createProcedure(user) {
-    const dialogRef = this.dialog.open(ProcedureCreateComponent, { disableClose: true, data: user });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.state === 1) {
-        this.getAll();
-        this._snackBar.open(result.message, 'Aceptar', {
-          duration: 3000,
-          panelClass: 'snackbarSuccess'
-        });
-      }
-      if (result.state === 0) {
-        this._snackBar.open(result.message, 'Aceptar', {
-          duration: 3000,
-        });
-      }
-    });
+ 
   }
 
   documents(user) {
-    const dialogRef = this.dialog.open(DocumentCreateComponent, { disableClose: true, data: user });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.getAll();
-    });
-  }
-
-  idx(procedure) {
-    console.log(procedure)
-
-    if (procedure.organId === 1) {
-      const dialogRef = this.dialog.open(IDXCreateComponent, { disableClose: true, data: procedure });
-      dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
-      });
-    }
+  
   }
 
 
   diagnosis(procedure) {
     console.log(procedure)
 
-    if (procedure.organId === 1) {
+/*     if (procedure.organId === 1) {
       const dialogRef = this.dialog.open(MamaDiagnosisComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
         this.getAll();
       });
     }
-
-    if (procedure.organId === 2) {
-      const dialogRef = this.dialog.open(EstomagoDiagnosisComponent, { disableClose: true, data: procedure });
-      dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
-      });
-    }
-
-    if (procedure.organId === 3) {
-      const dialogRef = this.dialog.open(ColonDiagnosisComponent, { disableClose: true, data: procedure });
-      dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
-      });
-    }
-
-    if (procedure.organId === 4) {
-      const dialogRef = this.dialog.open(PielDiagnosisComponent, { disableClose: true, data: procedure });
-      dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
-      });
-    }
-
-    if (procedure.organId === 5) {
-      const dialogRef = this.dialog.open(TiroidesDiagnosisComponent, { disableClose: true, data: procedure });
-      dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
-      });
-    }
-
-    if (procedure.organId === 6) {
-      const dialogRef = this.dialog.open(SarcomaDiagnosisComponent, { disableClose: true, data: procedure });
-      dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
-      });
-    }
-
-    if (procedure.organId === 7) {
-      const dialogRef = this.dialog.open(EsofagoDiagnosisComponent, { disableClose: true, data: procedure });
-      dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
-      });
-    }
-
-    if (procedure.organId === 8) {
-      const dialogRef = this.dialog.open(MelanomaDiagnosisComponent, { disableClose: true, data: procedure });
-      dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
-      });
-    }
-
+ */
   }
 
   getAll() {
@@ -313,7 +217,7 @@ export class PacientsMainComponent implements OnInit {
     this.dataSourceDocuments.paginator = this.paginatorDocuments;
     this.dataSourceDocuments.sort = this.sortDocuments;
 
-    this.displayedColumnsDiagnosis = ['name', 'number', 'organ', 'idx', 'actions'];
+    this.displayedColumnsDiagnosis = ['name', 'number', 'organ', 'actions'];
     this.mainTablePaginationOptionsDiagnosis = [7, 15, 50];
     this.dataSourceDiagnosis.paginator = this.paginatorDiagnosis;
     this.dataSourceDiagnosis.sort = this.sortDiagnosis;
