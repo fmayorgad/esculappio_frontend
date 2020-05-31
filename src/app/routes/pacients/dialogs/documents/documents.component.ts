@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit , ViewChild, ElementRef} from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminUsersService } from '@services';
@@ -57,6 +57,7 @@ export class DocumentCreateComponent implements OnInit {
     fd.append('files', this.fileToUpload, this.fileToUpload.name);
     fd.append('procedure', this.incomingdata.id);
     fd.append('type', this.fileType);
+
 
     this.adminUsersService.uploadFile(fd).subscribe(data => {
 
@@ -126,7 +127,7 @@ export class DocumentCreateComponent implements OnInit {
       });
     },
       error => {
-        this._snackBar.open('Error al descargar el archivo. Intentalo de nuevo más tarde: '+ error, 'Aceptar', {
+        this._snackBar.open('Error al descargar el archivo. Intentalo de nuevo más tarde: ' + error, 'Aceptar', {
           duration: 3000,
           panelClass: 'snackbarError'
         });
@@ -135,6 +136,7 @@ export class DocumentCreateComponent implements OnInit {
 
   uploadFile(e) {
     this.fileToUpload = e.target.files[0];
+
     if (this.fileToUpload !== undefined) {
       this.fileButton = false;
     } else {

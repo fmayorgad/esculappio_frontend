@@ -6,6 +6,8 @@ import { PacientsRoutingModule } from './pacients-routing.module';
 import { UserPacientCreateComponent } from './dialogs/create/create.component';
 import { ProcedureCreateComponent } from './dialogs/procedure/procedure.component';
 import { DocumentCreateComponent } from './dialogs/documents/documents.component';
+
+// diagnosis
 import { MamaDiagnosisComponent } from './dialogs/diagnosis/mama/mama.component';
 import { EstomagoDiagnosisComponent } from './dialogs/diagnosis/estomago/estomago.component';
 import { ColonDiagnosisComponent } from './dialogs/diagnosis/colon/colon.component';
@@ -15,12 +17,17 @@ import { SarcomaDiagnosisComponent } from './dialogs/diagnosis/sarcoma/sarcoma.c
 import { EsofagoDiagnosisComponent } from './dialogs/diagnosis/esofago/esofago.component';
 import { MelanomaDiagnosisComponent } from './dialogs/diagnosis/melanoma/melanoma.component';
 import { IDXCreateComponent } from './dialogs/idx/idx.component';
+import { TreatmentsMainComponent } from './treatments/main.component';
+
+// treatment
+import { MamaTreatmentComponent } from './treatments/dialogs/mama/mama.component';
 
 const COMPONENTS =
   [
     PacientsMainComponent,
+    TreatmentsMainComponent
   ];
-const COMPONENTS_DYNAMIC = [IDXCreateComponent, MelanomaDiagnosisComponent, EsofagoDiagnosisComponent, SarcomaDiagnosisComponent, PielDiagnosisComponent, ColonDiagnosisComponent, UserPacientCreateComponent, ProcedureCreateComponent, DocumentCreateComponent, MamaDiagnosisComponent, EstomagoDiagnosisComponent, TiroidesDiagnosisComponent];
+const COMPONENTS_DYNAMIC = [MamaTreatmentComponent, IDXCreateComponent, MelanomaDiagnosisComponent, EsofagoDiagnosisComponent, SarcomaDiagnosisComponent, PielDiagnosisComponent, ColonDiagnosisComponent, UserPacientCreateComponent, ProcedureCreateComponent, DocumentCreateComponent, MamaDiagnosisComponent, EstomagoDiagnosisComponent, TiroidesDiagnosisComponent];
 
 @NgModule({
   imports: [

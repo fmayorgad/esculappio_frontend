@@ -35,6 +35,7 @@ const routes: Routes = [
     path: 'pacientes',
     loadChildren: () => import('./pacients/pacients.module').then(m => m.PacientsdModule),
     component: AdminLayoutComponent,
+    canActivate: [AuthGuard]
   },
 
   {
@@ -46,7 +47,7 @@ const routes: Routes = [
   {
     path: 'configuracion',
     loadChildren: () => import('./settings/settingsplatform.module').then(m => m.SettingsModule),
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     component: AdminLayoutComponent,
   },
 

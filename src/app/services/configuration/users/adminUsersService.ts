@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Routes, RouterModule, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 //import {} from '';
-import {saveAs} from "file-saver";
+import { saveAs } from "file-saver";
 
 @Injectable()
 export class APIResolver implements Resolve<any> {
@@ -62,6 +62,12 @@ export class AdminUsersService {
       .pipe(map(data => data['user']));
   }
 
+  ridx(id, obj) {
+    return this.http
+      .patch(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/idx/${id}`, obj)
+      .pipe(map(data => data['procedure']));
+  }
+
   getById(id) {
     return this.http
       .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/organs/${id}`)
@@ -89,13 +95,48 @@ export class AdminUsersService {
   getFileById(id) {
     return this.http
       .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/getFile/${id}`,
-      {responseType: "blob", headers: {'Accept': 'application/pdf'}}
+        { responseType: "blob", headers: { 'Accept': 'application/pdf' } }
       )
   }
+
+  getConsultations() {
+    return this.http
+      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/consultations/getAll`)
+      .pipe(map(data => data['consultations']));
+  }
+
 
   getTnms() {
     return this.http
       .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/tnms`)
       .pipe(map(data => data['tnm']));
   }
+
+
+  getConsultationsFiles(id) {
+    return this.http
+      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/consultations/getFile/${id}`,
+        { responseType: "blob", headers: { 'Accept': 'application/pdf' } }
+      )
+  }
+
+  getAnswerFiles(id) {
+    return this.http
+      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/consultations/getAnswerFile/${id}`,
+        { responseType: "blob", headers: { 'Accept': 'application/pdf' } }
+      )
+  }
+
+  closeConsultation(data) {
+    return this.http
+      .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/consultations/responseConsultation`, data)
+      .pipe(map(data => data['tnm']));
+  }
+
+  savediagnosys(data) {
+    return this.http
+      .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/saveDiagnosys`, data)
+      .pipe(map(data => data['tnm']));
+  }
+
 }

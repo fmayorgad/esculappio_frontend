@@ -1,0 +1,77 @@
+<div class="mediumModal">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <mat-dialog-content class="mat-typography">
+
+    <mat-accordion class="mat-elevation-z1">
+      <mat-expansion-panel style="border-radius: 2px !important;" [expanded]='1'>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h2 style="color: #f44336; margin: 0px !important;">Datos del paciente que consulta</h2>
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+
+        <p><strong>Paciente: </strong>{{user}}</p>
+        <p><strong>Género: </strong>{{id.medicalProcedure.patiente.genderName}}</p>
+        <p><strong>{{id.medicalProcedure.patiente.identificationType}}:
+          </strong>{{id.medicalProcedure.patiente.identificationValue}}</p>
+        <p><strong>Fecha de nacimiento: </strong>{{id.medicalProcedure.patiente.birthday}}
+          ({{id.medicalProcedure.patiente.age}} años )</p>
+
+
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div class="answerContainer mat-elevation-z2 fullwidth pad20" style="margin: 20px 0px">
+      <h2 style="color: #2196f3">Consulta realizada</h2>
+      <p><strong>Organo: </strong> </p><p> {{id.medicalProcedure.organ.name}}</p>
+      <p><strong>Titulo de la consulta: </strong> </p><p> {{id.title}}</p>
+      <p><strong>Consulta: </strong> </p><p> {{id.message}}</p>
+      <p><strong>Fecha de apertura: </strong> </p><p> {{id.openingDate}}</p>
+      <h3 style="font-weight: 400;">Archivos adjuntos:</h3>
+      <h3 *ngIf="id.medicalConsultationFile.length==0">Sin archivos adjuntos</h3>
+
+      <mat-chip-list aria-label="Fish selection">
+        <mat-chip color="primary" *ngFor="let f of id.medicalConsultationFile" style="cursor: pointer"
+          (click)="getFile(f.id, f.name)" matTooltip="Descargar archivo" selected> {{f.name}} <mat-icon
+            style="margin-left: 10px;">save_alt</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+
+    </div>
+
+    <h2 style="margin: 40px 0px !important;font-size: 24px;text-align: center;color: #3f51b5;">Respuestas a esta consulta</h2>
+
+    <div class="answerContainer mat-elevation-z2 fullwidth pad20" *ngFor="let r of id.consultationsAnswers; let i = index" style="margin: 20px 0px">
+      <h2 style="color: #15bf52">Respuesta #{{i+1}}</h2>
+      <h3>Por:</h3>
+      <p style="margin-bottom: 2px !important;"><strong>{{r.user.name}} {{r.user.surname}} {{r.user.lastname}}</strong></p>
+      <p style="margin-bottom: 2px !important;"><strong>{{r.user.profile.name}}</strong></p>
+      <p style="margin-bottom: 2px !important;" ><strong>Registro profesional:</strong> {{r.user.professionalNumber}}</p>
+      <p><strong>Fecha de la respuesta: {{r.createdAt}}</strong></p>
+
+      <p style="color: #0066ff;font-size: 16px;margin-top: 35px !important;"><strong>Titulo de la respuesta: </strong> </p><p> {{r.title}}</p>
+      <p style="color: #d82708;font-size: 16px;margin-top: 35px !important;"><strong>Respuesta: </strong> </p><p> {{r.message}}</p>
+
+      <div style="margin: 20px 0px;">
+        <h3 style="width: 100%;">Archivos adjuntos por quién responde:</h3>
+        <h3 *ngIf="r.consultationsAnswerFiles.length==0">Sin archivos adjuntos</h3>
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip color="primary" *ngFor="let f of r.consultationsAnswerFiles; let i = index" style="cursor: pointer"
+          (click)="getFileAnswer(f.id, f.name)" matTooltip="Descargar archivo" selected> {{f.name}} <mat-icon
+              style="margin-left: 10px;">save_alt</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="danger">Cerrar ventana</button>
+  </mat-dialog-actions>
+</div>

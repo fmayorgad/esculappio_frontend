@@ -6,10 +6,12 @@ import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AdminUsersService } from '@services';
+import { AdminUsersService, } from '@services';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 // dialogs
+import { ResponseComponent } from '../dialogs/response/response.component';
+import { ViewConsultationComponent } from '../dialogs/view/view.component';
 
 @Component({
   selector: 'app-pacients-main',
@@ -56,48 +58,39 @@ export class ConsultationsMainComponent implements OnInit {
     1: 'Activo'
   };
 
-
-  // tabla de pacientes
-  dataSourcePacients = new MatTableDataSource<any>([]);
-  @ViewChild('paginatorPacients') paginatorPacients: MatPaginator;
-  @ViewChild('sortPacients') sortPacients: MatSort;
-  @ViewChild('tablePacients') tablePacients: MatTable<any>;
-  mainTablePaginationOptionsPacients: number[];
-  displayedColumnsPacients: string[];
-  noDataPacients = false;
-  isLoadingPacients = true;
-
-
-  //tabla de pendientes documento
-  dataSourceDocuments = new MatTableDataSource<any>([]);
-  @ViewChild('paginatorDocuments') paginatorDocuments: MatPaginator;
-  @ViewChild('sortDocuments') sortDocuments: MatSort;
-  @ViewChild('tableDocuments') tableDocuments: MatTable<any>;
-  mainTablePaginationOptionsDocuments: number[];
-  displayedColumnsDocuments: string[];
-  noDataDocuments = false;
-  isLoadingDocuments = true;
+  // tabla de pendientes documento
+  dataSourcePendings = new MatTableDataSource<any>([]);
+  @ViewChild('paginatorPendings') paginatorPendings: MatPaginator;
+  @ViewChild('sortPendings') sortPendings: MatSort;
+  @ViewChild('tablePendings') tablePendings: MatTable<any>;
+  mainTablePaginationOptionsPendings: number[];
+  displayedColumnsPendings: string[];
+  noDataPendings = false;
+  isLoadingPendings = true;
 
 
-  //tabla de pendientes documento
-  dataSourceDiagnosis = new MatTableDataSource<any>([]);
-  @ViewChild('paginatorDiagnosis') paginatorDiagnosis: MatPaginator;
-  @ViewChild('sortDiagnosis') sortDiagnosis: MatSort;
-  @ViewChild('tableDiagnosis') tableDiagnosis: MatTable<any>;
-  mainTablePaginationOptionsDiagnosis: number[];
-  displayedColumnsDiagnosis: string[];
-  noDataDiagnosis = false;
-  isLoadingDiagnosis = true;
+  // tabla de pendientes documento
+  dataSourceClosed = new MatTableDataSource<any>([]);
+  @ViewChild('paginatorClosed') paginatorClosed: MatPaginator;
+  @ViewChild('sortClosed') sortClosed: MatSort;
+  @ViewChild('tableClosed') tableClosed: MatTable<any>;
+  mainTablePaginationOptionsClosed: number[];
+  displayedColumnsClosed: string[];
+  noDataClosed = false;
+  isLoadingClosed = true;
 
   @HostListener('window:resize', ['$event']) onResize(event) {
     this.windowwith = event.target.innerWidth;
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSourcePacients.filter = filterValue.trim().toLowerCase();
+  applyFilterPending(filterValue: string) {
+
+    this.dataSourcePendings.filter = filterValue.trim().toLowerCase();
   }
 
-
+  applyFilterHistoric(filterValue: string) {
+    this.dataSourceClosed.filter = filterValue.trim().toLowerCase();
+  }
 
   changeEntityState(index, state, entityId) {
     console.log(index)
@@ -106,8 +99,9 @@ export class ConsultationsMainComponent implements OnInit {
 
   }
 
-  create() {
-    /* const dialogRef = this.dialog.open(UserPacientCreateComponent, { disableClose: true, data: this.activatedRoute.params["_value"] });
+  response(e) {
+    console.log(e)
+    const dialogRef = this.dialog.open(ResponseComponent, { disableClose: true, data: e });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result.state === 1) {
@@ -117,85 +111,86 @@ export class ConsultationsMainComponent implements OnInit {
           panelClass: 'snackbarSuccess'
         });
       }
-      if (result.state === 0) {
+    });
+  }
+
+  view(e) {
+    console.log(e)
+    const dialogRef = this.dialog.open(ViewConsultationComponent, { disableClose: true, data: e });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.state === 1) {
+        this.getAll();
         this._snackBar.open(result.message, 'Aceptar', {
           duration: 3000,
+          panelClass: 'snackbarSuccess'
         });
       }
-    }); */
+    });
   }
 
   createProcedure(user) {
- 
+
   }
 
-  documents(user) {
-  
+  Pendings(user) {
+
   }
 
 
-  diagnosis(procedure) {
+  Closed(procedure) {
     console.log(procedure)
 
-/*     if (procedure.organId === 1) {
-      const dialogRef = this.dialog.open(MamaDiagnosisComponent, { disableClose: true, data: procedure });
-      dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
-      });
-    }
- */
+    /*     if (procedure.organId === 1) {
+          const dialogRef = this.dialog.open(MamaClosedComponent, { disableClose: true, data: procedure });
+          dialogRef.afterClosed().subscribe(result => {
+            this.getAll();
+          });
+        }
+     */
   }
 
   getAll() {
-    this.adminUsersService.getPacients().subscribe(
+    this.adminUsersService.getConsultations().subscribe(
       data => {
         console.log(data);
-        this.dataSourcePacients = new MatTableDataSource<any>(data);
-        this.dataSourcePacients.paginator = this.paginatorPacients;
-        this.dataSourcePacients.sort = this.sortPacients;
-        this.isLoadingPacients = false;
-        if (data.length === 0) {
-          this.noDataPacients = true;
-        } else {
-          this.noDataPacients = false;
-        }
-      },
-      error => {
-      });
 
-
-    this.adminUsersService.getPendingMedicalProcedures().subscribe(
-      data => {
-        console.log(data);
+        data = data.map(p => {
+          const tmp = p;
+          tmp.name = p.medicalProcedure.patiente.name + p.medicalProcedure.patiente.surname + p.medicalProcedure.patiente.lastname;
+          tmp.ident = p.medicalProcedure.patiente.identificationValue;
+          tmp.organname = p.medicalProcedure.organ.name;
+          return tmp;
+        })
 
         // se filtran los tipos de archivo biopsia e imagenes: si existe por lo menos uno de cada uno, ya esta listo para diagnostico.
         let pendingFiles = data.filter(p => {
-          return p.state === 1;
+          return p.stateId === 0;
         })
 
-        let pendingDiagnosis = data.filter(p => {
-          return p.state === 2;
+        let pendingClosed = data.filter(p => {
+          return p.stateId === 1;
         })
 
-        this.dataSourceDocuments = new MatTableDataSource<any>(pendingFiles);
-        this.dataSourceDocuments.paginator = this.paginatorDocuments;
-        this.dataSourceDocuments.sort = this.sortDocuments;
-        this.isLoadingDocuments = false;
+        this.dataSourcePendings = new MatTableDataSource<any>(pendingFiles);
+        this.dataSourcePendings.paginator = this.paginatorPendings;
+        this.dataSourcePendings.sort = this.sortPendings;
+        this.isLoadingPendings = false;
         if (data.length === 0) {
-          this.noDataDocuments = true;
+          this.noDataPendings = true;
         } else {
-          this.noDataDocuments = false;
+          this.noDataPendings = false;
         }
 
 
-        this.dataSourceDiagnosis = new MatTableDataSource<any>(pendingDiagnosis);
-        this.dataSourceDiagnosis.paginator = this.paginatorDiagnosis;
-        this.dataSourceDiagnosis.sort = this.sortDiagnosis;
-        this.isLoadingDiagnosis = false;
+        this.dataSourceClosed = new MatTableDataSource<any>(pendingClosed);
+        this.dataSourceClosed.paginator = this.paginatorClosed;
+        this.dataSourceClosed.sort = this.sortClosed;
+        this.isLoadingClosed = false;
         if (data.length === 0) {
-          this.noDataDiagnosis = true;
+          this.noDataClosed = true;
         } else {
-          this.noDataDiagnosis = false;
+          this.noDataClosed = false;
         }
 
 
@@ -207,20 +202,16 @@ export class ConsultationsMainComponent implements OnInit {
   ngOnInit() {
 
     this.getAll();
-    this.displayedColumnsPacients = ['name', 'surname', 'lastname', 'number', 'cellphone', 'actions'];
-    this.mainTablePaginationOptionsPacients = [7, 15, 50];
-    this.dataSourcePacients.paginator = this.paginatorPacients;
-    this.dataSourcePacients.sort = this.sortPacients;
 
-    this.displayedColumnsDocuments = ['name', 'number', 'organ', 'actions'];
-    this.mainTablePaginationOptionsDocuments = [7, 15, 50];
-    this.dataSourceDocuments.paginator = this.paginatorDocuments;
-    this.dataSourceDocuments.sort = this.sortDocuments;
+    this.displayedColumnsPendings = ['name', 'number', 'organ', 'title', 'actions'];
+    this.mainTablePaginationOptionsPendings = [7, 15, 50];
+    this.dataSourcePendings.paginator = this.paginatorPendings;
+    this.dataSourcePendings.sort = this.sortPendings;
 
-    this.displayedColumnsDiagnosis = ['name', 'number', 'organ', 'actions'];
-    this.mainTablePaginationOptionsDiagnosis = [7, 15, 50];
-    this.dataSourceDiagnosis.paginator = this.paginatorDiagnosis;
-    this.dataSourceDiagnosis.sort = this.sortDiagnosis;
+    this.displayedColumnsClosed = ['name', 'number', 'organ', 'title', 'actions'];
+    this.mainTablePaginationOptionsClosed = [7, 15, 50];
+    this.dataSourceClosed.paginator = this.paginatorClosed;
+    this.dataSourceClosed.sort = this.sortClosed;
 
 
   }

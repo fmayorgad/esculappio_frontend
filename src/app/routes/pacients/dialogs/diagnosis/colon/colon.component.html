@@ -41,7 +41,7 @@
                     {{t.m}}
                   </td>
                   <td style="text-align: center;">
-                    <mat-radio-button name="tnm" value="t.id"></mat-radio-button>
+                    <mat-radio-button name="tnm" value="{{t.id}}" [checked]="t.id==tnm" [disabled]="!mainAction" ngDefaultControl [(ngModel)]="tnm"></mat-radio-button>
                   </td>
 
                 </tr>
@@ -55,7 +55,7 @@
             <mat-form-field class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 
               <mat-label>Localización</mat-label>
-              <mat-select formControlName='localizacion'>
+              <mat-select formControlName='localizacion' [disabled]="!mainAction">
 
                 <mat-option [value]="1">
                   CIEGO
@@ -98,7 +98,7 @@
 
             <mat-form-field class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <mat-label>Inmunohistoquimica MMR</mat-label>
-              <mat-select formControlName='her'>
+              <mat-select formControlName='inmuno' [disabled]="!mainAction">
                 <mat-option [value]="1">
                   MLH1
                 </mat-option>
@@ -124,17 +124,13 @@
                 <mat-option [value]="7">
                   KRAS
                 </mat-option>
-
-                <mat-option [value]="8">
-                  KRAS
-                </mat-option>
               </mat-select>
             </mat-form-field>
 
 
             <mat-form-field class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <mat-label>Biopsia</mat-label>
-              <mat-select formControlName='biopsia'>
+              <mat-select formControlName='biopsia' [disabled]="!mainAction">
                 <mat-option [value]="1">
                   ADENOCARCINOMA COLONICO
                 </mat-option>
@@ -323,6 +319,6 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close color="warn">Cerrar</button>
-    <button mat-raised-button class="successbutton" [disabled]="!mainForm.valid">Diagnosticar</button>
+    <button mat-raised-button class="successbutton" [disabled]="!mainForm.valid" *ngIf="mainAction" (click)="savediagnosys()">Diagnosticar</button>
   </mat-dialog-actions>
 </div>

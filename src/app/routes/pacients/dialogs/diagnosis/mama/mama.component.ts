@@ -25,6 +25,7 @@ export class MamaDiagnosisComponent implements OnInit {
   icon = 'how_to_reg';
   color = '#2196f3';
   subtitle = 'Diagnostico para Máma';
+  mainAction = this.incomingdata.state === 3 ? false : true;
 
   user = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.surname + ' ' + this.incomingdata.patiente.lastname;
   userfiles = {
@@ -49,28 +50,29 @@ export class MamaDiagnosisComponent implements OnInit {
     private adminUsersService: AdminUsersService,
     @Inject(MAT_DIALOG_DATA) public incomingdata: any
   ) {
+    console.log(this.incomingdata.diagnosysMedicalProcedure)
   }
 
   filesToUpload: Array<File> = [];
 
-  tnm = 1;
-  tnm2 = 1;
+  tnm =  this.incomingdata.diagnosys ? parseInt(this.incomingdata.diagnosys['9'], 0) : null;
+  tnm2 = this.incomingdata.diagnosys ? parseInt(this.incomingdata.diagnosys['10'], 0) : null;
 
   mainForm = new FormGroup({
     biopsia: new FormControl(
-      1,
+      this.incomingdata.diagnosys ? parseInt(this.incomingdata.diagnosys['11'], 0) : 1,
       [
         Validators.required,
       ],
     ),
     luminal: new FormControl(
-      1,
+      this.incomingdata.diagnosys ? parseInt(this.incomingdata.diagnosys['16'], 0) : 1,
       [
         Validators.required,
       ],
     ),
     re: new FormControl(
-      1,
+      this.incomingdata.diagnosys ? parseInt(this.incomingdata.diagnosys['12'], 0) : 1,
       [
         Validators.max(100),
         Validators.required,
@@ -79,7 +81,7 @@ export class MamaDiagnosisComponent implements OnInit {
     ),
 
     rp: new FormControl(
-      1,
+      this.incomingdata.diagnosys ? parseInt(this.incomingdata.diagnosys['13'], 0) : 1,
       [
         Validators.max(100),
         Validators.required,
@@ -88,14 +90,14 @@ export class MamaDiagnosisComponent implements OnInit {
     ),
 
     her: new FormControl(
-      1,
+      this.incomingdata.diagnosys ? parseInt(this.incomingdata.diagnosys['14'], 0) : 1,
       [
         Validators.required,
       ],
     ),
 
     ki: new FormControl(
-      1,
+      this.incomingdata.diagnosys ? parseInt(this.incomingdata.diagnosys['15'], 0) : 1,
       [
         Validators.max(100),
         Validators.required,
@@ -117,22 +119,28 @@ export class MamaDiagnosisComponent implements OnInit {
       });
   }
 
-  upload() {
+  savediagnosys() {
+    let send = {
+      data: {
+        9: this.tnm, //this.mainForm.controls.name.value
+        10: this.tnm2,
+        11: this.mainForm.controls.biopsia.value,
+        12: this.mainForm.controls.re.value,
+        13: this.mainForm.controls.rp.value,
+        14: this.mainForm.controls.her.value,
+        15: this.mainForm.controls.ki.value,
+        16: this.mainForm.controls.luminal.value,
+      },
+      procedure: this.incomingdata.id
+    };
 
-    const fd = new FormData();
-    fd.append('files', this.fileToUpload, this.fileToUpload.name);
-    fd.append('procedure', this.incomingdata.id);
-    fd.append('type', this.fileType);
+    this.adminUsersService.savediagnosys(send).subscribe(data => {
 
-    this.adminUsersService.uploadFile(fd).subscribe(data => {
-
-      this.myInputVariable.nativeElement.value = '';
-      this.fileButton = true;
-      this._snackBar.open('Archivo ' + this.fileToUpload.name + ' subido correctamente.', 'Aceptar', {
+      this.dialogRef.close();
+      this._snackBar.open('Diagnostico realizado. Ahora este proceso puede iniciar un tratamiento.', 'Aceptar', {
         duration: 3000,
         panelClass: 'snackbarSuccess'
       });
-      this.getById();
     },
       error => {
         console.log(error)
@@ -141,81 +149,11 @@ export class MamaDiagnosisComponent implements OnInit {
           panelClass: 'snackbarError'
         });
       });
-  }
 
-
-  deletefile(id) {
-    this.adminUsersService.deleteFile(id).subscribe(data => {
-      this._snackBar.open('Archivo borrado correctamente.', 'Aceptar', {
-        duration: 3000,
-        panelClass: 'snackbarSuccess'
-      });
-      this.getById();
-    },
-      error => {
-        this._snackBar.open(error, 'Aceptar', {
-          duration: 3000,
-          panelClass: 'snackbarError'
-        });
-      });
-  }
-
-  getById() {
-    this.adminUsersService.getProcedureById(this.incomingdata.id).subscribe(
-      data => {
-        console.log(data)
-        this.userfiles = {
-          b: data.filesMedicalProcedure.filter(f => f.fileType === 'Biopsia'),
-          i: data.filesMedicalProcedure.filter(f => f.fileType === 'Imagenes médicas'),
-          r: data.filesMedicalProcedure.filter(f => f.fileType === 'Radioterapias'),
-          q: data.filesMedicalProcedure.filter(f => f.fileType === 'Quimioterapia'),
-          h: data.filesMedicalProcedure.filter(f => f.fileType === 'Historia clínica'),
-        };
-
-        console.log(this.userfiles)
-      },
-      error => {
-      });
-  }
-
-  getFile(id, name) {
-    this._snackBar.open('Descargando archivo...', 'Aceptar', {
-      duration: 10000,
-      panelClass: 'snackbarInfo'
-    });
-
-    this.adminUsersService.getFileById(id).subscribe(blob => {
-      importedSaveAs(blob, name);
-      this._snackBar.open('Archivo ' + name + ' descargado correctamente.', 'Aceptar', {
-        duration: 3000,
-        panelClass: 'snackbarSuccess'
-      });
-    },
-      error => {
-        this._snackBar.open('Error al descargar el archivo. Intentalo de nuevo más tarde: ' + error, 'Aceptar', {
-          duration: 3000,
-          panelClass: 'snackbarError'
-        });
-      });
-  }
-
-  uploadFile(e) {
-    this.fileToUpload = e.target.files[0];
-    if (this.fileToUpload !== undefined) {
-      this.fileButton = false;
-    } else {
-      this.fileButton = true;
-    }
-    console.log(this.fileButton)
-
-  }
-
-  fileChangeEvent(fileInput: any) {
-    this.filesToUpload = <Array<File>>fileInput.target.files;
+    console.log(send);
   }
 
   ngOnInit() {
     this.getTnms();
-    this.getById();
   }
 }

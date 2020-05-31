@@ -1,0 +1,313 @@
+<div class="mediumModal">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <mat-dialog-content class="mat-typography">
+
+    <mat-tab-group dynamicHeight mat-align-tabs="center">
+
+      <mat-tab>
+
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">favorite</mat-icon>
+          Cirugia
+        </ng-template>
+
+        <div class="row">
+
+          <h2 style="margin: 20px 0px; text-align: center; width: 100%;">Agregar cirugia</h2>
+
+          <form [formGroup]='mainForm' class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <mat-label>Cirugia</mat-label>
+              <mat-select formControlName='surgery'>
+                <mat-option [value]="s.id" *ngFor="let s of surgeries">
+                  {{s.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="mainForm.controls.surgery.hasError('required')">
+                El campo es <strong>obligatorio</strong>.
+              </mat-error>
+
+            </mat-form-field>
+
+            <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <mat-label>Fecha de la cirugia</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName='date'>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker disabled="false"></mat-datepicker>
+              <mat-error *ngIf="mainForm.controls.date.hasError('required')">
+                El campo es <strong>obligatorio</strong>.
+              </mat-error>
+            </mat-form-field>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 flexi">
+              <button mat-raised-button color="primary" class="mauto" [disabled]="!mainForm.valid"
+                (click)="createSurgery()">Agregar</button>
+            </div>
+
+          </form>
+
+          <div class="flexi fullwidth" style="margin: 25px 0px; overflow-x: overlay;">
+            <div class="mauto" *ngIf="surgeriesCreated.length === 0">
+              Sin cirugias registradas
+            </div>
+            <div class="mauto" *ngIf="surgeriesCreated.length !== 0">
+              <table class="table" style="width: auto;">
+                <thead>
+                  <tr>
+                    <th style="min-width:150px !important" *ngFor="let s of surgeriesCreated">{{s.surgery.name}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="text-align: center;" *ngFor="let s of surgeriesCreated">
+                      {{s.date}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </mat-tab>
+
+      <mat-tab>
+
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">graphic_eq</mat-icon>
+          Radioterapia
+        </ng-template>
+
+
+
+        <div class="row">
+
+          <h2 style="margin: 20px 0px; text-align: center; width: 100%;">Agregar ciclo</h2>
+
+          <form [formGroup]='ciclosForm' class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <mat-label>Ciclo de radioterapia</mat-label>
+              <mat-select formControlName='ciclo'>
+                <mat-option [value]="c" *ngFor="let c of ciclos">
+                  {{c}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="ciclosForm.controls.ciclo.hasError('required')">
+                El campo es <strong>obligatorio</strong>.
+              </mat-error>
+
+            </mat-form-field>
+
+            <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <mat-label>Fecha del ciclo</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName='date'>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+              <mat-error *ngIf="ciclosForm.controls.date.hasError('required')">
+                El campo es <strong>obligatorio</strong>.
+              </mat-error>
+            </mat-form-field>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 flexi">
+              <button mat-raised-button color="primary" class="mauto" [disabled]="!ciclosForm.valid"
+                (click)="createCicle()">Agregar ciclo</button>
+            </div>
+
+          </form>
+
+          <div class="flexi fullwidth" style="margin: 25px 0px; overflow-x: overlay;">
+            <div class="mauto" *ngIf="ciclesCreated.length === 0">
+              Sin ciclos registrados por el momento...
+            </div>
+            <div class="mauto" *ngIf="ciclesCreated.length !== 0">
+              <table class="table" style="width: auto;">
+                <thead>
+                  <tr>
+                    <th style="min-width:150px !important" *ngFor="let c of ciclesCreated">Ciclo {{c.cicle}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="text-align: center;" *ngFor="let c of ciclesCreated">
+                      {{c.date}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+
+      </mat-tab>
+
+      <mat-tab>
+
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">local_hospital</mat-icon>
+          Quimioterapia
+        </ng-template>
+
+        <div class="row">
+          <h2 style="margin: 20px 0px; text-align: center; width: 100%;">Agregar Quimio</h2>
+
+          <form [formGroup]='quimosForm' class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+            <mat-form-field class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <mat-label>Esquema</mat-label>
+              <mat-select formControlName='schema'>
+                <mat-option [value]="c" *ngFor="let c of schemas">
+                  {{c}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="quimosForm.controls.schema.hasError('required')">
+                El campo es <strong>obligatorio</strong>.
+              </mat-error>
+
+            </mat-form-field>
+
+            <mat-form-field class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <mat-label>Medicamento</mat-label>
+              <mat-select formControlName='drug_id'>
+                <mat-option [value]="d.id" *ngFor="let d of drugs">
+                  {{d.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="quimosForm.controls.drug_id.hasError('required')">
+                El campo es <strong>obligatorio</strong>.
+              </mat-error>
+
+            </mat-form-field>
+
+            <mat-form-field class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <input matInput type="number" placeholder="mg" formControlName='dosis' autocomplete="off">
+              <mat-error *ngIf="quimosForm.controls.dosis.hasError('required')">
+                El campo es <strong>obligatorio</strong>.
+              </mat-error>
+              <mat-error *ngIf="quimosForm.controls.dosis.hasError('maxlength')">
+                El campo debe ser máximo <strong>1000 </strong>.
+              </mat-error>
+              <mat-error *ngIf="quimosForm.controls.dosis.hasError('minlength')">
+                El campo debe ser mínimo <strong>0.1 </strong>.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <input matInput type="number" placeholder="Veces al día" formControlName='value' autocomplete="off">
+              <mat-error *ngIf="quimosForm.controls.value.hasError('required')">
+                El campo es <strong>obligatorio</strong>.
+              </mat-error>
+              <mat-error *ngIf="quimosForm.controls.value.hasError('maxlength')">
+                El campo debe ser máximo <strong>24 </strong>.
+              </mat-error>
+              <mat-error *ngIf="quimosForm.controls.value.hasError('minlength')">
+                El campo debe ser mínimo <strong>1 </strong>.
+              </mat-error>
+            </mat-form-field>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 flexi">
+              <button mat-raised-button color="primary" class="mauto" [disabled]="!quimosForm.valid"
+                (click)="createQuimo()">Agregar quimioterapia</button>
+            </div>
+
+          </form>
+
+          <h2 style="margin: 20px 0px; text-align: center; width: 100%;">Quimios agregadas</h2>
+
+          <mat-accordion class="fullwidth">
+
+            <mat-expansion-panel *ngFor="let q of quimos;let i = index ">
+
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Esquema : {{q.schema}}
+                </mat-panel-title>
+
+                <mat-panel-title>
+                  Medicamento : {{q.drug.name}}
+                </mat-panel-title>
+
+                <mat-panel-title>
+                  Dosis (mg): {{q.dosis}}
+                </mat-panel-title>
+
+                <mat-panel-title>
+                  Veces al día: {{q.value}}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+
+              <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <mat-label>Ciclo de radioterapia</mat-label>
+                <mat-select ([ngModel])="innerc">
+                  <mat-option [value]="c" *ngFor="let c of ciclos2">
+                    {{c}}
+                  </mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="ciclosForm.controls.ciclo.hasError('required')">
+                    El campo es <strong>obligatorio</strong>.
+                  </mat-error> -->
+
+              </mat-form-field>
+
+              <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <mat-label>Fecha del ciclo</mat-label>
+                <input matInput [matDatepicker]="picker1" ([ngModel])="innerd">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+                <!-- <mat-error *ngIf="ciclosForm.controls.date.hasError('required')">
+                    El campo es <strong>obligatorio</strong>.
+                  </mat-error> -->
+              </mat-form-field>
+
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 flexi">
+                <button mat-raised-button color="primary" class="mauto" (click)="createCicleInner(q)">Agregar
+                  ciclo</button>
+              </div>
+
+
+              <h2 class="fullwidth" style="margin-top: 15px !important;">Ciclos agregados</h2>
+
+              <div class="flexi fullwidth" style="margin: 25px 0px; overflow-x: overlay;">
+
+                <div class="mauto" *ngIf="q.ciclesQuimo.length === 0">
+                  Sin ciclos registrados
+                </div>
+
+                <table class="table" style="width: auto" *ngIf="q.ciclesQuimo.length > 0">
+                  <thead>
+                    <tr>
+                      <th style="min-width:150px !important" *ngFor="let c of q.ciclesQuimo">Ciclo {{c.cicle}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align: center;width:150px" *ngFor="let c of q.ciclesQuimo">
+                        {{c.date}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </mat-expansion-panel>
+
+          </mat-accordion>
+
+        </div>
+
+
+
+      </mat-tab>
+
+    </mat-tab-group>
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="warn">Cerrar</button>
+    <button mat-raised-button class="successbutton" [disabled]="!mainForm.valid"
+      *ngIf="mainAction">Diagnosticar</button>
+  </mat-dialog-actions>
+</div>

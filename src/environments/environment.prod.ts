@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://167.172.127.180',
+  apiUrl: 'http://198.211.112.240',
   apiBaseMain: {
     main: 'sigasac',
     configuration: 'configurations',

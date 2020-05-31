@@ -23,6 +23,9 @@ import { EsofagoDiagnosisComponent } from '../dialogs/diagnosis/esofago/esofago.
 import { MelanomaDiagnosisComponent } from '../dialogs/diagnosis/melanoma/melanoma.component';
 import { IDXCreateComponent } from '../dialogs/idx/idx.component';
 
+// treatment
+import { MamaTreatmentComponent } from '../treatments/dialogs/mama/mama.component';
+
 @Component({
   selector: 'app-pacients-main',
   templateUrl: './main.component.html',
@@ -39,7 +42,7 @@ import { IDXCreateComponent } from '../dialogs/idx/idx.component';
     ])
   ]
 })
-export class PacientsMainComponent implements OnInit {
+export class TreatmentsMainComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
@@ -49,14 +52,15 @@ export class PacientsMainComponent implements OnInit {
     private adminUsersService: AdminUsersService,
   ) {
   }
+  data;
 
   windowwith = window.innerWidth;
   colsnumber = 6;
 
-  title = 'Pacientes';
+  title = 'Paciente: ';
   icon = 'face';
   color = '#113b8f';
-  subtitle = 'Listados de pacientes inscritos en la plataforma.';
+  subtitle = 'Listados de procedimientos de este paciente.';
 
   titleProcedures = 'Historias clinicas pendientes';
   iconProcedures = 'supervised_user_circle';
@@ -85,26 +89,6 @@ export class PacientsMainComponent implements OnInit {
   isLoadingPacients = true;
 
 
-  //tabla de pendientes documento
-  dataSourceDocuments = new MatTableDataSource<any>([]);
-  @ViewChild('paginatorDocuments') paginatorDocuments: MatPaginator;
-  @ViewChild('sortDocuments') sortDocuments: MatSort;
-  @ViewChild('tableDocuments') tableDocuments: MatTable<any>;
-  mainTablePaginationOptionsDocuments: number[];
-  displayedColumnsDocuments: string[];
-  noDataDocuments = false;
-  isLoadingDocuments = true;
-
-
-  //tabla de pendientes documento
-  dataSourceDiagnosis = new MatTableDataSource<any>([]);
-  @ViewChild('paginatorDiagnosis') paginatorDiagnosis: MatPaginator;
-  @ViewChild('sortDiagnosis') sortDiagnosis: MatSort;
-  @ViewChild('tableDiagnosis') tableDiagnosis: MatTable<any>;
-  mainTablePaginationOptionsDiagnosis: number[];
-  displayedColumnsDiagnosis: string[];
-  noDataDiagnosis = false;
-  isLoadingDiagnosis = true;
 
   @HostListener('window:resize', ['$event']) onResize(event) {
     this.windowwith = event.target.innerWidth;
@@ -112,10 +96,6 @@ export class PacientsMainComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSourcePacients.filter = filterValue.trim().toLowerCase();
-  }
-
-  redirect(id){
-    this.router.navigate([`pacientes/${id}/tratamientos`]);
   }
 
 
@@ -189,60 +169,123 @@ export class PacientsMainComponent implements OnInit {
     if (procedure.organId === 1) {
       const dialogRef = this.dialog.open(MamaDiagnosisComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
+
       });
     }
 
     if (procedure.organId === 2) {
       const dialogRef = this.dialog.open(EstomagoDiagnosisComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
+
       });
     }
 
     if (procedure.organId === 3) {
       const dialogRef = this.dialog.open(ColonDiagnosisComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
+
       });
     }
 
     if (procedure.organId === 4) {
       const dialogRef = this.dialog.open(PielDiagnosisComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
+
       });
     }
 
     if (procedure.organId === 5) {
       const dialogRef = this.dialog.open(TiroidesDiagnosisComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
+
       });
     }
 
     if (procedure.organId === 6) {
       const dialogRef = this.dialog.open(SarcomaDiagnosisComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
+
       });
     }
 
     if (procedure.organId === 7) {
       const dialogRef = this.dialog.open(EsofagoDiagnosisComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
+
       });
     }
 
     if (procedure.organId === 8) {
       const dialogRef = this.dialog.open(MelanomaDiagnosisComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
-        this.getAll();
+
       });
     }
 
   }
+
+
+  treatment(procedure) {
+
+    if (procedure.organId === 1) {
+      const dialogRef = this.dialog.open(MamaTreatmentComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
+
+    if (procedure.organId === 2) {
+      const dialogRef = this.dialog.open(EstomagoDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
+
+    if (procedure.organId === 3) {
+      const dialogRef = this.dialog.open(ColonDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
+
+    if (procedure.organId === 4) {
+      const dialogRef = this.dialog.open(PielDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
+
+    if (procedure.organId === 5) {
+      const dialogRef = this.dialog.open(TiroidesDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
+
+    if (procedure.organId === 6) {
+      const dialogRef = this.dialog.open(SarcomaDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
+
+    if (procedure.organId === 7) {
+      const dialogRef = this.dialog.open(EsofagoDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
+
+    if (procedure.organId === 8) {
+      const dialogRef = this.dialog.open(MelanomaDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
+
+  }
+
+
 
   getAll() {
     this.adminUsersService.getPacients().subscribe(
@@ -275,28 +318,6 @@ export class PacientsMainComponent implements OnInit {
           return p.state === 2;
         })
 
-        this.dataSourceDocuments = new MatTableDataSource<any>(pendingFiles);
-        this.dataSourceDocuments.paginator = this.paginatorDocuments;
-        this.dataSourceDocuments.sort = this.sortDocuments;
-        this.isLoadingDocuments = false;
-        if (data.length === 0) {
-          this.noDataDocuments = true;
-        } else {
-          this.noDataDocuments = false;
-        }
-
-
-        this.dataSourceDiagnosis = new MatTableDataSource<any>(pendingDiagnosis);
-        this.dataSourceDiagnosis.paginator = this.paginatorDiagnosis;
-        this.dataSourceDiagnosis.sort = this.sortDiagnosis;
-        this.isLoadingDiagnosis = false;
-        if (data.length === 0) {
-          this.noDataDiagnosis = true;
-        } else {
-          this.noDataDiagnosis = false;
-        }
-
-
       },
       error => {
       });
@@ -304,22 +325,30 @@ export class PacientsMainComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getAll();
-    this.displayedColumnsPacients = ['name', 'surname', 'lastname', 'number', 'cellphone', 'actions'];
+    // this.getAll();
+
+    this.data = this.activatedRoute.data['_value'].item.user.medicalProcedures.filter(p => p.state === 3).map(p => {
+      let tmp = p;
+      tmp.patiente = this.activatedRoute.data['_value'].item.user;
+      return tmp;
+    });
+
+    this.displayedColumnsPacients = ['organ', 'idx', 'symptoms', 'actions'];
+    this.dataSourcePacients = new MatTableDataSource<any>(this.data);
     this.mainTablePaginationOptionsPacients = [7, 15, 50];
     this.dataSourcePacients.paginator = this.paginatorPacients;
     this.dataSourcePacients.sort = this.sortPacients;
 
-    this.displayedColumnsDocuments = ['name', 'number', 'organ', 'actions'];
-    this.mainTablePaginationOptionsDocuments = [7, 15, 50];
-    this.dataSourceDocuments.paginator = this.paginatorDocuments;
-    this.dataSourceDocuments.sort = this.sortDocuments;
+    this.isLoadingPacients = false;
+    if (this.data.length === 0) {
+      this.noDataPacients = true;
+    } else {
+      this.noDataPacients = false;
+    }
 
-    this.displayedColumnsDiagnosis = ['name', 'number', 'organ', 'idx', 'actions'];
-    this.mainTablePaginationOptionsDiagnosis = [7, 15, 50];
-    this.dataSourceDiagnosis.paginator = this.paginatorDiagnosis;
-    this.dataSourceDiagnosis.sort = this.sortDiagnosis;
+    console.log(this.data);
 
+    this.title = this.title + ' ' + this.activatedRoute.data['_value'].item.user.name + ' ' + this.activatedRoute.data['_value'].item.user.surname + ' ' + this.activatedRoute.data['_value'].item.user.lastname
 
   }
 

@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ConsultationsMainComponent } from '../consultations/main/main.component';
+import { AuthGuard } from '../../helpers';
+
 
 const routes: Routes = [
-  { path: '', component: ConsultationsMainComponent },
+  {
+    path: '',
+    canActivateChild: [AuthGuard],
+    component: ConsultationsMainComponent
+  },
 ];
 
 @NgModule({

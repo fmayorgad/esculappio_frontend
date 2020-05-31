@@ -6,7 +6,7 @@ import { MenuService } from './menu.service';
 
 @Injectable()
 export class StartupService {
-  constructor(private menuService: MenuService, private http: HttpClient) {}
+  constructor(private menuService: MenuService, private http: HttpClient) { }
 
   load(): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -22,9 +22,9 @@ export class StartupService {
           (res: any) => {
             this.menuService.set(res.menu);
             this.menuService.getAll();
-            
+
           },
-          () => {},
+          () => { },
           () => {
             console.log("resolvinbg")
             resolve();

@@ -16,6 +16,7 @@
 
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
+            <h2 class="centered fullwidth">Menores de 55 años</h2>
             <table class="table">
               <thead>
                 <tr>
@@ -41,14 +42,14 @@
                     {{t.m}}
                   </td>
                   <td style="text-align: center;">
-                    <mat-radio-button name="tnm" value="t.id"></mat-radio-button>
+                    <mat-radio-button name="tnm" [checked]="t.id==tnm" [disabled]="!mainAction" ngDefaultControl [(ngModel)]="tnm"  value="{{t.id}}"></mat-radio-button>
                   </td>
 
                 </tr>
               </tbody>
             </table>
 
-
+            <h2 class="centered fullwidth">Mayores de 55 años</h2>
             <table class="table" style="margin-top: 15px;">
               <thead>
                 <tr>
@@ -74,7 +75,7 @@
                     {{t.m}}
                   </td>
                   <td style="text-align: center;">
-                    <mat-radio-button name="tnm2" value="t.id"></mat-radio-button>
+                    <mat-radio-button name="tnm2"  [checked]="t.id==tnm2" [disabled]="!mainAction" ngDefaultControl [(ngModel)]="tnm2"  value="{{t.id}}"></mat-radio-button>
                   </td>
 
                 </tr>
@@ -88,7 +89,7 @@
             <mat-form-field class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 
               <mat-label>Localización</mat-label>
-              <mat-select formControlName='localizacion'>
+              <mat-select formControlName='localizacion' [disabled]="!mainAction">
 
                 <mat-option [value]="1">
                   ISTIMO
@@ -110,7 +111,7 @@
 
             <mat-form-field class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <mat-label>Inmunohistoquimica MMR</mat-label>
-              <mat-select formControlName='i'>
+              <mat-select formControlName='i' [disabled]="!mainAction">
                 <mat-option [value]="1">
                   BRAF
                 </mat-option>
@@ -123,7 +124,7 @@
 
             <mat-form-field class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <mat-label>Biopsia</mat-label>
-              <mat-select formControlName='biopsia'>
+              <mat-select formControlName='biopsia' [disabled]="!mainAction">
 
                 <mat-option [value]="1">
                   CARCINOMA PAPILAR DE TIROIDES
@@ -172,19 +173,6 @@
               </mat-select>
               <mat-error *ngIf="mainForm.controls.biopsia.hasError('required')">
                 El campo es <strong>obligatorio</strong>.
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <input type="number" matInput formControlName='breslow' autocomplete="off">
-              <mat-error *ngIf="mainForm.controls.breslow.hasError('required')">
-                El campo es <strong>obligatorio</strong>.
-              </mat-error>
-              <mat-error *ngIf="mainForm.controls.breslow.hasError('max')">
-                El campo debe tener máximo <strong>100</strong>.
-              </mat-error>
-              <mat-error *ngIf="mainForm.controls.breslow.hasError('min')">
-                El campo debe tener mínimo <strong>0</strong>.
               </mat-error>
             </mat-form-field>
 
@@ -349,6 +337,6 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close color="warn">Cerrar</button>
-    <button mat-raised-button class="successbutton" [disabled]="!mainForm.valid">Diagnosticar</button>
+    <button mat-raised-button class="successbutton" [disabled]="!mainForm.valid" (click)="savediagnosys()" *ngIf="mainAction">Diagnosticar</button>
   </mat-dialog-actions>
 </div>

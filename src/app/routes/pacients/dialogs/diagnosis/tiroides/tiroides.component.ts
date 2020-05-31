@@ -31,7 +31,7 @@ export class TiroidesDiagnosisComponent implements OnInit {
   fileToUpload: File = null;
   fileType = 'Biopsia';
   fileButton = true;
-
+  mainAction = this.incomingdata.state === 3 ? false : true;
   tnms;
   tnms2;
 
@@ -48,34 +48,25 @@ export class TiroidesDiagnosisComponent implements OnInit {
 
   filesToUpload: Array<File> = [];
 
-  tnm = 1;
-  tnm2 = 1;
+  tnm =  this.incomingdata.diagnosys ? parseInt(this.incomingdata.diagnosys['30'], 0) : 1;
+  tnm2 =  this.incomingdata.diagnosys ? parseInt(this.incomingdata.diagnosys['31'], 0) : 1;
 
   mainForm = new FormGroup({
     biopsia: new FormControl(
-      1,
+      this.incomingdata.diagnosys ? parseInt(this.incomingdata.diagnosys['34'], 0) : 1,
       [
         Validators.required,
       ],
     ),
     localizacion: new FormControl(
-      1,
+      this.incomingdata.diagnosys ? parseInt(this.incomingdata.diagnosys['32'], 0) : 1,
       [
-        Validators.required,
-      ],
-    ),
-
-    breslow: new FormControl(
-      1,
-      [
-        Validators.max(10),
-        Validators.min(0),
         Validators.required,
       ],
     ),
 
     i: new FormControl(
-      1,
+      this.incomingdata.diagnosys ? parseInt(this.incomingdata.diagnosys['33'], 0) : 1,
       [
         Validators.required,
       ],
@@ -96,22 +87,25 @@ export class TiroidesDiagnosisComponent implements OnInit {
       });
   }
 
-  upload() {
+  savediagnosys() {
+    let send = {
+      data: {
+        30: this.tnm, //this.mainForm.controls.name.value
+        31: this.tnm2,
+        34: this.mainForm.controls.biopsia.value,
+        33: this.mainForm.controls.i.value,
+        32: this.mainForm.controls.localizacion.value,
+      },
+      procedure: this.incomingdata.id
+    };
 
-    const fd = new FormData();
-    fd.append('files', this.fileToUpload, this.fileToUpload.name);
-    fd.append('procedure', this.incomingdata.id);
-    fd.append('type', this.fileType);
+    this.adminUsersService.savediagnosys(send).subscribe(data => {
 
-    this.adminUsersService.uploadFile(fd).subscribe(data => {
-
-      this.myInputVariable.nativeElement.value = '';
-      this.fileButton = true;
-      this._snackBar.open('Archivo ' + this.fileToUpload.name + ' subido correctamente.', 'Aceptar', {
+      this.dialogRef.close();
+      this._snackBar.open('Diagnostico realizado. Ahora este proceso puede iniciar un tratamiento.', 'Aceptar', {
         duration: 3000,
         panelClass: 'snackbarSuccess'
       });
-      this.getById();
     },
       error => {
         console.log(error)
@@ -120,81 +114,12 @@ export class TiroidesDiagnosisComponent implements OnInit {
           panelClass: 'snackbarError'
         });
       });
+
+    console.log(send);
   }
 
-
-  deletefile(id) {
-    this.adminUsersService.deleteFile(id).subscribe(data => {
-      this._snackBar.open('Archivo borrado correctamente.', 'Aceptar', {
-        duration: 3000,
-        panelClass: 'snackbarSuccess'
-      });
-      this.getById();
-    },
-      error => {
-        this._snackBar.open(error, 'Aceptar', {
-          duration: 3000,
-          panelClass: 'snackbarError'
-        });
-      });
-  }
-
-  getById() {
-    this.adminUsersService.getProcedureById(this.incomingdata.id).subscribe(
-      data => {
-        console.log(data)
-        this.userfiles = {
-          b: data.filesMedicalProcedure.filter(f => f.fileType === 'Biopsia'),
-          i: data.filesMedicalProcedure.filter(f => f.fileType === 'Imagenes médicas'),
-          r: data.filesMedicalProcedure.filter(f => f.fileType === 'Radioterapias'),
-          q: data.filesMedicalProcedure.filter(f => f.fileType === 'Quimioterapia'),
-          h: data.filesMedicalProcedure.filter(f => f.fileType === 'Historia clínica'),
-        };
-
-        console.log(this.userfiles)
-      },
-      error => {
-      });
-  }
-
-  getFile(id, name) {
-    this._snackBar.open('Descargando archivo...', 'Aceptar', {
-      duration: 10000,
-      panelClass: 'snackbarInfo'
-    });
-
-    this.adminUsersService.getFileById(id).subscribe(blob => {
-      importedSaveAs(blob, name);
-      this._snackBar.open('Archivo ' + name + ' descargado correctamente.', 'Aceptar', {
-        duration: 3000,
-        panelClass: 'snackbarSuccess'
-      });
-    },
-      error => {
-        this._snackBar.open('Error al descargar el archivo. Intentalo de nuevo más tarde: ' + error, 'Aceptar', {
-          duration: 3000,
-          panelClass: 'snackbarError'
-        });
-      });
-  }
-
-  uploadFile(e) {
-    this.fileToUpload = e.target.files[0];
-    if (this.fileToUpload !== undefined) {
-      this.fileButton = false;
-    } else {
-      this.fileButton = true;
-    }
-    console.log(this.fileButton)
-
-  }
-
-  fileChangeEvent(fileInput: any) {
-    this.filesToUpload = <Array<File>>fileInput.target.files;
-  }
 
   ngOnInit() {
     this.getTnms();
-    this.getById();
   }
 }

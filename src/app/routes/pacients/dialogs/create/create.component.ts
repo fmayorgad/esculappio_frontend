@@ -27,6 +27,9 @@ export class UserPacientCreateComponent implements OnInit {
 
   eps;
 
+  tnm = null;
+  tnm2 = null;
+
   mainForm = new FormGroup({
     name: new FormControl(
       '',

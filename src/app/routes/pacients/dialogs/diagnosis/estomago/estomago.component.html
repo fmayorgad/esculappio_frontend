@@ -41,7 +41,7 @@
                     {{t.m}}
                   </td>
                   <td style="text-align: center;">
-                    <mat-radio-button name="tnm" value="t.id"></mat-radio-button>
+                    <mat-radio-button name="tnm" [checked]="t.id==tnm" [disabled]="!mainAction" ngDefaultControl [(ngModel)]="tnm" value="{{t.id}}"></mat-radio-button>
                   </td>
 
                 </tr>
@@ -55,7 +55,7 @@
             <mat-form-field class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 
               <mat-label>Localización</mat-label>
-              <mat-select formControlName='localizacion'>
+              <mat-select formControlName='localizacion' [disabled]="!mainAction">
 
                 <mat-option [value]="1">
                   CUERPO
@@ -81,7 +81,7 @@
 
             <mat-form-field class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <mat-label>Inmunohistoquimica HER</mat-label>
-              <mat-select formControlName='her'>
+              <mat-select formControlName='her' [disabled]="!mainAction">
                 <mat-option [value]="1">
                   +
                 </mat-option>
@@ -99,7 +99,7 @@
 
             <mat-form-field class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <mat-label>Biopsia</mat-label>
-              <mat-select formControlName='biopsia'>
+              <mat-select [disabled]="!mainAction" formControlName='biopsia'>
                 <mat-option [value]="1">
                   ADENOCARCINOMA TIPO INTESTINAL
                 </mat-option>
@@ -287,6 +287,6 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close color="warn">Cerrar</button>
-    <button mat-raised-button class="successbutton" [disabled]="!mainForm.valid">Diagnosticar</button>
+    <button mat-raised-button class="successbutton" [disabled]="!mainForm.valid" (click)="savediagnosys()" *ngIf="mainAction">Diagnosticar</button>
   </mat-dialog-actions>
 </div>

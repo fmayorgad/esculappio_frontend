@@ -26,7 +26,7 @@ export class AuthenticationService {
     return this.http
       .post<any>(
         `${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/login`,
-         obj,
+        obj,
       )
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -41,6 +41,16 @@ export class AuthenticationService {
       .post<any>(
         `${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/login/recover`,
         { email },
+      )
+      .pipe(map(user => {
+        return user;
+      }));
+  }
+
+  getById(id: string) {
+    return this.http
+      .get<any>(
+        `${environment.apiUrl}/${environment.apiBaseMain.users}/${environment.versions.v1}/users/getById/` + id,
       )
       .pipe(map(user => {
         return user;

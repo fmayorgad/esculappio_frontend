@@ -29,7 +29,7 @@ export class IDXCreateComponent implements OnInit {
 
   mainForm = new FormGroup({
     idx: new FormControl(
-      '',
+      this.incomingdata.idx,
       [
         Validators.maxLength(500),
         Validators.required,
@@ -65,7 +65,7 @@ export class IDXCreateComponent implements OnInit {
     };
 
     this.adminUsersService
-      .createAdmin(tmp)
+      .ridx(this.incomingdata.id, tmp)
       .subscribe(
         response => {
           this.dialogRef.close({ state: 1, message: 'IDX registrado satisfactoriamente.' });
