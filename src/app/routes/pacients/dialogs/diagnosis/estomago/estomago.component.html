@@ -302,16 +302,15 @@
               <div>
                 <h3>{{p.question.title}}</h3>
                 <div class="flexi">
-                  <mat-radio-button [checked]="p.value==1" [disabled]="true"> SI </mat-radio-button>
-                  <mat-radio-button [checked]="p.value==0" [disabled]="true" style="margin-left: 20px;"> NO
-                  </mat-radio-button>
+                  <mat-checkbox [checked]="p.value==1" [disabled]="true"> SI  </mat-checkbox>
+                  <mat-checkbox [checked]="p.value==0" [disabled]="true" style="margin-left: 20px;"> NO 
+                  </mat-checkbox>
                 </div>
               </div>
             </li>
           </ul>
 
         </div>
-
       </mat-tab>
     </mat-tab-group>
 

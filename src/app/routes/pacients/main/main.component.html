@@ -48,8 +48,8 @@
           <th mat-header-cell *matHeaderCellDef class="centered" width="200"> Acciones </th>
           <td mat-cell *matCellDef="let element; let i = index" class="pad10 actionsColumn">
             <div class="minifabcontainer actionsContainer gridi">
-              <mat-slide-toggle class="mauto" (change)="editState(element.id, element.state)"
-                [(ngModel)]="element.state" matTooltip="Activar/Inactivar usuario"></mat-slide-toggle>
+<!--               <mat-slide-toggle class="mauto" (change)="editState(element.id, element.state)"
+                [(ngModel)]="element.state" matTooltip="Activar/Inactivar usuario"></mat-slide-toggle> -->
 
               <button mat-mini-fab class="successbutton" (click)="createProcedure(element)"
                 matTooltip="Agregar Procedimiento Médico">
