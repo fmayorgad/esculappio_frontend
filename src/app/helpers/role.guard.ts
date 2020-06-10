@@ -30,7 +30,13 @@ export class RoleGuard implements CanActivate {
   }
 
   canview(state, permission) {
-    return this.global.nav[state].permissions.filter(m => m.name === permission).length >= 1 ? true : false;
+    console.log(this.global.nav, state.split(','))
+    // es un permiso interno
+    if( state.split(',').length > 1 ){
+      return this.global.nav[state.split(',')[0]].children[state.split(',')[1]].permissions.filter(m => m.name === permission).length >= 1 ? true : false;
+    } else{
+      return this.global.nav[state.split(',')[0]].permissions.filter(m => m.name === permission).length >= 1 ? true : false;
+    }
   }
 
   getProfile() {

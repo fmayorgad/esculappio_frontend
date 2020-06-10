@@ -1,9 +1,10 @@
 <div class="matero-user-panel p-y-16 b-b-1" fxLayout="column" fxLayoutAlign="center center">
   <img class="matero-user-panel-avatar m-b-8 r-full" src="assets/images/mainlogomarkup.jpg" alt="avatar" width="64" />
-  <div mat-icon-button class="gridi" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger"
+ <!-- <div mat-icon-button class="gridi" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger"
     (mouseover)="menuTrigger.openMenu()" style="position: sticky;margin-top: -31px;margin-left: 21px;background: white;width: 27px;height: 27px;color: #28862c;border-radius: 50%;">
     <mat-icon class="icon-18 mauto">security</mat-icon>
   </div>
+
   <mat-menu #menu="matMenu" [overlapTrigger]="false">
     <span (mouseleave)="menuTrigger.closeMenu()">
       <button mat-menu-item>
@@ -15,8 +16,9 @@
         <span>Ingreso: {{last}}</span>
       </button>
 
-    </span>
-  </mat-menu>
+    </span> 
+  </mat-menu> -->
+
   <h4 class="matero-user-panel-name m-t-0 m-b-8 f-w-400 truncatedText" style="text-transform: capitalize; width: 80%;text-align: center; margin-top: 8px !important;">{{username}}</h4>
   <h5 class="matero-user-panel-email m-t-0 m-b-8 f-w-400"> {{email}}</h5>
   <h5 class="matero-user-panel-email m-t-0 m-b-8 f-w-400" matTooltip="Tu rol es {{role}}">({{role}})</h5>

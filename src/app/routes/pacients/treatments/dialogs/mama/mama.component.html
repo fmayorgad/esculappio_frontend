@@ -186,10 +186,10 @@
               <mat-error *ngIf="quimosForm.controls.dosis.hasError('required')">
                 El campo es <strong>obligatorio</strong>.
               </mat-error>
-              <mat-error *ngIf="quimosForm.controls.dosis.hasError('maxlength')">
+              <mat-error *ngIf="quimosForm.controls.dosis.hasError('max')">
                 El campo debe ser máximo <strong>1000 </strong>.
               </mat-error>
-              <mat-error *ngIf="quimosForm.controls.dosis.hasError('minlength')">
+              <mat-error *ngIf="quimosForm.controls.dosis.hasError('min')">
                 El campo debe ser mínimo <strong>0.1 </strong>.
               </mat-error>
             </mat-form-field>
@@ -199,15 +199,15 @@
               <mat-error *ngIf="quimosForm.controls.value.hasError('required')">
                 El campo es <strong>obligatorio</strong>.
               </mat-error>
-              <mat-error *ngIf="quimosForm.controls.value.hasError('maxlength')">
+              <mat-error *ngIf="quimosForm.controls.value.hasError('max')">
                 El campo debe ser máximo <strong>24 </strong>.
               </mat-error>
-              <mat-error *ngIf="quimosForm.controls.value.hasError('minlength')">
+              <mat-error *ngIf="quimosForm.controls.value.hasError('min')">
                 El campo debe ser mínimo <strong>1 </strong>.
               </mat-error>
             </mat-form-field>
 
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 flexi">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 flexi" style="padding-top: 25px;">
               <button mat-raised-button color="primary" class="mauto" [disabled]="!quimosForm.valid"
                 (click)="createQuimo()">Agregar quimioterapia</button>
             </div>
@@ -216,7 +216,11 @@
 
           <h2 style="margin: 20px 0px; text-align: center; width: 100%;">Quimios agregadas</h2>
 
-          <mat-accordion class="fullwidth">
+          <div class="mauto" *ngIf="quimos.length === 0">
+            Sin quimioterapias registradas
+          </div>
+
+          <mat-accordion class="fullwidth" *ngIf="quimos.length > 0">
 
             <mat-expansion-panel *ngFor="let q of quimos;let i = index ">
 
@@ -241,7 +245,7 @@
 
               <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <mat-label>Ciclo de radioterapia</mat-label>
-                <mat-select ([ngModel])="innerc">
+                <mat-select [(ngModel)]="innerc">
                   <mat-option [value]="c" *ngFor="let c of ciclos2">
                     {{c}}
                   </mat-option>
@@ -254,7 +258,7 @@
 
               <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <mat-label>Fecha del ciclo</mat-label>
-                <input matInput [matDatepicker]="picker1" ([ngModel])="innerd">
+                <input matInput [matDatepicker]="picker1" [(ngModel)]="innerd">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1 disabled="false"></mat-datepicker>
                 <!-- <mat-error *ngIf="ciclosForm.controls.date.hasError('required')">

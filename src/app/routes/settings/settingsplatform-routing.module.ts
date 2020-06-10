@@ -6,6 +6,7 @@ import { QuestionsMainComponent } from './questions/questions/main.component';
 import { AuthGuard } from '../../helpers';
 import { APIResolver } from '../../services/configuration/questions/questionsService';
 import { QuestionResolverService } from './questions/questions/question-resolver.service';
+import {ProfileMainComponent} from './profile/main/main.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,12 @@ const routes: Routes = [
         component: QuestionsMainComponent,
       },
     ]
+  },
+
+  {
+    path: 'profile',
+    //canActivate: [AuthGuard],
+    component: ProfileMainComponent,
   },
 
   {

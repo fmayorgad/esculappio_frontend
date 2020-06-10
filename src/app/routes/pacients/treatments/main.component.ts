@@ -1,3 +1,6 @@
+import { HttpClient } from '@angular/common/http';
+import { environment } from '@env/environment';
+
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -9,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserPacientCreateComponent } from '../dialogs/create/create.component';
 import { ProcedureCreateComponent } from '../dialogs/procedure/procedure.component';
 import { DocumentCreateComponent } from '../dialogs/documents/documents.component';
-import { AdminUsersService } from '@services';
+import { AdminUsersService, AuthenticationService } from '@services';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 // diagnosis 
@@ -25,6 +28,17 @@ import { IDXCreateComponent } from '../dialogs/idx/idx.component';
 
 // treatment
 import { MamaTreatmentComponent } from '../treatments/dialogs/mama/mama.component';
+import { EstomagoTreatmentComponent } from '../treatments/dialogs/estomago/estomago.component';
+import { ColonTreatmentComponent } from '../treatments/dialogs/colon/colon.component';
+import { PielTreatmentComponent } from '../treatments/dialogs/piel/piel.component';
+import { TiroideTreatmentComponent } from '../treatments/dialogs/tiroides/tiroide.component';
+import { SarcomaTreatmentComponent } from '../treatments/dialogs/sarcoma/sarcoma.component';
+import { EsofagoTreatmentComponent } from '../treatments/dialogs/esofago/esofago.component';
+import { MelanomaTreatmentComponent } from '../treatments/dialogs/melanoma/melanoma.component';
+
+// paleativos
+
+import { PaleativesTreatmentComponent } from '../treatments/dialogs/paleatives/paleative.component';
 
 @Component({
   selector: 'app-pacients-main',
@@ -50,6 +64,8 @@ export class TreatmentsMainComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private adminUsersService: AdminUsersService,
+    private http: HttpClient,
+    private authenticationService: AuthenticationService
   ) {
   }
   data;
@@ -235,56 +251,80 @@ export class TreatmentsMainComponent implements OnInit {
     }
 
     if (procedure.organId === 2) {
-      const dialogRef = this.dialog.open(EstomagoDiagnosisComponent, { disableClose: true, data: procedure });
+      const dialogRef = this.dialog.open(EstomagoTreatmentComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
 
       });
     }
 
     if (procedure.organId === 3) {
-      const dialogRef = this.dialog.open(ColonDiagnosisComponent, { disableClose: true, data: procedure });
+      const dialogRef = this.dialog.open(ColonTreatmentComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
 
       });
     }
 
     if (procedure.organId === 4) {
-      const dialogRef = this.dialog.open(PielDiagnosisComponent, { disableClose: true, data: procedure });
+      const dialogRef = this.dialog.open(PielTreatmentComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
 
       });
     }
 
     if (procedure.organId === 5) {
-      const dialogRef = this.dialog.open(TiroidesDiagnosisComponent, { disableClose: true, data: procedure });
+      const dialogRef = this.dialog.open(TiroideTreatmentComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
 
       });
     }
 
     if (procedure.organId === 6) {
-      const dialogRef = this.dialog.open(SarcomaDiagnosisComponent, { disableClose: true, data: procedure });
+      const dialogRef = this.dialog.open(SarcomaTreatmentComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
 
       });
     }
 
     if (procedure.organId === 7) {
-      const dialogRef = this.dialog.open(EsofagoDiagnosisComponent, { disableClose: true, data: procedure });
+      const dialogRef = this.dialog.open(EsofagoTreatmentComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
 
       });
     }
 
     if (procedure.organId === 8) {
-      const dialogRef = this.dialog.open(MelanomaDiagnosisComponent, { disableClose: true, data: procedure });
+      const dialogRef = this.dialog.open(MelanomaTreatmentComponent, { disableClose: true, data: procedure });
       dialogRef.afterClosed().subscribe(result => {
-
       });
     }
 
   }
 
+  openPaleatives(e) {
+
+    const dialogRef = this.dialog.open(PaleativesTreatmentComponent, { disableClose: true, data: e });
+    dialogRef.afterClosed().subscribe(result => {
+
+
+      this.http
+        .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/users/getById/${this.activatedRoute.data['_value'].item.user.id}`)
+        .toPromise().then(data => {
+          console.log(data)
+          if (data.hasOwnProperty('user')) {
+            this.data = data['user'].medicalProcedures.filter(p => p.state === 3).map(p => {
+              let tmp = p;
+              tmp.patiente = this.activatedRoute.data['_value'].item.user;
+              return tmp;
+            });
+            this.dataSourcePacients = new MatTableDataSource<any>(this.data);
+            this.mainTablePaginationOptionsPacients = [7, 15, 50];
+            this.dataSourcePacients.paginator = this.paginatorPacients;
+            this.dataSourcePacients.sort = this.sortPacients;
+          }
+        });
+
+    });
+  }
 
 
   getAll() {

@@ -46,7 +46,7 @@ export class AdminUsersService {
 
   editState(id, state) {
     return this.http
-      .patch(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/users/${id}`, { state })
+      .patch(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/users/${id}`, state )
       .pipe(map(data => data['user']));
   }
 
@@ -137,6 +137,19 @@ export class AdminUsersService {
     return this.http
       .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/saveDiagnosys`, data)
       .pipe(map(data => data['tnm']));
+  }
+
+  selfEdit(data) {
+    return this.http
+      .patch(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/users/selfEdit/edit`, data)
+      .pipe(map(data => data['user']));
+  }
+
+  uploadSign(data) {
+    console.log(data)
+    return this.http
+      .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/uploadFilesSign`, data)
+      .pipe(map(data => data['user']));
   }
 
 }

@@ -239,8 +239,10 @@ export class MamaTreatmentComponent implements OnInit {
       date: moment(this.innerd).format('YYYY-MM-DD'),
       quimoId: q.id
     };
+
+    console.log(tmp)
     this.globalService.createCicleInner(tmp).subscribe(data => {
-      console.log(this.drugs);
+      this.getQuimos();
     },
       error => {
         this._snackBar.open(error, 'Aceptar', {

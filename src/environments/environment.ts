@@ -5,14 +5,14 @@
 
 export const environment = {
   production: true,
-  // apiUrl: 'http://198.211.112.240',
-   apiUrl: 'http://esculappio.local:3000',
+  apiUrl: 'http://198.211.112.240',
+  // apiUrl: 'http://esculappio.local:3000',
   apiBaseMain: {
-    main: 'main',
-    configuration: 'configurations',
-    users: 'users',
-    data: 'data',
-  },
+  main: 'main',
+  configuration: 'configurations',
+  users: 'users',
+  data: 'data',
+},
   versions: {
     v1: 'v1',
     v2: 'v2.0.1'

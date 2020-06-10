@@ -35,7 +35,7 @@ export class UserAdminCreateComponent {
     email: new FormControl(
       '',
       [
-        Validators.maxLength(20), 
+        Validators.maxLength(40), 
         Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"),
         Validators.required,
         Validators.minLength(8),

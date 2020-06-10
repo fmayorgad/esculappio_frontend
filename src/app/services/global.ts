@@ -77,4 +77,53 @@ export class GlobalService {
     .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/quimo/create/innerCicle  `, data)
     .pipe(map(response => response));
   }
+
+  createYodo(data) {
+    return this.http
+    .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/treatment/create/yodo`, data)
+    .pipe(map(response => response));
+  }
+
+  getYodos(id) {
+    return this.http
+      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/treatment/get/yodo/${id}`)
+      .pipe(map(data => data['yodo']));
+  }
+
+  createHormonal(data) {
+    return this.http
+    .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/treatment/create/hormonal`, data)
+    .pipe(map(response => response));
+  }
+
+  getHormonal(id) {
+    return this.http
+      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/treatment/get/hormonal/${id}`)
+      .pipe(map(data => data['hormonal']));
+  }
+
+  getTta(id) {
+    return this.http
+      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/treatment/get/tta/${id}`)
+      .pipe(map(data => data['tta']));
+  }
+
+  createTta(data) {
+    return this.http
+    .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/treatment/create/tta`, data)
+    .pipe(map(response => response));
+  }
+
+  createPaleative(data) {
+    return this.http
+    .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/treatment/create/paleative`, data)
+    .pipe(map(response => response));
+  }
+
+  getPaleatives(id) {
+    return this.http
+      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/treatment/paleative/${id}`)
+      .pipe(map(data => data['p']));
+  }
+
 }

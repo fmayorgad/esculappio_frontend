@@ -121,7 +121,7 @@ export class UsersAdminMainComponent implements OnInit {
   }
 
   editState(id, state) {
-    this.adminUsersService.editState(id, state).subscribe(
+    this.adminUsersService.editState(id, {state}).subscribe(
       data => {
         this._snackBar.open('Estado editado satisfactoriamente.', 'Aceptar', {
           duration: 3000,

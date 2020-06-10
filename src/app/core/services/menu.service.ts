@@ -36,7 +36,7 @@ export class MenuService {
   ) {
     console.log("comprobando que existe local")
     if (localStorage.getItem('currentUser')) {
-    this.getAll();
+      this.getAll();
     }
 
   }
@@ -58,7 +58,7 @@ export class MenuService {
       const menucopy = [];
       const t12 = this.menu;
 
-     
+
 
       if (!decodedToken) {
         //this.router.navigate(['/']);
@@ -81,6 +81,7 @@ export class MenuService {
         tokenmenu[i.name].name = i.name;
         if (i.submenus.length === 0) {
           tokenmenu[i.name].permissions = i.permissions;
+          tokenmenu[i.name].show = i.show;
         }
         if (i.submenus.length > 0) {
           for (const i2 of i.submenus) {
@@ -88,9 +89,11 @@ export class MenuService {
               tokenmenu[i.name].children = {};
               tokenmenu[i.name].children[i2.name] = {};
               tokenmenu[i.name].children[i2.name].permissions = i2.permissions;
+              tokenmenu[i.name].children[i2.name].show = i2.show;
             } else {
               tokenmenu[i.name].children[i2.name] = {};
               tokenmenu[i.name].children[i2.name].permissions = i2.permissions;
+              tokenmenu[i.name].children[i2.name].show = i2.show;
             }
           }
         }
@@ -151,8 +154,11 @@ export class MenuService {
             // se recorren todos los children del token y se pasan al menu final desde el menu app 
             // (si existe en el token, debe exizstir en el menu app, pues este ultimo tiene a todos)
             // tslint:disable-next-line: forin
+
             for (const i2 in tokenmenu[i].children) {
-              tmp2.push(appmenu[i].children[i2])
+              if (tokenmenu[i].children[i2].show === 1) {
+                tmp2.push(appmenu[i].children[i2])
+              }
             }
             tmp['children'] = tmp2;
           }
@@ -161,12 +167,14 @@ export class MenuService {
         }
       }
 
+      console.log(finalmenu);
+
       this.globals.tree = finalmenu;
       this.globals.nav = tokenmenu;
       return finalmenu;
 
     }
-    else{
+    else {
       return [];
     }
   }

@@ -103,9 +103,9 @@ export class UserAdminEditComponent {
       lastname: this.mainForm.controls.lastname.value,
       gender: this.mainForm.controls.gender.value,
       surname: this.mainForm.controls.surname.value,
-      identification_type: this.mainForm.controls.identificationType.value,
-      identification_value: this.mainForm.controls.identificationValue.value,
-      profile_id: this.mainForm.controls.profile.value,
+      identificationType: this.mainForm.controls.identificationType.value,
+      identificationValue: this.mainForm.controls.identificationValue.value,
+      profileId: this.mainForm.controls.profile.value,
       professionalNumber: this.mainForm.controls.profile.value === 2 || this.mainForm.controls.profile.value === 5 ? this.mainForm.controls.professionalNumber.value : this.mainForm.controls.identificationValue.value,
     };
 

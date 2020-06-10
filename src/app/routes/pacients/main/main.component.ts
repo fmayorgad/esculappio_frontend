@@ -23,6 +23,7 @@ import { EsofagoDiagnosisComponent } from '../dialogs/diagnosis/esofago/esofago.
 import { MelanomaDiagnosisComponent } from '../dialogs/diagnosis/melanoma/melanoma.component';
 import { IDXCreateComponent } from '../dialogs/idx/idx.component';
 
+import { RoleGuard } from '../../../helpers/role.guard';
 @Component({
   selector: 'app-pacients-main',
   templateUrl: './main.component.html',
@@ -47,6 +48,7 @@ export class PacientsMainComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private adminUsersService: AdminUsersService,
+    private roleGuard : RoleGuard
   ) {
   }
 
@@ -264,8 +266,8 @@ export class PacientsMainComponent implements OnInit {
 
     this.adminUsersService.getPendingMedicalProcedures().subscribe(
       data => {
+        
         console.log(data);
-
         // se filtran los tipos de archivo biopsia e imagenes: si existe por lo menos uno de cada uno, ya esta listo para diagnostico.
         let pendingFiles = data.filter(p => {
           return p.state === 1;
@@ -301,6 +303,10 @@ export class PacientsMainComponent implements OnInit {
       error => {
       });
   }
+
+  canview(permission) {
+		return this.roleGuard.canview('pacientes', permission);
+	}
 
   ngOnInit() {
 

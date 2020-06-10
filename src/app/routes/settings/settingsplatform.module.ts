@@ -12,7 +12,9 @@ import { QuestionEditComponent } from './questions/questions/dialogs/edit/edit.c
 import { UserAdminCreateComponent } from './users/dialogs/create/create.component';
 import { UserAdminEditComponent } from './users/dialogs/edit/edit.component';
 
-const COMPONENTS = [OrgansMainComponent, QuestionsMainComponent, UsersAdminMainComponent];
+import {ProfileMainComponent} from './profile/main/main.component';
+
+const COMPONENTS = [OrgansMainComponent, QuestionsMainComponent, UsersAdminMainComponent, ProfileMainComponent];
 const COMPONENTS_DYNAMIC = [QuestionCreateComponent, QuestionEditComponent, UserAdminCreateComponent, UserAdminEditComponent];
 
 
