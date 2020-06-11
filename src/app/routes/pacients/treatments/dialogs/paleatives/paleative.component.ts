@@ -25,7 +25,7 @@ export class PaleativesTreatmentComponent implements OnInit {
   title = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.surname + ' ' + this.incomingdata.patiente.lastname;
   icon = 'how_to_reg';
   color = 'tomato';
-  subtitle = 'Paleativos';
+  subtitle = 'Paliativos';
   mainAction = this.incomingdata.state === 3 ? false : true;
 
   user = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.surname + ' ' + this.incomingdata.patiente.lastname;

@@ -30,7 +30,7 @@ export class RoleGuard implements CanActivate {
   }
 
   canview(state, permission) {
-    console.log(this.global.nav, state.split(','))
+   // console.log(this.global.nav, state.split(','))
     // es un permiso interno
     if( state.split(',').length > 1 ){
       return this.global.nav[state.split(',')[0]].children[state.split(',')[1]].permissions.filter(m => m.name === permission).length >= 1 ? true : false;
@@ -43,7 +43,7 @@ export class RoleGuard implements CanActivate {
     const localvariable: any = JSON.parse(localStorage.getItem('currentUser')).token;
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localvariable);
-    console.log(decodedToken);
+   // console.log(decodedToken);
     return 1;
   }
 }

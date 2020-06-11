@@ -1,19 +1,12 @@
 <breadcrumb></breadcrumb>
 
-<mat-grid-list cols="6" rowHeight="100px" gutterSize="20">
-    <mat-grid-tile [colspan]=" 2 " [rowspan]="3" >
-      <mat-card class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%;">
-        <bodycardtitle [title]=cards.aud.title [subtitle]=cards.aud.subtitle [icon]=cards.aud.icon
-          [color]=cards.aud.color></bodycardtitle>
-          <mat-form-field>
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        
-      </mat-card>
-    </mat-grid-tile>
-  
-  
-  </mat-grid-list>
+<mat-card class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%;">
+  <bodycardtitle [title]=cards.aud.title [subtitle]=cards.aud.subtitle [icon]=cards.aud.icon [color]=cards.aud.color>
+  </bodycardtitle>
+
+  <canvas style="height:400px;" id="myChartbars" height="350" class="fullwidth " style="margin-top: 10px;"></canvas>
+
+
+  <canvas style="height:400px;" id="myChartbars2" height="400" class="fullwidth " style="margin-top: 10px;"></canvas>
+
+</mat-card>
