@@ -5,7 +5,7 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'localhost',
+  apiUrl: '',
   // apiUrl: 'http://esculappio.local:3000',
   apiBaseMain: {
   main: 'main',
