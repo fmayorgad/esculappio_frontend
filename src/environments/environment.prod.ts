@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: '',
+  apiUrl: 'http://198.211.112',
   apiBaseMain: {
     main: 'main',
     configuration: 'configurations',
