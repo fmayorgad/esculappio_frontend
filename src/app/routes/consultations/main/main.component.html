@@ -108,8 +108,8 @@
         <table mat-table matSort [dataSource]="dataSourceClosed" #sortClosed="matSort" #tableClosed="matTable" sticky>
           <ng-container matColumnDef="name" sticky>
             <th mat-header-cell *matHeaderCellDef>Nombre Paciente</th>
-            <td mat-cell *matCellDef="let element"> {{element.medicalProcedure.patiente.name}} {{element.medicalProcedure.patiente.surname}}
-              {{element.medicalProcedure.patiente.lastname}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.medicalProcedure.patiente.name}} {{element.medicalProcedure.patiente.lastname}}
+              {{element.medicalProcedure.patiente.surname}} </td>
           </ng-container>
 
           <ng-container matColumnDef="number" >
