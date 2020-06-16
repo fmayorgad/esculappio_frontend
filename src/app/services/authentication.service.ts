@@ -25,7 +25,7 @@ export class AuthenticationService {
   login(obj) {
     return this.http
       .post<any>(
-        `${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/login`,
+        `${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/login/web`,
         obj,
       )
       .pipe(map(user => {
