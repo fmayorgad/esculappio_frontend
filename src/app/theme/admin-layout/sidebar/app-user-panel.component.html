@@ -26,10 +26,7 @@
     <a routerLink="/configuracion/profile" mat-icon-button matTooltip="Ir al perfil">
       <mat-icon class="icon-18">account_circle</mat-icon>
     </a>
-    <a routerLink="/configuracion/platform" *ngIf="role==='SUPER_ADMIN'" mat-icon-button
-      matTooltip="Configuración de entorno">
-      <mat-icon class="icon-18">settings</mat-icon>
-    </a>
+
     <a routerLink="/auth/login" mat-icon-button matTooltip="Cerrar sesión">
       <mat-icon (click)="logout()" class="icon-18">exit_to_app</mat-icon>
     </a>

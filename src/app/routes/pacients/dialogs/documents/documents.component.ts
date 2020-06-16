@@ -26,7 +26,7 @@ export class DocumentCreateComponent implements OnInit {
   color = '#2196f3';
   subtitle = 'Completar los documentos faltantes para diagnosticar.';
 
-  user = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.surname + ' ' + this.incomingdata.patiente.lastname;
+  user = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.lastname + ' ' + this.incomingdata.patiente.surname;
   userfiles = {
     b: this.incomingdata.filesMedicalProcedure.filter(f => f.fileType === 'Biopsia'),
     i: this.incomingdata.filesMedicalProcedure.filter(f => f.fileType === 'Imagenes médicas'),

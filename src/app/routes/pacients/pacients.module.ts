@@ -31,13 +31,13 @@ import { MelanomaTreatmentComponent } from './treatments/dialogs/melanoma/melano
 
 // paleativos
 import {PaleativesTreatmentComponent} from './treatments/dialogs/paleatives/paleative.component';
-
+import {AnotationCreateComponent}  from './dialogs/diagnosis/anotation/idx.component';
 const COMPONENTS =
   [
     PacientsMainComponent,
     TreatmentsMainComponent
   ];
-const COMPONENTS_DYNAMIC = [PaleativesTreatmentComponent, MelanomaTreatmentComponent, EsofagoTreatmentComponent, SarcomaTreatmentComponent, TiroideTreatmentComponent, PielTreatmentComponent, ColonTreatmentComponent, EstomagoTreatmentComponent, MamaTreatmentComponent, IDXCreateComponent, MelanomaDiagnosisComponent, EsofagoDiagnosisComponent, SarcomaDiagnosisComponent, PielDiagnosisComponent, ColonDiagnosisComponent, UserPacientCreateComponent, ProcedureCreateComponent, DocumentCreateComponent, MamaDiagnosisComponent, EstomagoDiagnosisComponent, TiroidesDiagnosisComponent];
+const COMPONENTS_DYNAMIC = [AnotationCreateComponent, PaleativesTreatmentComponent, MelanomaTreatmentComponent, EsofagoTreatmentComponent, SarcomaTreatmentComponent, TiroideTreatmentComponent, PielTreatmentComponent, ColonTreatmentComponent, EstomagoTreatmentComponent, MamaTreatmentComponent, IDXCreateComponent, MelanomaDiagnosisComponent, EsofagoDiagnosisComponent, SarcomaDiagnosisComponent, PielDiagnosisComponent, ColonDiagnosisComponent, UserPacientCreateComponent, ProcedureCreateComponent, DocumentCreateComponent, MamaDiagnosisComponent, EstomagoDiagnosisComponent, TiroidesDiagnosisComponent];
 
 @NgModule({
   imports: [

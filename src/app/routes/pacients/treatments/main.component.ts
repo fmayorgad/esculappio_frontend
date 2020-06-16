@@ -40,6 +40,9 @@ import { MelanomaTreatmentComponent } from '../treatments/dialogs/melanoma/melan
 
 import { PaleativesTreatmentComponent } from '../treatments/dialogs/paleatives/paleative.component';
 
+
+import {AnotationCreateComponent} from '../../pacients/dialogs/diagnosis/anotation/idx.component';
+
 @Component({
   selector: 'app-pacients-main',
   templateUrl: './main.component.html',
@@ -327,6 +330,20 @@ export class TreatmentsMainComponent implements OnInit {
   }
 
 
+
+
+  openAno(e) {
+
+    const dialogRef = this.dialog.open(AnotationCreateComponent, { disableClose: true, data: e });
+    dialogRef.afterClosed().subscribe(result => {
+
+
+    });
+  }
+
+
+
+
   getAll() {
     this.adminUsersService.getPacients().subscribe(
       data => {
@@ -373,7 +390,7 @@ export class TreatmentsMainComponent implements OnInit {
       return tmp;
     });
 
-    this.displayedColumnsPacients = ['organ', 'idx', 'symptoms', 'actions'];
+    this.displayedColumnsPacients = ['organ', 'idx', 'ano' ,'symptoms', 'actions'];
     this.dataSourcePacients = new MatTableDataSource<any>(this.data);
     this.mainTablePaginationOptionsPacients = [7, 15, 50];
     this.dataSourcePacients.paginator = this.paginatorPacients;
@@ -388,7 +405,7 @@ export class TreatmentsMainComponent implements OnInit {
 
     console.log(this.data);
 
-    this.title = this.title + ' ' + this.activatedRoute.data['_value'].item.user.name + ' ' + this.activatedRoute.data['_value'].item.user.surname + ' ' + this.activatedRoute.data['_value'].item.user.lastname
+    this.title = this.title + ' ' + this.activatedRoute.data['_value'].item.user.name + ' ' + this.activatedRoute.data['_value'].item.user.lastname + ' ' + this.activatedRoute.data['_value'].item.user.surname
 
   }
 

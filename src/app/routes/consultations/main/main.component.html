@@ -6,6 +6,8 @@
 
     <p>Listado de consultas realizadas por los pacientes del sistema.</p>
 
+    <button mat-raised-button color="primary" (click)="reload()">Actualizar listado de consultas</button>
+
 
   </div>
 
@@ -31,8 +33,8 @@
         <table mat-table matSort [dataSource]="dataSourcePendings" #sortPendings="matSort" #tablePendings="matTable">
           <ng-container matColumnDef="name" sticky>
             <th mat-header-cell *matHeaderCellDef>Nombre Paciente</th>
-            <td mat-cell *matCellDef="let element"> {{element.medicalProcedure.patiente.name}} {{element.medicalProcedure.patiente.surname}}
-              {{element.medicalProcedure.patiente.lastname}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.medicalProcedure.patiente.name}} {{element.medicalProcedure.patiente.lastname}}
+              {{element.medicalProcedure.patiente.surname}} </td>
           </ng-container>
 
           <ng-container matColumnDef="number" >

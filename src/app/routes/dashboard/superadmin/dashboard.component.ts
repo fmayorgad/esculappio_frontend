@@ -43,21 +43,36 @@ export class DashboardSuperAdminComponent implements OnInit {
   mainChartbars2: Chart;
   lineChartData2: ChartDataSets[] = [];
 
+
+
   lineChartOptions: ChartOptions = {
-    responsive: true,
+    responsive: true, beginAtZero: true,
     legend: { display: false },
     title: {
       display: true,
       text: 'Estado de los pacientes'
-    }
+    },scales: {
+    yAxes: [{
+      ticks: {
+        min: 0
+      }
+    }]
+  }
   };
 
   lineChartOptions2: ChartOptions = {
-    responsive: true,
+    responsive: true, beginAtZero: true,
     legend: { display: false },
     title: {
       display: true,
       text: 'Por organo'
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          min: 0
+        }
+      }]
     }
   };
 

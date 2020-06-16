@@ -304,6 +304,13 @@ export class PacientsMainComponent implements OnInit {
       });
   }
 
+  reload(){
+    this.getAll();
+    this._snackBar.open('Listado actualizado', 'Aceptar', {
+      duration: 3000,
+    });
+  }
+
   canview(permission) {
 		return this.roleGuard.canview('pacientes', permission);
 	}

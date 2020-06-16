@@ -19,20 +19,7 @@
         </mat-form-field>
 
         <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <input matInput placeholder="Primer apellido" formControlName='surname' autocomplete="off">
-          <mat-error *ngIf="mainForm.controls.surname.hasError('required')">
-            El campo es <strong>obligatorio</strong>.
-          </mat-error>
-          <mat-error *ngIf="mainForm.controls.surname.hasError('maxlength')">
-            El campo debe tener máximo <strong>75 caracteres</strong>.
-          </mat-error>
-          <mat-error *ngIf="mainForm.controls.surname.hasError('minlength')">
-            El campo debe tener mínimo <strong>2 caracteres</strong>.
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <input matInput placeholder="Segundo apellido" formControlName='lastname' autocomplete="off">
+          <input matInput placeholder="Primer apellido" formControlName='lastname' autocomplete="off">
           <mat-error *ngIf="mainForm.controls.lastname.hasError('required')">
             El campo es <strong>obligatorio</strong>.
           </mat-error>
@@ -40,6 +27,19 @@
             El campo debe tener máximo <strong>75 caracteres</strong>.
           </mat-error>
           <mat-error *ngIf="mainForm.controls.lastname.hasError('minlength')">
+            El campo debe tener mínimo <strong>2 caracteres</strong>.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <input matInput placeholder="Segundo apellido" formControlName='surname' autocomplete="off">
+          <mat-error *ngIf="mainForm.controls.surname.hasError('required')">
+            El campo es <strong>obligatorio</strong>.
+          </mat-error>
+          <mat-error *ngIf="mainForm.controls.surname.hasError('maxlength')">
+            El campo debe tener máximo <strong>75 caracteres</strong>.
+          </mat-error>
+          <mat-error *ngIf="mainForm.controls.surname.hasError('minlength')">
             El campo debe tener mínimo <strong>2 caracteres</strong>.
           </mat-error>
         </mat-form-field>
@@ -53,6 +53,9 @@
             </mat-option>
             <mat-option [value]="'M'">
               Masculino
+            </mat-option>
+            <mat-option [value]="'OTHER'">
+              OTRO
             </mat-option>
           </mat-select>
           <mat-error *ngIf="mainForm.controls.gender.hasError('required')">
@@ -91,10 +94,10 @@
             El campo es <strong>obligatorio</strong>.
           </mat-error>
           <mat-error *ngIf="mainForm.controls.identificationValue.hasError('maxlength')">
-            El campo debe tener máximo <strong>75 caracteres</strong>.
+            El campo debe tener máximo <strong>12 caracteres</strong>.
           </mat-error>
           <mat-error *ngIf="mainForm.controls.identificationValue.hasError('minlength')">
-            El campo debe tener mínimo <strong>5 caracteres</strong>.
+            El campo debe tener mínimo <strong>7 caracteres</strong>.
           </mat-error>
         </mat-form-field>
 
@@ -105,7 +108,7 @@
             El campo debe tener máximo <strong>25 caracteres</strong>.
           </mat-error>
           <mat-error *ngIf="mainForm.controls.cellphone.hasError('minlength')">
-            El campo debe tener mínimo <strong>12 caracteres</strong>.
+            El campo debe tener mínimo <strong>10 caracteres</strong>.
           </mat-error>
         </mat-form-field>
 

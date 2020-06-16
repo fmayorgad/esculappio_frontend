@@ -79,7 +79,16 @@ export class ProcedureCreateComponent implements OnInit {
   getOrgans() {
     this.questionsService.getAll().subscribe(
       response => {
+        console.log(this.incomingdata)
+        let array = this.incomingdata.medicalProcedures.map(p=>{
+          return p.organId
+        })
+
+        console.log(array)
         this.organs = response;
+        this.organs = this.organs.filter(f=>{
+          return !array.includes( f.id )
+        })
       },
       error => {
         this._snackBar.open('Error al traer el listado de organos. Intentalo de nuevo más tarde', 'Aceptar', {
@@ -94,7 +103,7 @@ export class ProcedureCreateComponent implements OnInit {
 
     const tmp = {
       organId: this.mainForm.controls.organId.value,
-      eps: this.mainForm.controls.eps.value,
+      epsId: this.mainForm.controls.eps.value,
       patientId: this.incomingdata.id,
       state: 1
     };

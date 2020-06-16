@@ -99,6 +99,13 @@ export class ConsultationsMainComponent implements OnInit {
 
   }
 
+  reload(){
+    this.getAll();
+    this._snackBar.open('Listado de consultas actualizado', 'Aceptar', {
+      duration: 3000,
+    });
+  }
+
   response(e) {
     console.log(e)
     const dialogRef = this.dialog.open(ResponseComponent, { disableClose: true, data: e });
@@ -157,7 +164,7 @@ export class ConsultationsMainComponent implements OnInit {
 
         data = data.map(p => {
           const tmp = p;
-          tmp.name = p.medicalProcedure.patiente.name + p.medicalProcedure.patiente.surname + p.medicalProcedure.patiente.lastname;
+          tmp.name = p.medicalProcedure.patiente.name + p.medicalProcedure.patiente.lastname + p.medicalProcedure.patiente.surname;
           tmp.ident = p.medicalProcedure.patiente.identificationValue;
           tmp.organname = p.medicalProcedure.organ.name;
           return tmp;

@@ -48,7 +48,7 @@
     <div class="answerContainer mat-elevation-z2 fullwidth pad20" *ngFor="let r of id.consultationsAnswers; let i = index" style="margin: 20px 0px">
       <h2 style="color: #15bf52">Respuesta #{{i+1}}</h2>
       <h3>Por:</h3>
-      <p style="margin-bottom: 2px !important;"><strong>{{r.user.name}} {{r.user.surname}} {{r.user.lastname}}</strong></p>
+      <p style="margin-bottom: 2px !important;"><strong>{{r.user.name}} {{r.user.lastname}} {{r.user.surname}}</strong></p>
       <p style="margin-bottom: 2px !important;"><strong>{{r.user.profile.name}}</strong></p>
       <p style="margin-bottom: 2px !important;" ><strong>Registro profesional:</strong> {{r.user.professionalNumber}}</p>
       <p><strong>Fecha de la respuesta: {{r.createdAt}}</strong></p>

@@ -75,7 +75,7 @@ export class UserPacientCreateComponent implements OnInit {
       '',
       [
         Validators.maxLength(25),
-        Validators.minLength(12),
+        Validators.minLength(10),
         Validators.required,
       ],
     ),
@@ -127,7 +127,7 @@ export class UserPacientCreateComponent implements OnInit {
       [
         Validators.maxLength(12),
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(7),
       ],
     ),
     profile: new FormControl(

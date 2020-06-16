@@ -27,7 +27,7 @@ export class ViewConsultationComponent implements OnInit {
   color = '#1e88e5';
   subtitle = 'Visualizando consulta cerrada y sus respuestas';
 
-  user = this.incomingdata.medicalProcedure.patiente.name + ' ' + this.incomingdata.medicalProcedure.patiente.surname + ' ' + this.incomingdata.medicalProcedure.patiente.lastname;
+  user = this.incomingdata.medicalProcedure.patiente.name + ' ' + this.incomingdata.medicalProcedure.patiente.lastname+ ' ' + this.incomingdata.medicalProcedure.patiente.surname;
   userfiles = {
   };
   fileToUpload: File = null;

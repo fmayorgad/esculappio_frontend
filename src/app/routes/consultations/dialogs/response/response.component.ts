@@ -27,7 +27,7 @@ export class ResponseComponent implements OnInit {
   color = '#46a549';
   subtitle = 'Responder la consulta la cierra automáticamente';
 
-  user = this.incomingdata.medicalProcedure.patiente.name + ' ' + this.incomingdata.medicalProcedure.patiente.surname + ' ' + this.incomingdata.medicalProcedure.patiente.lastname;
+  user = this.incomingdata.medicalProcedure.patiente.name + ' ' + this.incomingdata.medicalProcedure.patiente.lastname+ ' ' + this.incomingdata.medicalProcedure.patiente.surname;
   userfiles = {
   };
   fileToUpload: File = null;

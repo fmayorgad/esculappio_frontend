@@ -22,13 +22,13 @@ const identype = {
 
 export class PielTreatmentComponent implements OnInit {
 
-  title = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.surname + ' ' + this.incomingdata.patiente.lastname;
+  title = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.lastname + ' ' + this.incomingdata.patiente.surname;
   icon = 'how_to_reg';
   color = '#17a2b8';
   subtitle = 'Piel escamocelular: Tratamiento';
   mainAction = this.incomingdata.state === 3 ? false : true;
 
-  user = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.surname + ' ' + this.incomingdata.patiente.lastname;
+  user = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.lastname + ' ' + this.incomingdata.patiente.surname;
   userfiles = {
     b: this.incomingdata.filesMedicalProcedure.filter(f => f.fileType === 'Biopsia'),
     i: this.incomingdata.filesMedicalProcedure.filter(f => f.fileType === 'Imagenes médicas'),
