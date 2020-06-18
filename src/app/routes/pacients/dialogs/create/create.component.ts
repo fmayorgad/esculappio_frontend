@@ -42,7 +42,7 @@ export class UserPacientCreateComponent implements OnInit {
     email: new FormControl(
       '',
       [
-        Validators.maxLength(20),
+        Validators.maxLength(40),
         Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"),
         Validators.required,
         Validators.minLength(8),
@@ -197,7 +197,8 @@ export class UserPacientCreateComponent implements OnInit {
           this.dialogRef.close({ state: 1, message: 'Usuario creado satisfactoriamente.' });
         },
         error => {
-          this._snackBar.open('Error al crear el usuario. Intentalo de nuevo más tarde', 'Aceptar', {
+          console.log(error)
+          this._snackBar.open(error, 'Aceptar', {
             duration: 3000,
             panelClass: 'snackbarError'
           });
