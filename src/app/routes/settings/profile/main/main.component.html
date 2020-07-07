@@ -1,8 +1,8 @@
 <div class="row fullwidth">
   <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
     <mat-card class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%;">
-      <bodycardtitle [title]=cards.aud.title [subtitle]=cards.aud.subtitle [icon]=cards.aud.icon
-        [color]=cards.aud.color></bodycardtitle>
+      <bodycardtitle [title]=cards.sign.title [subtitle]=cards.sign.subtitle [icon]=cards.sign.icon
+        [color]=cards.sign.color></bodycardtitle>
       <form [formGroup]='profileFormGroup'>
         <div class="row">
 
@@ -95,25 +95,57 @@
   </div>
 
 
-  <!--   <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" *ngIf="canview('especial1')">
-    <mat-card class="mat-card-cardtitled" style="height: calc(100% - 33px);width: 100%;">
-   <bodycardtitle [title]=cards.sign.title [subtitle]=cards.sign.subtitle [icon]=cards.sign.icon
-     [color]=cards.sign.color></bodycardtitle>
-   <form [formGroup]='profileFormGroup'>
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" *ngIf="canview('especial1')">
+    <mat-card class="mat-card-cardtitled" style="height: 350px;width: 100%;">
+   <bodycardtitle [title]=cards.pass.title [subtitle]=cards.pass.subtitle [icon]=cards.pass.icon
+     [color]=cards.pass.color></bodycardtitle>
+   <form [formGroup]='passwordFormGroup'>
      <div class="row">
 
-      <input style="padding: 20px 0px;" #inputFile class="col-lg-6 col-md-6 col-sm-12 col-xs-12" (change)="uploadFile($event)" type="file" id="avatar"
-            name="avatar" accept="image/png, image/jpeg, application/pdf">
+      <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <input type="password" matInput placeholder="Contraseña Actual" formControlName='name'>
+        <mat-error *ngIf="passwordFormGroup.controls.actual.hasError('required')">
+          El nombre es <strong>obligatorio</strong>.
+        </mat-error>
+
+      </mat-form-field>
+
+
+      <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <input  type="password" matInput placeholder="Contraseña nueva" formControlName='name'>
+        <mat-error *ngIf="passwordFormGroup.controls.new.hasError('required')">
+          El nombre es <strong>obligatorio</strong>.
+        </mat-error>
+        <mat-error *ngIf="passwordFormGroup.controls.new.hasError('maxlength')">
+          El nombre debe tener máximo <strong>12 caracteres</strong>.
+        </mat-error>
+        <mat-error *ngIf="passwordFormGroup.controls.new.hasError('minlength')">
+          El nombre debe tener mínimo <strong>8 caracteres</strong>.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <input type="password" matInput placeholder="Repita contraseña nueva" formControlName='name'>
+        <mat-error *ngIf="passwordFormGroup.controls.rnew.hasError('required')">
+          El nombre es <strong>obligatorio</strong>.
+        </mat-error>
+        <mat-error *ngIf="passwordFormGroup.controls.rnew.hasError('maxlength')">
+          El nombre debe tener máximo <strong>12 caracteres</strong>.
+        </mat-error>
+        <mat-error *ngIf="passwordFormGroup.controls.rnew.hasError('minlength')">
+          El nombre debe tener mínimo <strong>8 caracteres</strong>.
+        </mat-error>
+      </mat-form-field>
 
        
-       <div class="col-lg-12 col-md-12 col-sm-12 centered">
-         <button mat-raised-button [disabled]="!profileFormGroup.valid" (click)="upload()"
-           color="primary">Guardar</button>
+       <div class="col-lg-12 col-md-12 col-sm-12 centered" style="margin-top: 20px;">
+         <button mat-raised-button [disabled]="!passwordFormGroup.valid" (click)="upload()"
+           color="primary">Cambiar contraseña</button>
        </div>
      </div>
    </form>
  </mat-card>
 </div>
- -->
+
 
 </div>

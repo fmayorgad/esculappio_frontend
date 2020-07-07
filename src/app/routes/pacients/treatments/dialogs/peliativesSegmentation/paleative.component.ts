@@ -64,6 +64,21 @@ export class PaleativesSegmentationTreatmentComponent implements OnInit {
   ciclos2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   schemas = [1, 2, 3, 4, 5];
 
+
+  kfss = {
+    100 : 'Vive normal , sin evidencia de enfermedad',
+    90: 'Capaz de llevar actividad normal pero con síntomas leves',
+    80: 'Actividad normal con esfuerzo, algunos síntomas de enfermedad',
+    70: 'Capaz de cuidarse, pero incapaz de actividad normal o trabajo',
+    60: 'Requiere atención ocasional , pero es capaz de atender la mayoría de sus necesidades  ',
+    50: 'Necesita ayuda  importante y asistencia médica frecuente ',
+    40: 'Incapaz, necesita ayuda y asistencia especiales ',
+    30: 'Totalmente  incapaz, necesita hospitalización y soporte activo  ',
+    20: 'Muy  gravemente  enfermo ',
+    10: 'Moribundo   '
+  }
+
+
   answers;
 
   innerc = 1;

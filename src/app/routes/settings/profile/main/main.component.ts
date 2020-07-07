@@ -30,11 +30,11 @@ export class ProfileMainComponent implements OnInit {
       color: 'blue',
       subtitle: 'Editar firma de especialista',
     },
-    aud: {
-      title: 'Editar datos',
-      icon: 'person_pin',
+    pass: {
+      title: 'Cambiar contraseña',
+      icon: 'lock',
       color: '#f7555c',
-      subtitle: 'Editar datos personales',
+      subtitle: 'Editar contraseña actual',
     },
   };
 
@@ -52,6 +52,15 @@ export class ProfileMainComponent implements OnInit {
       surname: new FormControl(this.userdata.surname, [Validators.maxLength(40), Validators.required, Validators.minLength(6)]),
       phone: new FormControl(this.userdata.phone, [Validators.maxLength(30), Validators.required, Validators.minLength(7)]),
       cellphone: new FormControl(this.userdata.cellphone, [Validators.maxLength(30), Validators.required, Validators.minLength(10)]),
+    }
+  );
+
+
+  passwordFormGroup = new FormGroup(
+    {
+      actual: new FormControl(this.userdata.name, [Validators.maxLength(12), Validators.required, Validators.minLength(8)]),
+      new: new FormControl(this.userdata.lastname, [Validators.maxLength(12), Validators.required, Validators.minLength(8)]),
+      rnew: new FormControl(this.userdata.surname, [Validators.maxLength(12), Validators.required, Validators.minLength(8)]),
     }
   );
 
@@ -91,6 +100,24 @@ export class ProfileMainComponent implements OnInit {
       error => {
       });
   }
+
+  editPassword() {
+
+    let obj = {
+      actual: this.passwordFormGroup.value.actual,
+      new: this.passwordFormGroup.value.new
+    };
+
+    this.adminUsersService.selfEdit(obj).subscribe(
+      data => {
+        this._snackBar.open('Contraseña editada.', 'Aceptar', {
+          duration: 3000,
+        });
+      },
+      error => {
+      });
+  }
+
 
   canview(permission) {
     return this.roleGuard.canview('configuracion,profile', permission);

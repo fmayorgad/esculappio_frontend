@@ -25,6 +25,7 @@ export class UserPacientCreateComponent implements OnInit {
   color = '#4caf50';
   subtitle = 'Crear paciente pendiente de diagnostico.';
 
+
   eps;
 
   tnm = null;
@@ -76,15 +77,6 @@ export class UserPacientCreateComponent implements OnInit {
       [
         Validators.maxLength(25),
         Validators.minLength(10),
-        Validators.required,
-      ],
-    ),
-
-    phone: new FormControl(
-      '',
-      [
-        Validators.maxLength(15),
-        Validators.minLength(7),
         Validators.required,
       ],
     ),
@@ -184,7 +176,6 @@ export class UserPacientCreateComponent implements OnInit {
       profileId: 4,
       password: this.mainForm.controls.password.value,
       cellphone: this.mainForm.controls.cellphone.value,
-      phone: this.mainForm.controls.phone.value,
       eps: this.mainForm.controls.eps.value,
       blood_group: this.mainForm.controls.blood_group.value,
       rh_factor: this.mainForm.controls.rh_factor.value,
