@@ -55,16 +55,20 @@
                 <mat-icon>how_to_reg</mat-icon>
               </button>
 
-              <button mat-mini-fab class="errorbutton" (click)="openPaleatives(element)" matTooltip="Paliativos">
+              <button mat-mini-fab class="errorbutton" (click)="openPaleatives(element)" matTooltip="Paliativos (Medicación)">
                 <mat-icon>
                   healing</mat-icon>
+              </button>
+
+              <button mat-mini-fab color="accent" (click)="openPaleativesSegmentation(element)" matTooltip="Paliativos (Control)">
+                <mat-icon>
+                  local_hospital</mat-icon>
               </button>
 
               <button mat-mini-fab class="alterbutton" (click)="openAno(element)" matTooltip="Anotaciones">
                 <mat-icon>
                   accessibility</mat-icon>
               </button>
-
 
             </div>
           </td>

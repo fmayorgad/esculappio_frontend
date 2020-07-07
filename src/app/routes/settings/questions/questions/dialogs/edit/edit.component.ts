@@ -19,7 +19,7 @@ export class QuestionEditComponent {
     title: new FormControl(
       this.incomingdata.title,
       [
-        Validators.maxLength(75),
+        Validators.maxLength(100),
         Validators.required,
         Validators.minLength(5),
       ],

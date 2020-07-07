@@ -1,0 +1,98 @@
+<div class="mediumModal">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <mat-dialog-content class="mat-typography">
+
+
+    <form [formGroup]='mainForm' class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+      *ngIf="incomingdata.paleativesState === 0">
+
+      <h3 class="centered">Al valorar el proceso de usuario, este será obligado a responder una serie de preguntas en la
+        app movil</h3>
+
+      <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <mat-label>Fecha de inicio</mat-label>
+        <input [disabled]="true" [disabled]="true" matInput [matDatepicker]="picker" formControlName='date'>
+        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+        <mat-datepicker #picker disabled="false"></mat-datepicker>
+        <mat-error *ngIf="mainForm.controls.date.hasError('required')">
+          El campo es <strong>obligatorio</strong>.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <mat-label>Valoración del paciente</mat-label>
+        <mat-select formControlName='paleativesValue'>
+          <mat-option [value]="1">
+            1
+          </mat-option>
+
+          <mat-option [value]="2">
+            2
+          </mat-option>
+
+          <mat-option [value]="3">
+            3
+          </mat-option>
+
+          <mat-option [value]="4">
+            4
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="mainForm.controls.paleativesValue.hasError('required')">
+          El campo es <strong>obligatorio</strong>.
+        </mat-error>
+
+      </mat-form-field>
+
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 flexi">
+        <button mat-raised-button color="primary" class="mauto" 
+          (click)="startPaleative()">Valorar e iniciar proceso</button>
+      </div>
+
+    </form>
+
+    <div *ngIf="incomingdata.paleativesState !== 0">
+     
+    
+      <div class="row">
+        
+        <h2 class="col-xm-12 col-sm-12 col-md-12 col-lg-12">Respuestas del usuario</h2>
+
+        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+          <h3 class="centered"> <strong>Valoración:</strong>  {{incomingdata.paleativesValue}}</h3>
+        </div>
+
+        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+          <h3 class="centered"> <strong>Fecha de valoración:</strong>  {{incomingdata.paleativesActivationDate}}</h3>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="incomingdata.paleativesState === 1">
+        <h2 class="centered col-xm-12 col-sm-12 col-md-12 col-lg-12">El paciente aún no responde el cuestionario.</h2>
+      </div>
+
+      <div class="row" *ngIf="incomingdata.paleativesState === 2">
+         <h3 class="col-xm-12 col-sm-12 col-md-12 col-lg-12">- ¿Tiene Nauseas? | Valoración: <strong>{{answers.nauses}}</strong> </h3>
+         <h3 class="col-xm-12 col-sm-12 col-md-12 col-lg-12">- ¿Ha perdido el apetito? | Valoración: <strong>{{answers.apetito}}</strong> </h3>
+         <h3 class="col-xm-12 col-sm-12 col-md-12 col-lg-12">- ¿Siente ahogo? | Valoración: <strong>{{answers.ahogo}}</strong> </h3>
+         <h3 class="col-xm-12 col-sm-12 col-md-12 col-lg-12">- ¿Se siente cansado? | Valoración: <strong>{{answers.cansancio}}</strong> </h3>
+         <h3 class="col-xm-12 col-sm-12 col-md-12 col-lg-12">- ¿Ha Perdido el sueño ? | Valoración: <strong>{{answers.sueno}}</strong> </h3>
+         <h3 class="col-xm-12 col-sm-12 col-md-12 col-lg-12">- ¿Tiene estreñimiento? | Valoración: <strong>{{answers.estrenimiento}}</strong> </h3>
+         <h3 class="col-xm-12 col-sm-12 col-md-12 col-lg-12">- ¿Se siente Triste? | Valoración: <strong>{{answers.tristeza}}</strong> </h3>
+         <h3 class="col-xm-12 col-sm-12 col-md-12 col-lg-12">- ¿Siente angustia? | Valoración: <strong>{{answers.angustia}}</strong> </h3>
+         <h3 class="col-xm-12 col-sm-12 col-md-12 col-lg-12">- ¿Siente Dolor? | Valoración: <strong>{{answers.sienteDolor}}</strong> </h3>
+         <h3 class="col-xm-12 col-sm-12 col-md-12 col-lg-12">- ¿En qué parte siente más dolor? | Valoración: <strong>{{answers.localizacionDolor}}</strong> </h3>
+         <h3 class="col-xm-12 col-sm-12 col-md-12 col-lg-12">- ¿Qué medicamentos está tomando? | Valoración: <strong>{{answers.medicamentos}}</strong> </h3>
+      </div>
+
+    </div>
+
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="warn">Cerrar</button>
+
+  </mat-dialog-actions>
+</div>

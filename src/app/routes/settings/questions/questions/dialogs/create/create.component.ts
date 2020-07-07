@@ -19,7 +19,7 @@ export class QuestionCreateComponent {
     title: new FormControl(
       '',
       [
-        Validators.maxLength(75),
+        Validators.maxLength(100),
         Validators.required,
         Validators.minLength(5),
       ],

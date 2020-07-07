@@ -25,6 +25,12 @@ import { SarcomaDiagnosisComponent } from '../dialogs/diagnosis/sarcoma/sarcoma.
 import { EsofagoDiagnosisComponent } from '../dialogs/diagnosis/esofago/esofago.component';
 import { MelanomaDiagnosisComponent } from '../dialogs/diagnosis/melanoma/melanoma.component';
 import { IDXCreateComponent } from '../dialogs/idx/idx.component';
+import { OvarioDiagnosisComponent } from '../dialogs/diagnosis/ovario/main.component';
+import { ProstataDiagnosisComponent } from '../dialogs/diagnosis/prostata/main.component';
+import { PulmonDiagnosisComponent } from '../dialogs/diagnosis/pulmon/main.component';
+import { CervixDiagnosisComponent } from '../dialogs/diagnosis/cervix/main.component';
+import { UteroDiagnosisComponent } from '../dialogs/diagnosis/utero/main.component';
+
 
 // treatment
 import { MamaTreatmentComponent } from '../treatments/dialogs/mama/mama.component';
@@ -35,13 +41,16 @@ import { TiroideTreatmentComponent } from '../treatments/dialogs/tiroides/tiroid
 import { SarcomaTreatmentComponent } from '../treatments/dialogs/sarcoma/sarcoma.component';
 import { EsofagoTreatmentComponent } from '../treatments/dialogs/esofago/esofago.component';
 import { MelanomaTreatmentComponent } from '../treatments/dialogs/melanoma/melanoma.component';
-
+import { OvarioTreatmentComponent } from '../treatments/dialogs/ovario/main.component';
+import { ProstataTreatmentComponent } from '../treatments/dialogs/prostata/main.component';
+import { PulmonTreatmentComponent } from '../treatments/dialogs/pulmon/main.component';
+import { CervixTreatmentComponent } from '../treatments/dialogs/cervix/main.component';
+import { UteroTreatmentComponent } from '../treatments/dialogs/utero/main.component';
 // paleativos
 
 import { PaleativesTreatmentComponent } from '../treatments/dialogs/paleatives/paleative.component';
-
-
-import {AnotationCreateComponent} from '../../pacients/dialogs/diagnosis/anotation/idx.component';
+import { PaleativesSegmentationTreatmentComponent } from '../treatments/dialogs/peliativesSegmentation/paleative.component';
+import { AnotationCreateComponent } from '../../pacients/dialogs/diagnosis/anotation/idx.component';
 
 @Component({
   selector: 'app-pacients-main',
@@ -241,6 +250,40 @@ export class TreatmentsMainComponent implements OnInit {
       });
     }
 
+    if (procedure.organId === 9) {
+      const dialogRef = this.dialog.open(OvarioDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
+
+    if (procedure.organId === 10) {
+      const dialogRef = this.dialog.open(ProstataDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
+
+    if (procedure.organId === 11) {
+      const dialogRef = this.dialog.open(PulmonDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
+
+    if (procedure.organId === 12) {
+      const dialogRef = this.dialog.open(CervixDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
+
+    if (procedure.organId === 13) {
+      const dialogRef = this.dialog.open(UteroDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
   }
 
 
@@ -301,6 +344,37 @@ export class TreatmentsMainComponent implements OnInit {
       });
     }
 
+    if (procedure.organId === 9) {
+      const dialogRef = this.dialog.open(OvarioTreatmentComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    }
+
+    if (procedure.organId === 10) {
+      const dialogRef = this.dialog.open(ProstataTreatmentComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    }
+
+    if (procedure.organId === 11) {
+      const dialogRef = this.dialog.open(PulmonTreatmentComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    }
+
+    if (procedure.organId === 12) {
+      const dialogRef = this.dialog.open(CervixTreatmentComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    }
+
+    if (procedure.organId === 13) {
+      const dialogRef = this.dialog.open(UteroTreatmentComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    }
+
+
   }
 
   openPaleatives(e) {
@@ -336,11 +410,28 @@ export class TreatmentsMainComponent implements OnInit {
 
     const dialogRef = this.dialog.open(AnotationCreateComponent, { disableClose: true, data: e });
     dialogRef.afterClosed().subscribe(result => {
-
-
+      // this.getAll();
+      if (result.state === 1) {
+        setTimeout(function () {
+          location.reload();
+        }, 3000);
+      }
     });
   }
 
+  openPaleativesSegmentation(e) {
+    console.log(e)
+    const dialogRef = this.dialog.open(PaleativesSegmentationTreatmentComponent, { disableClose: true, data: e });
+    dialogRef.afterClosed().subscribe(result => {
+      // this.getAll();
+      if (result.state === 1) {
+        setTimeout(function () {
+          location.reload();
+        }, 3000);
+      }
+    });
+
+  }
 
 
 
@@ -390,7 +481,7 @@ export class TreatmentsMainComponent implements OnInit {
       return tmp;
     });
 
-    this.displayedColumnsPacients = ['organ', 'idx', 'ano' ,'symptoms', 'actions'];
+    this.displayedColumnsPacients = ['organ', 'idx', 'ano', 'symptoms', 'actions'];
     this.dataSourcePacients = new MatTableDataSource<any>(this.data);
     this.mainTablePaginationOptionsPacients = [7, 15, 50];
     this.dataSourcePacients.paginator = this.paginatorPacients;

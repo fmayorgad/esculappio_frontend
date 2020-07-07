@@ -18,6 +18,11 @@ import { EsofagoDiagnosisComponent } from './dialogs/diagnosis/esofago/esofago.c
 import { MelanomaDiagnosisComponent } from './dialogs/diagnosis/melanoma/melanoma.component';
 import { IDXCreateComponent } from './dialogs/idx/idx.component';
 import { TreatmentsMainComponent } from './treatments/main.component';
+import { OvarioDiagnosisComponent } from './dialogs/diagnosis/ovario/main.component';
+import { ProstataDiagnosisComponent } from './dialogs/diagnosis/prostata/main.component';
+import {PulmonDiagnosisComponent} from './dialogs/diagnosis/pulmon/main.component';
+import {CervixDiagnosisComponent} from './dialogs/diagnosis/cervix/main.component';
+import {UteroDiagnosisComponent} from './dialogs/diagnosis/utero/main.component';
 
 // treatment
 import { MamaTreatmentComponent } from './treatments/dialogs/mama/mama.component';
@@ -28,16 +33,23 @@ import { TiroideTreatmentComponent } from './treatments/dialogs/tiroides/tiroide
 import { SarcomaTreatmentComponent } from './treatments/dialogs/sarcoma/sarcoma.component';
 import { EsofagoTreatmentComponent } from './treatments/dialogs/esofago/esofago.component';
 import { MelanomaTreatmentComponent } from './treatments/dialogs/melanoma/melanoma.component';
+import { OvarioTreatmentComponent } from './treatments/dialogs/ovario/main.component';
+import {ProstataTreatmentComponent} from './treatments/dialogs/prostata/main.component';
+import {PulmonTreatmentComponent} from './treatments/dialogs/pulmon/main.component';
+import {CervixTreatmentComponent} from './treatments/dialogs/cervix/main.component';
+import {UteroTreatmentComponent} from './treatments/dialogs/utero/main.component';
 
 // paleativos
-import {PaleativesTreatmentComponent} from './treatments/dialogs/paleatives/paleative.component';
-import {AnotationCreateComponent}  from './dialogs/diagnosis/anotation/idx.component';
+import { PaleativesTreatmentComponent } from './treatments/dialogs/paleatives/paleative.component';
+import { AnotationCreateComponent } from './dialogs/diagnosis/anotation/idx.component';
+import {PaleativesSegmentationTreatmentComponent} from './treatments/dialogs/peliativesSegmentation/paleative.component';
+
 const COMPONENTS =
   [
     PacientsMainComponent,
     TreatmentsMainComponent
   ];
-const COMPONENTS_DYNAMIC = [AnotationCreateComponent, PaleativesTreatmentComponent, MelanomaTreatmentComponent, EsofagoTreatmentComponent, SarcomaTreatmentComponent, TiroideTreatmentComponent, PielTreatmentComponent, ColonTreatmentComponent, EstomagoTreatmentComponent, MamaTreatmentComponent, IDXCreateComponent, MelanomaDiagnosisComponent, EsofagoDiagnosisComponent, SarcomaDiagnosisComponent, PielDiagnosisComponent, ColonDiagnosisComponent, UserPacientCreateComponent, ProcedureCreateComponent, DocumentCreateComponent, MamaDiagnosisComponent, EstomagoDiagnosisComponent, TiroidesDiagnosisComponent];
+const COMPONENTS_DYNAMIC = [PaleativesSegmentationTreatmentComponent, UteroTreatmentComponent, UteroDiagnosisComponent, CervixTreatmentComponent, PulmonTreatmentComponent, CervixDiagnosisComponent, PulmonDiagnosisComponent, ProstataTreatmentComponent, ProstataDiagnosisComponent, OvarioTreatmentComponent, OvarioDiagnosisComponent, AnotationCreateComponent, PaleativesTreatmentComponent, MelanomaTreatmentComponent, EsofagoTreatmentComponent, SarcomaTreatmentComponent, TiroideTreatmentComponent, PielTreatmentComponent, ColonTreatmentComponent, EstomagoTreatmentComponent, MamaTreatmentComponent, IDXCreateComponent, MelanomaDiagnosisComponent, EsofagoDiagnosisComponent, SarcomaDiagnosisComponent, PielDiagnosisComponent, ColonDiagnosisComponent, UserPacientCreateComponent, ProcedureCreateComponent, DocumentCreateComponent, MamaDiagnosisComponent, EstomagoDiagnosisComponent, TiroidesDiagnosisComponent];
 
 @NgModule({
   imports: [

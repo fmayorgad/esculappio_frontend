@@ -126,4 +126,11 @@ export class GlobalService {
       .pipe(map(data => data['p']));
   }
 
+  getPatologies(id) {
+    return this.http
+      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/organs/patologies/${id}`)
+      .pipe(map(data => data['patologies']));
+  }
+
+
 }

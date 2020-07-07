@@ -20,15 +20,28 @@
           </mat-form-field>
 
           <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <input matInput placeholder="Apellido" formControlName='surname'>
+            <input matInput placeholder="Primer apellido" formControlName='lastname'>
+            <mat-error *ngIf="profileFormGroup.controls.lastname.hasError('required')">
+              El primer apellido es <strong>obligatorio</strong>.
+            </mat-error>
+            <mat-error *ngIf="profileFormGroup.controls.lastname.hasError('maxlength')">
+              El primer apellido debe tener máximo <strong>40 caracteres</strong>.
+            </mat-error>
+            <mat-error *ngIf="profileFormGroup.controls.lastname.hasError('minlength')">
+              El primer apellido debe tener mínimo <strong>6 caracteres</strong>.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input matInput placeholder="Segundo pellido" formControlName='surname'>
             <mat-error *ngIf="profileFormGroup.controls.surname.hasError('required')">
-              El apellido es <strong>obligatorio</strong>.
+              El segundo apellido es <strong>obligatorio</strong>.
             </mat-error>
             <mat-error *ngIf="profileFormGroup.controls.surname.hasError('maxlength')">
-              El apellido debe tener máximo <strong>40 caracteres</strong>.
+              El segundo apellido debe tener máximo <strong>40 caracteres</strong>.
             </mat-error>
             <mat-error *ngIf="profileFormGroup.controls.surname.hasError('minlength')">
-              El apellido debe tener mínimo <strong>6 caracteres</strong>.
+              El segundo apellido debe tener mínimo <strong>6 caracteres</strong>.
             </mat-error>
           </mat-form-field>
 

@@ -12,6 +12,7 @@ import { DocumentCreateComponent } from '../dialogs/documents/documents.componen
 import { AdminUsersService } from '@services';
 import { trigger, style, animate, transition } from '@angular/animations';
 
+
 // diagnosis 
 import { MamaDiagnosisComponent } from '../dialogs/diagnosis/mama/mama.component';
 import { EstomagoDiagnosisComponent } from '../dialogs/diagnosis/estomago/estomago.component';
@@ -22,6 +23,11 @@ import { SarcomaDiagnosisComponent } from '../dialogs/diagnosis/sarcoma/sarcoma.
 import { EsofagoDiagnosisComponent } from '../dialogs/diagnosis/esofago/esofago.component';
 import { MelanomaDiagnosisComponent } from '../dialogs/diagnosis/melanoma/melanoma.component';
 import { IDXCreateComponent } from '../dialogs/idx/idx.component';
+import { OvarioDiagnosisComponent } from '../dialogs/diagnosis/ovario/main.component';
+import { ProstataDiagnosisComponent } from '../dialogs/diagnosis/prostata/main.component';
+import { PulmonDiagnosisComponent } from '../dialogs/diagnosis/pulmon/main.component';
+import { CervixDiagnosisComponent } from '../dialogs/diagnosis/cervix/main.component';
+import { UteroDiagnosisComponent } from '../dialogs/diagnosis/utero/main.component';
 
 import { RoleGuard } from '../../../helpers/role.guard';
 @Component({
@@ -48,7 +54,7 @@ export class PacientsMainComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private adminUsersService: AdminUsersService,
-    private roleGuard : RoleGuard
+    private roleGuard: RoleGuard
   ) {
   }
 
@@ -116,7 +122,7 @@ export class PacientsMainComponent implements OnInit {
     this.dataSourcePacients.filter = filterValue.trim().toLowerCase();
   }
 
-  redirect(id){
+  redirect(id) {
     this.router.navigate([`pacientes/${id}/tratamientos`]);
   }
 
@@ -244,6 +250,41 @@ export class PacientsMainComponent implements OnInit {
       });
     }
 
+    if (procedure.organId === 9) {
+      const dialogRef = this.dialog.open(OvarioDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+        this.getAll();
+      });
+    }
+
+    if (procedure.organId === 10) {
+      const dialogRef = this.dialog.open(ProstataDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+        this.getAll();
+      });
+    }
+
+    if (procedure.organId === 11) {
+      const dialogRef = this.dialog.open(PulmonDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+        this.getAll();
+      });
+    }
+
+    if (procedure.organId === 12) {
+      const dialogRef = this.dialog.open(CervixDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+        this.getAll();
+      });
+    }
+
+    if (procedure.organId === 13) {
+      const dialogRef = this.dialog.open(UteroDiagnosisComponent, { disableClose: true, data: procedure });
+      dialogRef.afterClosed().subscribe(result => {
+        this.getAll();
+      });
+    }
+
   }
 
   getAll() {
@@ -266,7 +307,7 @@ export class PacientsMainComponent implements OnInit {
 
     this.adminUsersService.getPendingMedicalProcedures().subscribe(
       data => {
-        
+
         console.log(data);
         // se filtran los tipos de archivo biopsia e imagenes: si existe por lo menos uno de cada uno, ya esta listo para diagnostico.
         let pendingFiles = data.filter(p => {
@@ -304,7 +345,7 @@ export class PacientsMainComponent implements OnInit {
       });
   }
 
-  reload(){
+  reload() {
     this.getAll();
     this._snackBar.open('Listado actualizado', 'Aceptar', {
       duration: 3000,
@@ -312,8 +353,8 @@ export class PacientsMainComponent implements OnInit {
   }
 
   canview(permission) {
-		return this.roleGuard.canview('pacientes', permission);
-	}
+    return this.roleGuard.canview('pacientes', permission);
+  }
 
   ngOnInit() {
 

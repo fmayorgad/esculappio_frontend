@@ -15,17 +15,17 @@ const identype = {
 }
 
 @Component({
-  selector: 'user-paleativediagnosis-create',
+  selector: 'user-paleativesegmentationdiagnosis-create',
   templateUrl: './paleative.component.html',
   styleUrls: ['./paleative.component.css'],
 })
 
-export class PaleativesTreatmentComponent implements OnInit {
+export class PaleativesSegmentationTreatmentComponent implements OnInit {
 
   title = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.lastname + ' ' + this.incomingdata.patiente.surname;
-  icon = 'how_to_reg';
-  color = 'tomato';
-  subtitle = 'Paliativos: Medicación';
+  icon = 'local_hospital';
+  color = 'purple';
+  subtitle = 'Paliativos: Control';
   mainAction = this.incomingdata.state === 3 ? false : true;
 
   user = this.incomingdata.patiente.name + ' ' + this.incomingdata.patiente.lastname + ' ' + this.incomingdata.patiente.surname;
@@ -49,7 +49,7 @@ export class PaleativesTreatmentComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<PaleativesTreatmentComponent>,
+    public dialogRef: MatDialogRef<PaleativesSegmentationTreatmentComponent>,
     private globalService: GlobalService,
     private adminUsersService: AdminUsersService,
     @Inject(MAT_DIALOG_DATA) public incomingdata: any
@@ -64,14 +64,16 @@ export class PaleativesTreatmentComponent implements OnInit {
   ciclos2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   schemas = [1, 2, 3, 4, 5];
 
+  answers;
+
   innerc = 1;
   innerd = new Date();
 
   started = 0;
 
   mainForm = new FormGroup({
-    surgery: new FormControl(
-      '',
+    paleativesValue: new FormControl(
+      1,
       [
         Validators.required,
       ],
@@ -140,12 +142,26 @@ export class PaleativesTreatmentComponent implements OnInit {
 
 
   startPaleative() {
-    this.adminUsersService.ridx(this.incomingdata.id, { paleativesDate: moment(this.mainForm.controls.date.value).format('YYYY-MM-DD') }).subscribe(data => {
+    this.adminUsersService.startPaleative({ procedureId: this.incomingdata.id, paleativesValue: this.mainForm.controls.paleativesValue.value, paleativesDate: moment(this.mainForm.controls.date.value).format('YYYY-MM-DD') }).subscribe(data => {
       this._snackBar.open('Paleativos iniciados', 'Aceptar', {
         duration: 3000,
         panelClass: 'snackbarSuccess'
       });
       this.dialogRef.close();
+    },
+      error => {
+        this._snackBar.open(error, 'Aceptar', {
+          duration: 3000,
+          panelClass: 'snackbarError'
+        });
+      });
+  }
+
+  getAnswerPaleatives() {
+    this.adminUsersService.getAnswerPaleatives(this.incomingdata.id).subscribe(data => {
+      console.log(data)
+
+      this.answers = data;
     },
       error => {
         this._snackBar.open(error, 'Aceptar', {
@@ -193,7 +209,7 @@ export class PaleativesTreatmentComponent implements OnInit {
 
 
   getPaleative() {
-     this.globalService.getPaleatives(this.incomingdata.id).subscribe(data => {
+    this.globalService.getPaleatives(this.incomingdata.id).subscribe(data => {
       this.paleatives = data;
     },
       error => {
@@ -207,5 +223,9 @@ export class PaleativesTreatmentComponent implements OnInit {
   ngOnInit() {
     console.log(this.incomingdata)
     this.getPaleative();
+
+    if (this.incomingdata.paleativesState === 2) {
+      this.getAnswerPaleatives()
+    }
   }
 }

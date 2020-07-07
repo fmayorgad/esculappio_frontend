@@ -48,6 +48,7 @@ export class ProfileMainComponent implements OnInit {
   profileFormGroup = new FormGroup(
     {
       name: new FormControl(this.userdata.name, [Validators.maxLength(75), Validators.required, Validators.minLength(5)]),
+      lastname: new FormControl(this.userdata.lastname, [Validators.maxLength(75), Validators.required, Validators.minLength(5)]),
       surname: new FormControl(this.userdata.surname, [Validators.maxLength(40), Validators.required, Validators.minLength(6)]),
       phone: new FormControl(this.userdata.phone, [Validators.maxLength(30), Validators.required, Validators.minLength(7)]),
       cellphone: new FormControl(this.userdata.cellphone, [Validators.maxLength(30), Validators.required, Validators.minLength(10)]),
@@ -75,6 +76,7 @@ export class ProfileMainComponent implements OnInit {
 
     let obj = {
       name: this.profileFormGroup.value.name,
+      lastname: this.profileFormGroup.value.lastname,
       surname: this.profileFormGroup.value.surname,
       phone: this.profileFormGroup.value.phone,
       cellphone: this.profileFormGroup.value.cellphone,

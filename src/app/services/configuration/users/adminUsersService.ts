@@ -152,4 +152,17 @@ export class AdminUsersService {
       .pipe(map(data => data['user']));
   }
 
+
+  startPaleative( obj) {
+    return this.http
+      .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/startPaleatives`, obj)
+      .pipe(map(data => data['procedure']));
+  }
+
+  getAnswerPaleatives(id) {
+    return this.http
+      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/getPaleativesAnswers/${id}`,
+      )
+  }
+
 }

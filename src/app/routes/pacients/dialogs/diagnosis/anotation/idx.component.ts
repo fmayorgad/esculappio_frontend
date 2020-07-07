@@ -29,7 +29,7 @@ export class AnotationCreateComponent implements OnInit {
 
   mainForm = new FormGroup({
     idx: new FormControl(
-      '',
+      this.incomingdata.anotation,
       [
         Validators.maxLength(500),
         Validators.required,
@@ -68,10 +68,15 @@ export class AnotationCreateComponent implements OnInit {
       .ridx(this.incomingdata.id, tmp)
       .subscribe(
         response => {
+
+          this._snackBar.open('Registro realizado satisfactoriamente.', 'Aceptar', {
+            duration: 3000,
+            panelClass: 'snackbarSuccess'
+          });
           this.dialogRef.close({ state: 1, message: 'Registro realizado satisfactoriamente.' });
         },
         error => {
-          this._snackBar.open('Error al registrar el IDX. Intentalo de nuevo más tarde', 'Aceptar', {
+          this._snackBar.open('Error al registrar la anotación. Intentalo de nuevo más tarde', 'Aceptar', {
             duration: 3000,
             panelClass: 'snackbarError'
           });
