@@ -138,7 +138,7 @@
 
 
           <div class="col-lg-12 col-md-12 col-sm-12 centered" style="margin-top: 20px;">
-            <button mat-raised-button [disabled]="!passwordFormGroup.valid" (click)="editPassword()" color="primary">Cambiar
+            <button mat-raised-button [disabled]="!passwordFormGroup.valid || (rnew != new) " (click)="editPassword()" color="primary">Cambiar
               contraseña</button>
           </div>
         </div>
