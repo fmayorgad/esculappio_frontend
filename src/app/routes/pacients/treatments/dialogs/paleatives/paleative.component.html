@@ -54,6 +54,22 @@
             <mat-option [value]="'MORFINA'"> MORFINA</mat-option>
             <mat-option [value]="'OXICODONA'"> OXICODONA</mat-option>
             <mat-option [value]="'RESCATE DE MORFINA'"> RESCATE DE MORFINA</mat-option>
+
+            <mat-option [value]="'FENTANYL'"> FENTANYL </mat-option>
+            <mat-option [value]="'ACETAMINOFEN 325+ HIDROCODONA 5'"> ACETAMINOFEN 325+ HIDROCODONA 5 </mat-option>
+            <mat-option [value]="'ACETAMINOFEN 325+ HIDROCODONA 7.5'"> ACETAMINOFEN 325+ HIDROCODONA 7.5 </mat-option>
+            <mat-option [value]="'ACETAMINOFEN 325 + HIDROCODONA 10'"> ACETAMINOFEN 325 + HIDROCODONA 10 </mat-option>
+            <mat-option [value]="'ACETAMINOFEN 325+ 8  CODEINA'"> ACETAMINOFEN 325+ 8  CODEINA </mat-option>
+            <mat-option [value]="'ACETAMINOFEN 325+30 CODEINA'"> ACETAMINOFEN 325+30 CODEINA </mat-option>
+            <mat-option [value]="'TAPENTADOL'"> TAPENTADOL </mat-option>
+            <mat-option [value]="'PREGABALINA'"> PREGABALINA </mat-option>
+            <mat-option [value]="'BISACODILO'"> BISACODILO </mat-option>
+            <mat-option [value]="'LACTULOSA'"> LACTULOSA </mat-option>
+            <mat-option [value]="'PICOSULFATO'"> PICOSULFATO </mat-option>
+            <mat-option [value]="'TRAZODONA'"> TRAZODONA </mat-option>
+            <mat-option [value]="'LORAZEPAM'"> LORAZEPAM </mat-option>0
+
+
           </mat-select>
           <mat-error *ngIf="paleativeForm.controls.drug.hasError('required')">
             El campo es <strong>obligatorio</strong>.
@@ -80,7 +96,6 @@
           <mat-select formControlName='dosisType'>
             <mat-option [value]="'mcg/h'"> mcg/h </mat-option>
             <mat-option [value]="'SC'"> SC</mat-option>
-            <mat-option [value]="'GOTAS'"> GOTAS</mat-option>
             <mat-option [value]="'MG'"> MG</mat-option>
             <mat-option [value]="'UG'"> UG</mat-option>
             <mat-option [value]="'UG/H'"> UG/H</mat-option>
@@ -100,6 +115,7 @@
             <mat-option [value]="'PARCHE'"> PARCHE </mat-option>
             <mat-option [value]="'TABLETAS'"> TABLETAS </mat-option>
             <mat-option [value]="'AMPOLLAS'"> AMPOLLAS </mat-option>
+            <mat-option [value]="'GOTAS'"> GOTAS </mat-option>
           </mat-select>
           <mat-error *ngIf="paleativeForm.controls.presentation.hasError('required')">
             El campo es <strong>obligatorio</strong>.
