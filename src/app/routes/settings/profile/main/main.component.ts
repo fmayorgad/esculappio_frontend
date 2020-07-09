@@ -58,9 +58,9 @@ export class ProfileMainComponent implements OnInit {
 
   passwordFormGroup = new FormGroup(
     {
-      actual: new FormControl('123123', [Validators.maxLength(12), Validators.required, Validators.minLength(8)]),
-      new: new FormControl('', [Validators.maxLength(12), Validators.required, Validators.minLength(8)]),
-      rnew: new FormControl('', [Validators.maxLength(12), Validators.required, Validators.minLength(8)]),
+      actual: new FormControl('123123', [Validators.maxLength(12), Validators.required, Validators.minLength(4)]),
+      new: new FormControl('', [Validators.maxLength(12), Validators.required, Validators.minLength(4)]),
+      rnew: new FormControl('', [Validators.maxLength(12), Validators.required, Validators.minLength(4)]),
     }
   );
 

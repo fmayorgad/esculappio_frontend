@@ -59,7 +59,7 @@ export class UserAdminCreateComponent {
       '',
       [
         Validators.maxLength(12),
-        Validators.minLength(8),
+        Validators.minLength(4),
         Validators.required,
       ],
     ),
