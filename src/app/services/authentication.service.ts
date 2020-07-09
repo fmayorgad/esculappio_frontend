@@ -39,7 +39,7 @@ export class AuthenticationService {
   recover(email: string) {
     return this.http
       .post<any>(
-        `${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/login/recover`,
+        `${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/users/recover-password`,
         { email },
       )
       .pipe(map(user => {
