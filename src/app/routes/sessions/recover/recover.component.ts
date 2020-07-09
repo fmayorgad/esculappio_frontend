@@ -29,6 +29,7 @@ export class RecoverComponent implements OnInit {
           duration: 5000,
         });
       },
+      
       error => {
       });
   }
