@@ -87,65 +87,64 @@
 
 
         <div class="col-lg-12 col-md-12 col-sm-12 centered">
-          <button mat-raised-button (click)="upload()"
-            color="primary">Guardar firma</button>
+          <button mat-raised-button (click)="upload()" color="primary">Guardar firma</button>
         </div>
       </div>
     </mat-card>
   </div>
 
 
-    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" *ngIf="canview('especial1')">
+  <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
     <mat-card class="mat-card-cardtitled" style="height: 350px;width: 100%;">
-   <bodycardtitle [title]=cards.pass.title [subtitle]=cards.pass.subtitle [icon]=cards.pass.icon
-     [color]=cards.pass.color></bodycardtitle>
-   <form [formGroup]='passwordFormGroup'>
-     <div class="row">
+      <bodycardtitle [title]=cards.pass.title [subtitle]=cards.pass.subtitle [icon]=cards.pass.icon
+        [color]=cards.pass.color></bodycardtitle>
+      <form [formGroup]='passwordFormGroup'>
+        <div class="row">
 
-      <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <input type="password" matInput placeholder="Contraseña Actual" formControlName='name'>
-        <mat-error *ngIf="passwordFormGroup.controls.actual.hasError('required')">
-          El nombre es <strong>obligatorio</strong>.
-        </mat-error>
+          <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input type="password" matInput placeholder="Contraseña Actual" formControlName='actual'>
+            <mat-error *ngIf="passwordFormGroup.controls.actual.hasError('required')">
+              El nombre es <strong>obligatorio</strong>.
+            </mat-error>
 
-      </mat-form-field>
+          </mat-form-field>
 
 
-      <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <input  type="password" matInput placeholder="Contraseña nueva" formControlName='name'>
-        <mat-error *ngIf="passwordFormGroup.controls.new.hasError('required')">
-          El nombre es <strong>obligatorio</strong>.
-        </mat-error>
-        <mat-error *ngIf="passwordFormGroup.controls.new.hasError('maxlength')">
-          El nombre debe tener máximo <strong>12 caracteres</strong>.
-        </mat-error>
-        <mat-error *ngIf="passwordFormGroup.controls.new.hasError('minlength')">
-          El nombre debe tener mínimo <strong>8 caracteres</strong>.
-        </mat-error>
-      </mat-form-field>
+          <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input type="password" matInput placeholder="Contraseña nueva" formControlName='new'>
+            <mat-error *ngIf="passwordFormGroup.controls.new.hasError('required')">
+              El nombre es <strong>obligatorio</strong>.
+            </mat-error>
+            <mat-error *ngIf="passwordFormGroup.controls.new.hasError('maxlength')">
+              El nombre debe tener máximo <strong>12 caracteres</strong>.
+            </mat-error>
+            <mat-error *ngIf="passwordFormGroup.controls.new.hasError('minlength')">
+              El nombre debe tener mínimo <strong>8 caracteres</strong>.
+            </mat-error>
+          </mat-form-field>
 
-      <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <input type="password" matInput placeholder="Repita contraseña nueva" formControlName='name'>
-        <mat-error *ngIf="passwordFormGroup.controls.rnew.hasError('required')">
-          El nombre es <strong>obligatorio</strong>.
-        </mat-error>
-        <mat-error *ngIf="passwordFormGroup.controls.rnew.hasError('maxlength')">
-          El nombre debe tener máximo <strong>12 caracteres</strong>.
-        </mat-error>
-        <mat-error *ngIf="passwordFormGroup.controls.rnew.hasError('minlength')">
-          El nombre debe tener mínimo <strong>8 caracteres</strong>.
-        </mat-error>
-      </mat-form-field>
+          <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input type="password" matInput placeholder="Repita contraseña nueva" formControlName='rnew'>
+            <mat-error *ngIf="passwordFormGroup.controls.rnew.hasError('required')">
+              El nombre es <strong>obligatorio</strong>.
+            </mat-error>
+            <mat-error *ngIf="passwordFormGroup.controls.rnew.hasError('maxlength')">
+              El nombre debe tener máximo <strong>12 caracteres</strong>.
+            </mat-error>
+            <mat-error *ngIf="passwordFormGroup.controls.rnew.hasError('minlength')">
+              El nombre debe tener mínimo <strong>8 caracteres</strong>.
+            </mat-error>
+          </mat-form-field>
 
-       
-       <div class="col-lg-12 col-md-12 col-sm-12 centered" style="margin-top: 20px;">
-         <button mat-raised-button [disabled]="!passwordFormGroup.valid" (click)="upload()"
-           color="primary">Cambiar contraseña</button>
-       </div>
-     </div>
-   </form>
- </mat-card>
-</div>
+
+          <div class="col-lg-12 col-md-12 col-sm-12 centered" style="margin-top: 20px;">
+            <button mat-raised-button [disabled]="!passwordFormGroup.valid" (click)="editPassword()" color="primary">Cambiar
+              contraseña</button>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+  </div>
 
 
 </div>

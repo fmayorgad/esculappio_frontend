@@ -46,7 +46,7 @@ export class AdminUsersService {
 
   editState(id, state) {
     return this.http
-      .patch(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/users/${id}`, state )
+      .patch(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/users/${id}`, state)
       .pipe(map(data => data['user']));
   }
 
@@ -153,7 +153,7 @@ export class AdminUsersService {
   }
 
 
-  startPaleative( obj) {
+  startPaleative(obj) {
     return this.http
       .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/startPaleatives`, obj)
       .pipe(map(data => data['procedure']));
@@ -162,7 +162,14 @@ export class AdminUsersService {
   getAnswerPaleatives(id) {
     return this.http
       .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/procedures/getPaleativesAnswers/${id}`,
-      )
+    )
+  }
+
+
+  changePassword(data) {
+    return this.http
+      .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/login/changePassword`, data)
+      .pipe();
   }
 
 }

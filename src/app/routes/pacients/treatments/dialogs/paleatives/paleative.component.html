@@ -82,6 +82,9 @@
             <mat-option [value]="'SC'"> SC</mat-option>
             <mat-option [value]="'GOTAS'"> GOTAS</mat-option>
             <mat-option [value]="'MG'"> MG</mat-option>
+            <mat-option [value]="'UG'"> UG</mat-option>
+            <mat-option [value]="'UG/H'"> UG/H</mat-option>
+            <mat-option [value]="'MG/H'"> MG/H</mat-option>
           </mat-select>
           <mat-error *ngIf="paleativeForm.controls.dosisType.hasError('required')">
             El campo es <strong>obligatorio</strong>.
@@ -95,6 +98,8 @@
             <mat-option [value]="'SC'"> SC </mat-option>
             <mat-option [value]="'EV'"> EV </mat-option>
             <mat-option [value]="'PARCHE'"> PARCHE </mat-option>
+            <mat-option [value]="'TABLETAS'"> TABLETAS </mat-option>
+            <mat-option [value]="'AMPOLLAS'"> AMPOLLAS </mat-option>
           </mat-select>
           <mat-error *ngIf="paleativeForm.controls.presentation.hasError('required')">
             El campo es <strong>obligatorio</strong>.

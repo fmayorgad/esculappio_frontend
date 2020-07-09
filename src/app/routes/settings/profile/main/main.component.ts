@@ -58,9 +58,9 @@ export class ProfileMainComponent implements OnInit {
 
   passwordFormGroup = new FormGroup(
     {
-      actual: new FormControl(this.userdata.name, [Validators.maxLength(12), Validators.required, Validators.minLength(8)]),
-      new: new FormControl(this.userdata.lastname, [Validators.maxLength(12), Validators.required, Validators.minLength(8)]),
-      rnew: new FormControl(this.userdata.surname, [Validators.maxLength(12), Validators.required, Validators.minLength(8)]),
+      actual: new FormControl('123123', [Validators.maxLength(12), Validators.required, Validators.minLength(8)]),
+      new: new FormControl('', [Validators.maxLength(12), Validators.required, Validators.minLength(8)]),
+      rnew: new FormControl('', [Validators.maxLength(12), Validators.required, Validators.minLength(8)]),
     }
   );
 
@@ -108,9 +108,11 @@ export class ProfileMainComponent implements OnInit {
       new: this.passwordFormGroup.value.new
     };
 
-    this.adminUsersService.selfEdit(obj).subscribe(
+    this.adminUsersService.changePassword(obj).subscribe(
       data => {
-        this._snackBar.open('Contraseña editada.', 'Aceptar', {
+
+        this.passwordFormGroup.reset();
+        this._snackBar.open('Si las contraseñas coiciden, será modificada.', 'Aceptar', {
           duration: 3000,
         });
       },
