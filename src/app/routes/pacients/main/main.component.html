@@ -60,7 +60,7 @@
                 <mat-icon>add</mat-icon>
               </button>
 
-              <button mat-mini-fab class="errorbutton" (click)="redirect(element.id)"
+              <button mat-mini-fab *ngIf="element.medicalProcedures.length > 0" class="errorbutton" (click)="redirect(element.id)"
                 matTooltip="Ver tratamientos">
                 <mat-icon>list</mat-icon>
               </button>
