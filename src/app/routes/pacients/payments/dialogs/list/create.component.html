@@ -1,0 +1,59 @@
+<div class="mediumModal">
+  <bodycardtitle [title]=title [subtitle]=subtitle [icon]=icon [color]=color></bodycardtitle>
+
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]='mainForm'>
+      <div class="row">
+
+        <h2 class="centered">Información del plan</h2>
+        <h3 class="fullwidth">Estado del PAGO: {{data.state.name}} </h3>
+        <h3 class="fullwidth">Inicio del plan: {{data.planStartDate }} </h3>
+        <h3 class="fullwidth">Cantidad de citas del plan: {{data.plan.consultations}} </h3>
+        <h3 class="fullwidth">Citas restantes: {{data.plan.consultations - data.schedules.length}} </h3>
+        
+
+
+        <table>
+          <tr>
+            <th>Doctor</th>
+            <th>Fecha</th>
+          </tr>
+          <tr *ngFor="let item of data.schedules" >
+            <td>{{item.name}} </td>
+            <td> {{item.date}} </td>
+          </tr>
+        </table>
+
+        <div style="margin: 30px; width: 100%;" *ngIf="(data.plan.consultations - data.schedules.length) > 0">
+          <h1 class="centered fullwidth" style="color: rgb(255, 106, 80);" >Agendar cita</h1>
+
+        <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <mat-label>Fecha</mat-label>
+          <input matInput [matDatepicker]="picker2" [disabled]="true" formControlName='date'>
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+          <mat-error *ngIf="mainForm.controls.date.hasError('required')">
+            El campo es <strong>obligatorio</strong>.
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <input type="text" matInput formControlName='name' autocomplete="off" placeholder="Nombre del doctor">
+          <mat-error *ngIf="mainForm.controls.name.hasError('required')">
+            El campo es <strong>obligatorio</strong>.
+          </mat-error>
+        </mat-form-field>
+        </div>
+
+        
+      </div>
+
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="warn">Cerrar</button>
+    <button mat-raised-button class="successbutton" *ngIf="(data.plan.consultations - data.schedules.length) > 0" [disabled]="!mainForm.valid" (click)="create()">Agendar</button>
+  </mat-dialog-actions>
+</div>

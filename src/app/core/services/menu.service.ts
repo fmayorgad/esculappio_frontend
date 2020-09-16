@@ -3,6 +3,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { filter, } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalsUser } from '../../../assets/data/globals'
+import { AuthenticationService } from '@services';
 export interface Tag {
   color: string; // Background Color
   value: string;
@@ -33,10 +34,22 @@ export class MenuService {
   // private readonly router: Router;
   constructor(
     private globals: GlobalsUser,
+    private authenticationService: AuthenticationService,
   ) {
     console.log("comprobando que existe local")
     if (localStorage.getItem('currentUser')) {
-      this.getAll();
+
+      // se verifica que el token no expirara al momento de entrar de nuevo
+      let j = new JwtHelperService()
+      console.log(j.getTokenExpirationDate(this.authenticationService.currentUserValue.token).getTime())
+      console.log(new Date().getTime())
+      console.log(j.isTokenExpired(this.authenticationService.currentUserValue.token))
+      if (!j.isTokenExpired(this.authenticationService.currentUserValue.token)) {
+        console.log("expired")
+      } else {
+        this.getAll();
+      }
+
     }
 
   }
@@ -229,7 +242,6 @@ export class MenuService {
   }
 
   createAppNavigation() {
-    console.log(this.menu);
     return "fabio";
   }
 }

@@ -126,6 +126,9 @@ export class PacientsMainComponent implements OnInit {
     this.router.navigate([`pacientes/${id}/tratamientos`]);
   }
 
+  redirectpayments(id) {
+    this.router.navigate([`pacientes/${id}/pagos`]);
+  }
 
 
   changeEntityState(index, state, entityId) {

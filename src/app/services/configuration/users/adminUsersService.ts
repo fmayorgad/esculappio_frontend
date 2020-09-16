@@ -172,4 +172,17 @@ export class AdminUsersService {
       .pipe();
   }
 
+  getUserPayments(id) {
+    return this.http
+      .get(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/payments/user/${id}`)
+      .pipe(map(data => data['payments']));
+  }
+
+  saveSchedule(data) {
+    return this.http
+      .post(`${environment.apiUrl}/${environment.apiBaseMain.main}/${environment.versions.v1}/payments/payments-user/saveSchedule`, data)
+      .pipe();
+  }
+
+
 }

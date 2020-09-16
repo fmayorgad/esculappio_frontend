@@ -65,6 +65,11 @@
                 <mat-icon>list</mat-icon>
               </button>
 
+              <button mat-mini-fab *ngIf="element.medicalProcedures.length > 0" class="infobutton" (click)="redirectpayments(element.id)"
+                matTooltip="Ver planes pagados">
+                <mat-icon>monetization_on</mat-icon>
+              </button>
+
             </div>
           </td>
         </ng-container>

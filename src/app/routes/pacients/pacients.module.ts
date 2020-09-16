@@ -18,6 +18,7 @@ import { EsofagoDiagnosisComponent } from './dialogs/diagnosis/esofago/esofago.c
 import { MelanomaDiagnosisComponent } from './dialogs/diagnosis/melanoma/melanoma.component';
 import { IDXCreateComponent } from './dialogs/idx/idx.component';
 import { TreatmentsMainComponent } from './treatments/main.component';
+import {PaymentsMainComponent} from './payments/main.component';
 import { OvarioDiagnosisComponent } from './dialogs/diagnosis/ovario/main.component';
 import { ProstataDiagnosisComponent } from './dialogs/diagnosis/prostata/main.component';
 import {PulmonDiagnosisComponent} from './dialogs/diagnosis/pulmon/main.component';
@@ -44,12 +45,15 @@ import { PaleativesTreatmentComponent } from './treatments/dialogs/paleatives/pa
 import { AnotationCreateComponent } from './dialogs/diagnosis/anotation/idx.component';
 import {PaleativesSegmentationTreatmentComponent} from './treatments/dialogs/peliativesSegmentation/paleative.component';
 
+import {ListCreateComponent} from './payments/dialogs/list/create.component';
+
 const COMPONENTS =
   [
     PacientsMainComponent,
-    TreatmentsMainComponent
+    TreatmentsMainComponent,
+    PaymentsMainComponent
   ];
-const COMPONENTS_DYNAMIC = [PaleativesSegmentationTreatmentComponent, UteroTreatmentComponent, UteroDiagnosisComponent, CervixTreatmentComponent, PulmonTreatmentComponent, CervixDiagnosisComponent, PulmonDiagnosisComponent, ProstataTreatmentComponent, ProstataDiagnosisComponent, OvarioTreatmentComponent, OvarioDiagnosisComponent, AnotationCreateComponent, PaleativesTreatmentComponent, MelanomaTreatmentComponent, EsofagoTreatmentComponent, SarcomaTreatmentComponent, TiroideTreatmentComponent, PielTreatmentComponent, ColonTreatmentComponent, EstomagoTreatmentComponent, MamaTreatmentComponent, IDXCreateComponent, MelanomaDiagnosisComponent, EsofagoDiagnosisComponent, SarcomaDiagnosisComponent, PielDiagnosisComponent, ColonDiagnosisComponent, UserPacientCreateComponent, ProcedureCreateComponent, DocumentCreateComponent, MamaDiagnosisComponent, EstomagoDiagnosisComponent, TiroidesDiagnosisComponent];
+const COMPONENTS_DYNAMIC = [ListCreateComponent, PaleativesSegmentationTreatmentComponent, UteroTreatmentComponent, UteroDiagnosisComponent, CervixTreatmentComponent, PulmonTreatmentComponent, CervixDiagnosisComponent, PulmonDiagnosisComponent, ProstataTreatmentComponent, ProstataDiagnosisComponent, OvarioTreatmentComponent, OvarioDiagnosisComponent, AnotationCreateComponent, PaleativesTreatmentComponent, MelanomaTreatmentComponent, EsofagoTreatmentComponent, SarcomaTreatmentComponent, TiroideTreatmentComponent, PielTreatmentComponent, ColonTreatmentComponent, EstomagoTreatmentComponent, MamaTreatmentComponent, IDXCreateComponent, MelanomaDiagnosisComponent, EsofagoDiagnosisComponent, SarcomaDiagnosisComponent, PielDiagnosisComponent, ColonDiagnosisComponent, UserPacientCreateComponent, ProcedureCreateComponent, DocumentCreateComponent, MamaDiagnosisComponent, EstomagoDiagnosisComponent, TiroidesDiagnosisComponent];
 
 @NgModule({
   imports: [

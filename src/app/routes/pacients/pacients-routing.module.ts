@@ -5,6 +5,7 @@ import { getProfile } from '../../../assets/data/globals';
 import { AuthGuard } from '../../helpers';
 import { PacientResolverService } from './treatments/resolver';
 import { TreatmentsMainComponent } from './treatments/main.component';
+import { PaymentsMainComponent } from './payments/main.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,11 @@ const routes: Routes = [
     path: ':id/tratamientos',
     resolve: { item: PacientResolverService },
     component: TreatmentsMainComponent,
+  },
+  {
+    path: ':id/pagos',
+    resolve: { item: PacientResolverService },
+    component: PaymentsMainComponent,
   },
 ];
 
