@@ -110,11 +110,11 @@ export class PaymentsMainComponent implements OnInit {
     this.adminUsersService.getUserPayments(id).subscribe(
       data => {
         console.log(data);
-        this.dataSourcePacients = new MatTableDataSource<any>(data);
+        this.dataSourcePacients = new MatTableDataSource<any>(data.filter(p => p.state.id == 1));
         this.dataSourcePacients.paginator = this.paginatorPacients;
         this.dataSourcePacients.sort = this.sortPacients;
         this.isLoadingPacients = false;
-        if (data.length === 0) {
+        if (data.filter(p => p.state.id == 1).length === 0) {
           this.noDataPacients = true;
         } else {
           this.noDataPacients = false;
@@ -129,7 +129,7 @@ export class PaymentsMainComponent implements OnInit {
 
     this.getAll();
 
-    this.displayedColumnsPacients = ['date', 'name', 'description' , 'actions'];
+    this.displayedColumnsPacients = ['date', 'name', 'state' , 'description' , 'actions'];
     this.dataSourcePacients = new MatTableDataSource<any>([]);
     this.mainTablePaginationOptionsPacients = [7, 15, 50];
     this.dataSourcePacients.paginator = this.paginatorPacients;

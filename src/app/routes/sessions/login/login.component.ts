@@ -85,6 +85,9 @@ export class LoginComponent implements OnInit {
 							duration: 3000,
 							panelClass: 'snackbarError'
 						});
+
+						this.loadingButtonSpin = false;
+						this.loadingButtonText = true;
 					},
 				);
 
